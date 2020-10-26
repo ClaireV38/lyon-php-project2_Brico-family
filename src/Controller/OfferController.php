@@ -17,8 +17,6 @@ use App\Model\OfferManager;
  */
 class OfferController extends AbstractController
 {
-
-
     /**
      * Display item listing
      *
@@ -32,9 +30,12 @@ class OfferController extends AbstractController
      //   $offerManager = new OfferManager();
       //  $offers = $offerManager->selectAll();
 
-        $offers = [0 => ['name' => "nomAnnonce1", 'category' => "nomCategorieA"], 1 => ['name' => "nomAnnonce1", 'category' => "nomCategorieB"], 2 => ['name' => "nomAnnonce1", 'category' => "nomCategorieA"]];
+        $offers = [
+            0 => ['name' => "nomAnnonce1", 'category' => "nomCategorieA"],
+            1 => ['name' => "nomAnnonce2", 'category' => "nomCategorieB"],
+            2 => ['name' => "nomAnnonce3", 'category' => "nomCategorieA"]
+        ];
 
         return $this->twig->render('Offer/index.html.twig', ['offers' => $offers]);
     }
-
 }

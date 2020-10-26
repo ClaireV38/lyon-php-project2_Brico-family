@@ -4,7 +4,18 @@
     <div class="looking_for_block">
         <h1>Je cherche</h1>
         <form>
-            
+                <p>
+                    <input type="checkbox" name="tool" id="tool" /> <label for="tool">Un outil</label><br />
+                    <input type="checkbox" name="material" id="material" /> <label for="material">Un materiau</label><br />
+                </p>
+                <p>
+                    <label for="categories">Caregories</label><br />
+                    <select name="categories" id="categories">
+                        {% for offer in offers %}
+                        <option value="{{ offer.category }}">{{ offer.category }}</option>
+                        {% endfor %}
+                    </select>
+                </p>
         </form>
         <ul>
             {% for item in items %}
