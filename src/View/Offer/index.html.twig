@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="looking_for_block">
+        <h1>Je cherche</h1>
+        <form>
+            
+        </form>
+        <ul>
+            {% for item in items %}
+                <li><a href="/item/show/{{ item.id }}">{{ item.id }}. {{ item.title }}</a></li>
+            {% else %}
+                <li>Nothing to display</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <a href="/item/add">Ajouter</a>
+{% endblock %}
