@@ -4,26 +4,41 @@
     <div class="looking_for_block">
         <h1>Je cherche</h1>
         <form>
-                <p>
-                    <input type="checkbox" name="tool" id="tool" /> <label for="tool">Un outil</label><br />
-                    <input type="checkbox" name="material" id="material" /> <label for="material">Un materiau</label><br />
-                </p>
-                <p>
-                    <label for="categories">Caregories</label><br />
-                    <select name="categories" id="categories">
-                        {% for offer in offers %}
+            <p>
+                <input type="radio" name="tool_or_material" id="tool" /> <label for="tool">Un outil</label><br />
+                <input type="radio" name="tool_or_material" id="material" /> <label for="material">Un materiau</label><br />
+            </p>
+            <p>
+                <label for="tools_categories">Categories</label><br />
+                <select name="tools_categories" id="tools_categories">
+                    {% for offer in offers %}
+                    <option value="{{ offer.category }}">{{ offer.category }}</option>
+                    {% endfor %}
+                </select>
+                <label for="materials_categories">Categories</label><br />
+                <select name="materials_categories" id="materials_categories">
+                    {% for offer in offers %}
                         <option value="{{ offer.category }}">{{ offer.category }}</option>
-                        {% endfor %}
-                    </select>
-                </p>
+                    {% endfor %}
+                </select>
+            </p>
+            <p>
+                <label for="selling_rending">A vendre / A louer</label><br />
+                <select name="tools_categories" id="tools_categories">
+                    <option value="selling">Vente</option>
+                    <option value="rending">Location</option>
+                </select>
+            </p>
+            <p>
+                <label for="departement">departement</label><br />
+                <select name="departement" id="departement">
+                    {% for offer in offers %}
+                        <option value="{{ offer.departement }}">{{ offer.departement }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+            <button  type="submit" name="btn-submit" value="submit">Go !</button>
         </form>
-        <ul>
-            {% for item in items %}
-                <li><a href="/item/show/{{ item.id }}">{{ item.id }}. {{ item.title }}</a></li>
-            {% else %}
-                <li>Nothing to display</li>
-            {% endfor %}
-        </ul>
     </div>
     <a href="/item/add">Ajouter</a>
 {% endblock %}
