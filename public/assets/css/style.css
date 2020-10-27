@@ -1,0 +1,29 @@
+:root {
+    --primary-color: #F2E186;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    width: 90%;
+    padding-bottom: 1rem;
+}
+
+.form-check-inline {
+    width: 100%;
+    justify-content: space-around;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba( 210,105,30,0.25);
+}
+
+.btn {
+    display: block;
+    margin: auto;
+}
+
