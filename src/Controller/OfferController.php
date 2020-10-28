@@ -27,15 +27,18 @@ class OfferController extends AbstractController
      */
     public function index()
     {
-     //   $offerManager = new OfferManager();
-      //  $offers = $offerManager->selectAll();
+        $categories = [
+            'tools' => ['toolsCategorieA' , 'toolsCategorieB' , 'toolsCategorieC' ],
+            'materials' => ['materialsCategorieA' , 'materialsCategorieB' , 'materialsCategorieC' ]
+        ];
+
 
         $offers = [
-            0 => ['name' => "nomAnnonce1", 'category' => "nomCategorieA", 'departement' => "Rhone"],
-            1 => ['name' => "nomAnnonce2", 'category' => "nomCategorieB", 'departement' => "Isère"],
+            0 => ['name' => "nomAnnonce1", 'departement' => "Rhone"],
+            1 => ['name' => "nomAnnonce2", 'departement' => "Isère"],
             2 => ['name' => "nomAnnonce3", 'category' => "nomCategorieA", 'departement' => "Ain"]
         ];
 
-        return $this->twig->render('Offer/index.html.twig', ['offers' => $offers]);
+        return $this->twig->render('Offer/index.html.twig', ['offers' => $offers ,'categories' => $categories]);
     }
 }

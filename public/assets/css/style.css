@@ -28,7 +28,24 @@ h1 {
     margin: auto;
 }
 
-.unvisible {
-    display : none;
+#tools_categories {
+
 }
+
+
+#materials_categories {
+
+}
+
+
+.visible {
+  display: unset;
+}
+
+
+.unvisible {
+ display: none;
+}
+
+
 

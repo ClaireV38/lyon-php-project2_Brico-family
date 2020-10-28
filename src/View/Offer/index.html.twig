@@ -10,19 +10,17 @@
                     <label for="tool" class="form-check-label">Un outil</label>
                 </div>
                 <div>
-                <input type="radio" name="tool_or_material" id="material" class="form-check-input"/>
-                <label for="material" class="form-check-label">Un materiau</label>
+                    <input type="radio" name="tool_or_material" id="material" class="form-check-input"/>
+                    <label for="material" class="form-check-label">Un materiau</label>
                 </div>
             </div>
             <div class="form-group">
-                <label for="tools_categories">Categories d'outils</label><br />
-                <select name="tools_categories" id="tools_categories" class="form-control">
-                    {% for offer in offers %}
-                    <option value="{{ offer.category }}">{{ offer.category }}</option>
+                <select name="tools_categories" id="tools_categories" class="form-control unvisible">
+                    {% for category in categories.tools %}
+                    <option value="{{ category }}">{{ category }}</option>
                     {% endfor %}
                 </select>
-                <label for="materials_categories">Categories de matériaux</label><br />
-                <select name="materials_categories" id="materials_categories" class="form-control">
+                <select name="materials_categories" id="materials_categories" class="form-control unvisible">
                     {% for offer in offers %}
                         <option value="{{ offer.category }}">{{ offer.category }}</option>
                     {% endfor %}
@@ -50,16 +48,16 @@
 {% block javascript %}
     <script>
         const selectToolsCategories = document.querySelector("#tools_categories");
-        const btnCheckTool = document.querySelector("#tool");
-        btnCheckTool.addEventListener("click", function() {
-        // On click we toggle the class visible on the dropdown
-        selectToolsCategories.classList.toggle("unvisible");
-        });
+        const btnCheckTool = document.querySelector('#tool');
         const selectMaterialsCategories = document.querySelector("#materials_categories");
         const btnCheckMaterial = document.querySelector("#material");
-        btnCheckMaterial.addEventListener("click", function() {
-        // On click we toggle the class visible on the dropdown
-        selectMaterialsCategories.classList.toggle("unvisible");
+        btnCheckTool.addEventListener('change', function() {
+        selectToolsCategories.classList.remove("unvisible");
+        selectMaterialsCategories.classList.add("unvisible");
+        });
+        btnCheckMaterial.addEventListener('change', function() {
+        selectMaterialsCategories.classList.remove("unvisible");
+        selectToolsCategories.classList.add("unvisible");
         });
     </script>
 {% endblock %}
