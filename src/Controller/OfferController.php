@@ -9,7 +9,6 @@
 
 namespace App\Controller;
 
-use App\Model\OfferManager;
 
 /**
  * Class OfferController
@@ -48,7 +47,6 @@ class OfferController extends AbstractController
             } else {
                 $product = $_POST['product'];
             }
-            $transaction = $_POST['transaction'];
 
             if (!isset($_POST['tools_categories']) && !isset($_POST['materials_categories'])) {
                 $errors['category'] = 'Veuillez choisir une catégorie de produit';
@@ -57,7 +55,7 @@ class OfferController extends AbstractController
             } else {
                 $category = $_POST['materials_categories'];
             }
-            //$transaction = $_POST['transaction'];
+            $transaction = $_POST['transaction'];
             $department = $_POST['department'];
 
             if (empty($errors)) {
