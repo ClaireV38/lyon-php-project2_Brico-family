@@ -15,13 +15,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="tools_categories">Categories</label><br />
+                <label for="tools_categories">Categories d'outils</label><br />
                 <select name="tools_categories" id="tools_categories" class="form-control">
                     {% for offer in offers %}
                     <option value="{{ offer.category }}">{{ offer.category }}</option>
                     {% endfor %}
                 </select>
-                <label for="materials_categories">Categories</label><br />
+                <label for="materials_categories">Categories de matériaux</label><br />
                 <select name="materials_categories" id="materials_categories" class="form-control">
                     {% for offer in offers %}
                         <option value="{{ offer.category }}">{{ offer.category }}</option>
@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label for="selling_rending">A vendre / A louer</label><br />
-                <select name="tools_categories" id="tools_categories" class="form-control">
+                <select name="selling_rending" id="selling_rending" class="form-control">
                     <option value="selling">Vente</option>
                     <option value="rending">Location</option>
                 </select>
@@ -46,4 +46,20 @@
             <button  type="submit" name="btn-submit" value="submit" class="btn btn-light">Go !</button>
         </form>
     </div>
+{% endblock %}
+{% block javascript %}
+    <script>
+        const selectToolsCategories = document.querySelector("#tools_categories");
+        const btnCheckTool = document.querySelector("#tool");
+        btnCheckTool.addEventListener("click", function() {
+        // On click we toggle the class visible on the dropdown
+        selectToolsCategories.classList.toggle("unvisible");
+        });
+        const selectMaterialsCategories = document.querySelector("#materials_categories");
+        const btnCheckMaterial = document.querySelector("#material");
+        btnCheckMaterial.addEventListener("click", function() {
+        // On click we toggle the class visible on the dropdown
+        selectMaterialsCategories.classList.toggle("unvisible");
+        });
+    </script>
 {% endblock %}

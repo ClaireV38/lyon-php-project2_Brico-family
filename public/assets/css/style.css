@@ -19,11 +19,16 @@ h1 {
 }
 
 .form-control:focus {
+    border-color: #d2691e;
     box-shadow: 0 0 0 0.2rem rgba( 210,105,30,0.25);
 }
 
 .btn {
     display: block;
     margin: auto;
+}
+
+.unvisible {
+    display : none;
 }
 
