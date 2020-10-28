@@ -8,7 +8,7 @@
                 <div>
                     <input type="radio" name="product" id="tool"
                            class="form-check-input" value="tool"
-                            {% if infos.product is same as ('tool') %}
+                            {% if offerInfos.product is same as ('tool') %}
                                 checked
                             {% endif %}
                     />
@@ -18,7 +18,7 @@
                 <div>
                     <input type="radio" name="product" id="material"
                            class="form-check-input" value="material"
-                            {% if infos.product is same as ('material') %}
+                            {% if offerInfos.product is same as ('material') %}
                                 checked
                             {% endif %}
                     />
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <select name="tools_categories" id="tools_categories" class="form-control
-                {% if infos.product is not same as ('tool') %}
+                {% if offerInfos.product is not same as ('tool') %}
                     invisible
                 {% endif %}
                 ">
@@ -42,7 +42,7 @@
                     {% endfor %}
                 </select>
                 <select name="materials_categories" id="materials_categories" class="form-control
-                {% if infos.product is not same as ('material') %}
+                {% if offerInfos.product is not same as ('material') %}
                     invisible
                 {% endif %}
                 ">
@@ -60,10 +60,10 @@
             <div class="form-group">
                 <label for="transaction">Recherchez vous un produit à la vente ou à la location ?</label>
                 <select name="transaction" id="transaction" class="form-control">
-                    {% if infos.transaction is not same as ('') %}
-                        <option value="{{ infos.transaction }}">{{ infos.transaction }}</option>
+                    {% if offerInfos.transaction is not same as ('') %}
+                        <option value="{{ offerInfos.transaction }}">{{ offerInfos.transaction }}</option>
                     {% endif %}
-                    {% for transaction in transactions if transaction is not same as (infos.transaction) %}
+                    {% for transaction in transactions if transaction is not same as (offerInfos.transaction) %}
                         <option value="{{ transaction }}">{{ transaction }}</option>
                     {% endfor %}
                 </select>
@@ -71,10 +71,10 @@
             <div class="form-group">
                 <label for="department">département de recherche :</label>
                 <select name="department" id="department" class="form-control">
-                    {% if infos.department is not same as ('') %}
-                        <option value="{{ infos.department }}">{{ infos.department }}</option>
+                    {% if offerInfos.department is not same as ('') %}
+                        <option value="{{ offerInfos.department }}">{{ offerInfos.department }}</option>
                     {% endif %}
-                    {% for offer in offers if offer.department is not same as (infos.department) %}
+                    {% for offer in offers if offer.department is not same as (offerInfos.department) %}
                         <option value="{{ offer.department }}">{{ offer.department }}</option>
                     {% endfor %}
                 </select>

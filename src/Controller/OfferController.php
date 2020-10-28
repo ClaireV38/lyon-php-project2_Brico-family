@@ -9,7 +9,6 @@
 
 namespace App\Controller;
 
-
 /**
  * Class OfferController
  *
@@ -63,7 +62,7 @@ class OfferController extends AbstractController
             }
         }
 
-        $infos = [
+        $offerInfos = [
             'product' => $product,
             'category' => $category,
             'transaction' => $transaction,
@@ -75,7 +74,7 @@ class OfferController extends AbstractController
             'transactions' => $transactions,
             'categories' => $categories,
             'errors' => $errors,
-            'infos' => $infos
+            'offerInfos' => $offerInfos
         ]);
     }
 
