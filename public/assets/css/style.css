@@ -38,12 +38,7 @@ h1 {
 }
 
 
-.visible {
-  display: unset;
-}
-
-
-.unvisible {
+.invisible {
  display: none;
 }
 

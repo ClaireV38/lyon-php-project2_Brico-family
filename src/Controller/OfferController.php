@@ -34,11 +34,22 @@ class OfferController extends AbstractController
 
 
         $offers = [
-            0 => ['name' => "nomAnnonce1", 'departement' => "Rhone"],
-            1 => ['name' => "nomAnnonce2", 'departement' => "Isère"],
-            2 => ['name' => "nomAnnonce3", 'category' => "nomCategorieA", 'departement' => "Ain"]
+            0 => ['name' => "nomAnnonce1", 'department' => "Rhone"],
+            1 => ['name' => "nomAnnonce2", 'department' => "Isère"],
+            2 => ['name' => "nomAnnonce3", 'category' => "nomCategorieA", 'department' => "Ain"]
         ];
 
-        return $this->twig->render('Offer/index.html.twig', ['offers' => $offers ,'categories' => $categories]);
+        $errors = [];
+        $toolOrMaterial = "";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'  && isset($_POST['btn-index-search'])  &&  !empty($_POST)) {
+            var_dump($_POST);
+
+            if (!isset($_POST['tool_or_material'])) {
+                $errors['tool_or_material'] = 'Veuillez choisir un type de produit';
+                $toolOrMaterial = $_POST['tool_or_material'];
+            }
+        }
+        return $this->twig->render('Offer/index.html.twig', [
+            'offers' => $offers ,'categories' => $categories, 'errors' => $errors]);
     }
 }

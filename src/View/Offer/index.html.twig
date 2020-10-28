@@ -1,9 +1,10 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
+    {{ dump() }}
     <div class="looking_for_block container">
         <h1>Je cherche</h1>
-        <form>
+        <form method="post" action="/offer/index">
             <div class="form-check-inline">
                 <div>
                     <input type="radio" name="tool_or_material" id="tool" class="form-check-input"/>
@@ -14,34 +15,42 @@
                     <label for="material" class="form-check-label">Un materiau</label>
                 </div>
             </div>
+            {% if errors.tool_or_material is defined %}
+                {{ errors.tool_or_material }}
+            {% endif %}
             <div class="form-group">
-                <select name="tools_categories" id="tools_categories" class="form-control unvisible">
+                <select name="tools_categories" id="tools_categories" class="form-control invisible">
+                    <option value="" disabled selected>Selectionnez une catégorie d'outil</option>
                     {% for category in categories.tools %}
                     <option value="{{ category }}">{{ category }}</option>
                     {% endfor %}
                 </select>
-                <select name="materials_categories" id="materials_categories" class="form-control unvisible">
-                    {% for offer in offers %}
-                        <option value="{{ offer.category }}">{{ offer.category }}</option>
+                <select name="materials_categories" id="materials_categories" class="form-control invisible">
+                    <option value="" disabled selected>Selectionnez une catégorie de matériau</option>
+                    {% for category in categories.materials %}
+                        <option value="{{ category }}">{{ category }}</option>
                     {% endfor %}
                 </select>
             </div>
+            {% if errors.category is defined %}
+                {{ errors.category }}
+            {% endif %}
             <div class="form-group">
-                <label for="selling_rending">A vendre / A louer</label><br />
-                <select name="selling_rending" id="selling_rending" class="form-control">
+                <label for="selling_renting">Rechercher vous un produit à la vente ou a la location</label>
+                <select name="selling_renting" id="selling_renting" class="form-control">
                     <option value="selling">Vente</option>
                     <option value="rending">Location</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="departement">departement</label><br/>
-                <select name="departement" id="departement" class="form-control">
+                <label for="departement">departement</label>
+                <select name="department" id="departement" class="form-control">
                     {% for offer in offers %}
-                        <option value="{{ offer.departement }}">{{ offer.departement }}</option>
+                        <option value="{{ offer.department }}">{{ offer.department }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <button  type="submit" name="btn-submit" value="submit" class="btn btn-light">Go !</button>
+            <button  type="submit" name="btn-index-search" value="submit" class="btn btn-light">Go !</button>
         </form>
     </div>
 {% endblock %}
@@ -52,12 +61,12 @@
         const selectMaterialsCategories = document.querySelector("#materials_categories");
         const btnCheckMaterial = document.querySelector("#material");
         btnCheckTool.addEventListener('change', function() {
-        selectToolsCategories.classList.remove("unvisible");
-        selectMaterialsCategories.classList.add("unvisible");
+        selectToolsCategories.classList.remove("invisible");
+        selectMaterialsCategories.classList.add("invisible");
         });
         btnCheckMaterial.addEventListener('change', function() {
-        selectMaterialsCategories.classList.remove("unvisible");
-        selectToolsCategories.classList.add("unvisible");
+        selectMaterialsCategories.classList.remove("invisible");
+        selectToolsCategories.classList.add("invisible");
         });
     </script>
 {% endblock %}
