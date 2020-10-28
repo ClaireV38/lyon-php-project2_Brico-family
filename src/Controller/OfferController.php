@@ -28,28 +28,62 @@ class OfferController extends AbstractController
     public function index()
     {
         $categories = [
-            'tools' => ['toolsCategorieA' , 'toolsCategorieB' , 'toolsCategorieC' ],
-            'materials' => ['materialsCategorieA' , 'materialsCategorieB' , 'materialsCategorieC' ]
+            'tools' => ['toolsCategoryA', 'toolsCategoryB', 'toolsCategoryC'],
+            'materials' => ['materialsCategoryA', 'materialsCategoryB', 'materialsCategoryC']
         ];
 
+        $transactions = ['A louer', 'A vendre'];
 
         $offers = [
-            0 => ['name' => "nomAnnonce1", 'department' => "Rhone"],
-            1 => ['name' => "nomAnnonce2", 'department' => "Isère"],
-            2 => ['name' => "nomAnnonce3", 'category' => "nomCategorieA", 'department' => "Ain"]
+            0 => ['title' => "nomAnnonce1", 'department' => "Rhone"],
+            1 => ['title' => "nomAnnonce2", 'department' => "Isère"],
+            2 => ['title' => "nomAnnonce3", 'department' => "Ain"]
         ];
 
         $errors = [];
-        $toolOrMaterial = "";
-        if ($_SERVER['REQUEST_METHOD'] === 'POST'  && isset($_POST['btn-index-search'])  &&  !empty($_POST)) {
-            var_dump($_POST);
+        $product = $category = $transaction = $department = "";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-index-search']) && !empty($_POST)) {
+            if (!isset($_POST['product'])) {
+                $errors['product'] = 'Veuillez choisir un type de produit';
+            } else {
+                $product = $_POST['product'];
+            }
+            $transaction = $_POST['transaction'];
 
-            if (!isset($_POST['tool_or_material'])) {
-                $errors['tool_or_material'] = 'Veuillez choisir un type de produit';
-                $toolOrMaterial = $_POST['tool_or_material'];
+            if (!isset($_POST['tools_categories']) && !isset($_POST['materials_categories'])) {
+                $errors['category'] = 'Veuillez choisir une catégorie de produit';
+            } elseif (isset($_POST['tools_categories'])) {
+                $category = $_POST['tools_categories'];
+            } else {
+                $category = $_POST['materials_categories'];
+            }
+            //$transaction = $_POST['transaction'];
+            $department = $_POST['department'];
+
+            if (empty($errors)) {
+                header('Location:/offer/search');
             }
         }
+
+        $infos = [
+            'product' => $product,
+            'category' => $category,
+            'transaction' => $transaction,
+            'department' => $department
+        ];
+
         return $this->twig->render('Offer/index.html.twig', [
-            'offers' => $offers ,'categories' => $categories, 'errors' => $errors]);
+            'offers' => $offers,
+            'transactions' => $transactions,
+            'categories' => $categories,
+            'errors' => $errors,
+            'infos' => $infos
+        ]);
+    }
+
+
+    public function search()
+    {
+        return $this->twig->render('Offer/search.html.twig');
     }
 }
