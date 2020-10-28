@@ -1,0 +1,46 @@
+.consult_offers_list_container{
+    display: block;
+    min-width: 500px;
+}
+.consult_offers_list_container h1{
+    font-size: 20px ;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap
+}
+.consult_offers_list_container p{
+    font-size: 15px ;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap
+}
+.consult_offers_list_container h3{
+    font-size: 15px;
+}
+
+.consult_offers_list_container h4{
+    font-size: 10px;
+}
+.consult_offer_card{
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #F2E186;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.consult_offer_card img{
+    border-radius: 10px;
+}
+
+.card-body{
+    padding-left:1.25rem;
+}
+
+.consult_list_offers_image{
+    padding:10px;
+}
