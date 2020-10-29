@@ -10,6 +10,8 @@
 namespace App\Controller;
 
 use App\Model\CategoryManager;
+use App\Model\TransactionManager;
+use App\Model\DepartmentManager;
 
 /**
  * Class OfferController
@@ -37,13 +39,11 @@ class OfferController extends AbstractController
             'materials' => $materialCategories
         ];
 
-        $transactions = ['A louer', 'A vendre'];
+        $transactionManager = new TransactionManager();
+        $transactions = $transactionManager->selectAll();
 
-        $offers = [
-            0 => ['title' => "nomAnnonce1", 'department' => "Rhone"],
-            1 => ['title' => "nomAnnonce2", 'department' => "Isère"],
-            2 => ['title' => "nomAnnonce3", 'department' => "Ain"]
-        ];
+        $departmentManager = new DepartmentManager();
+        $departments = $departmentManager->selectAll();
 
         $errors = [];
         $product = $category = $transaction = $department = "";
@@ -77,7 +77,7 @@ class OfferController extends AbstractController
         ];
 
         return $this->twig->render('Offer/index.html.twig', [
-            'offers' => $offers,
+            'departments' => $departments,
             'transactions' => $transactions,
             'categories' => $categories,
             'errors' => $errors,
