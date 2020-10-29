@@ -86,7 +86,7 @@ UNLOCK TABLES;
 TRUNCATE TABLE `transaction`;
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-INSERT INTO `transaction` VALUES (1,'Location'),(2,'Achat');
+INSERT INTO `transaction` VALUES (1,'Location'),(2,'Vente');
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
