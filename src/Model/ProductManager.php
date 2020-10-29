@@ -12,7 +12,7 @@ namespace App\Model;
 /**
  *
  */
-class CategoryManager extends AbstractManager
+class ProductManager extends AbstractManager
 {
     /**
      *
@@ -34,7 +34,7 @@ class CategoryManager extends AbstractManager
      *
      * @return array
      */
-    public function selectByProduct(string $productName)
+    public function selectByProductType(string $productName)
     {
         // prepared request
         $statement = $this->pdo->query("SELECT " . self::TABLE . ".name  FROM ". self::TABLE .

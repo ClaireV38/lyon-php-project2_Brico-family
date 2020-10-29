@@ -9,7 +9,7 @@
 
 namespace App\Controller;
 
-use App\Model\CategoryManager;
+use App\Model\ProductManager;
 use App\Model\TransactionManager;
 use App\Model\DepartmentManager;
 

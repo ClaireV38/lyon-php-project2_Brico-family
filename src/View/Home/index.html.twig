@@ -6,9 +6,9 @@
         <form method="post" action="/home/index">
             <div class="form-check-inline">
                 <div>
-                    <input type="radio" name="product" id="tool"
+                    <input type="radio" name="product_type" id="tool"
                            class="form-check-input" value="tool"
-                            {% if offerInfos.product is same as ('tool') %}
+                            {% if offerInfos.productType is same as ('tool') %}
                                 checked
                             {% endif %}
                     />
@@ -16,9 +16,9 @@
                 </div>
 
                 <div>
-                    <input type="radio" name="product" id="material"
+                    <input type="radio" name="product_type" id="material"
                            class="form-check-input" value="material"
-                            {% if offerInfos.product is same as ('material') %}
+                            {% if offerInfos.productType is same as ('material') %}
                                 checked
                             {% endif %}
                     />
@@ -26,35 +26,35 @@
                 </div>
             </div>
             <div class="errors">
-                {% if errors.product is defined %}
-                    {{ errors.product }}
+                {% if errors.productType is defined %}
+                    {{ errors.productType }}
                 {% endif %}
             </div>
             <div class="form-group">
-                <select name="tools_categories" id="tools_categories" class="form-control
-                {% if offerInfos.product is not same as ('tool') %}
+                <select name="tools_products" id="tools_products" class="form-control
+                {% if offerInfos.productType is not same as ('tool') %}
                     invisible
                 {% endif %}
                 ">
                     <option value="" disabled selected>Selectionnez une catégorie d'outil</option>
-                    {% for category in categories.tools %}
-                        <option value="{{ category.name }}">{{ category.name }}</option>
+                    {% for product in products.tools %}
+                        <option value="{{ product.name }}">{{ product.name }}</option>
                     {% endfor %}
                 </select>
-                <select name="materials_categories" id="materials_categories" class="form-control
-                {% if offerInfos.product is not same as ('material') %}
+                <select name="materials_products" id="materials_products" class="form-control
+                {% if offerInfos.productType is not same as ('material') %}
                     invisible
                 {% endif %}
                 ">
                     <option value="" disabled selected>Selectionnez une catégorie de matériau</option>
-                    {% for category in categories.materials %}
-                        <option value="{{ category.name }}">{{ category.name }}</option>
+                    {% for product in products.materials %}
+                        <option value="{{ product.name }}">{{ product.name }}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="errors">
-                {% if errors.category is defined %}
-                    {{ errors.category }}
+                {% if errors.product is defined %}
+                    {{ errors.product }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -85,17 +85,17 @@
 {% endblock %}
 {% block javascript %}
 <script>
-    const selectToolsCategories = document.querySelector("#tools_categories");
+    const selectToolsproducts = document.querySelector("#tools_products");
     const btnCheckTool = document.querySelector('#tool');
-    const selectMaterialsCategories = document.querySelector("#materials_categories");
+    const selectMaterialsproducts = document.querySelector("#materials_products");
     const btnCheckMaterial = document.querySelector("#material");
     btnCheckTool.addEventListener('change', function() {
-    selectToolsCategories.classList.remove("invisible");
-    selectMaterialsCategories.classList.add("invisible");
+    selectToolsproducts.classList.remove("invisible");
+    selectMaterialsproducts.classList.add("invisible");
 });
     btnCheckMaterial.addEventListener('change', function() {
-    selectMaterialsCategories.classList.remove("invisible");
-    selectToolsCategories.classList.add("invisible");
+    selectMaterialsproducts.classList.remove("invisible");
+    selectToolsproducts.classList.add("invisible");
 });
 </script>
 {% endblock %}

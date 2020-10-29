@@ -8,7 +8,7 @@
 
 namespace App\Controller;
 
-use App\Model\CategoryManager;
+use App\Model\ProductManager;
 use App\Model\DepartmentManager;
 use App\Model\TransactionManager;
 use App\Controller\OfferController;
@@ -27,13 +27,13 @@ class HomeController extends AbstractController
     public function index()
     {
 
-        $categoryManager = new CategoryManager();
-        $toolCategories = $categoryManager->selectByProduct('Tool');
-        $materialCategories = $categoryManager->selectByProduct('Material');
+        $productManager = new ProductManager();
+        $toolproducts = $productManager->selectByProductType('Tool');
+        $materialproducts = $productManager->selectByProductType('Material');
 
-        $categories = [
-            'tools' => $toolCategories,
-            'materials' => $materialCategories
+        $products = [
+            'tools' => $toolproducts,
+            'materials' => $materialproducts
         ];
 
         $transactionManager = new TransactionManager();
@@ -43,20 +43,20 @@ class HomeController extends AbstractController
         $departments = $departmentManager->selectAllOrderedByName();
 
         $errors = [];
-        $product = $category = $transaction = $department = "";
+        $productType = $product = $transaction = $department = "";
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-index-search']) && !empty($_POST)) {
-            if (!isset($_POST['product'])) {
-                $errors['product'] = 'Veuillez choisir un type de produit';
+            if (!isset($_POST['product_type'])) {
+                $errors['productType'] = 'Veuillez choisir un type de produit';
             } else {
-                $product = $_POST['product'];
+                $productType = $_POST['product_type'];
             }
 
-            if (!isset($_POST['tools_categories']) && !isset($_POST['materials_categories'])) {
-                $errors['category'] = 'Veuillez choisir une catégorie de produit';
-            } elseif (isset($_POST['tools_categories'])) {
-                $category = $_POST['tools_categories'];
+            if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
+                $errors['product'] = 'Veuillez choisir une catégorie de produit';
+            } elseif (isset($_POST['tools_products'])) {
+                $product = $_POST['tools_products'];
             } else {
-                $category = $_POST['materials_categories'];
+                $product = $_POST['materials_products'];
             }
             $transaction = $_POST['transaction'];
             $department = $_POST['department'];
@@ -68,7 +68,7 @@ class HomeController extends AbstractController
 
         $offerInfos = [
             'product' => $product,
-            'category' => $category,
+            'productType' => $productType,
             'transaction' => $transaction,
             'department' => $department
         ];
@@ -76,10 +76,9 @@ class HomeController extends AbstractController
         return $this->twig->render('Home/index.html.twig', [
             'departments' => $departments,
             'transactions' => $transactions,
-            'categories' => $categories,
+            'products' => $products,
             'errors' => $errors,
             'offerInfos' => $offerInfos
         ]);
     }
-
 }
