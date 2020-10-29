@@ -26,17 +26,9 @@ class OfferController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function index()
+
+    public function listOffers()
     {
-        //   $offerManager = new OfferManager();
-        //  $offers = $offerManager->selectAll();
-
-        $offers = [
-            0 => ['name' => "nomAnnonce1", 'category' => "nomCategorieA", 'departement' => "Rhone"],
-            1 => ['name' => "nomAnnonce2", 'category' => "nomCategorieB", 'departement' => "Isère"],
-            2 => ['name' => "nomAnnonce3", 'category' => "nomCategorieA", 'departement' => "Ain"]
-        ];
-
-        return $this->twig->render('Offer/list.html.twig', ['offers' => $offers]);
+        return $this->twig->render('Offer/list.html.twig');
     }
 }
