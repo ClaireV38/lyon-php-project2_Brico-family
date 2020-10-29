@@ -27,4 +27,14 @@ class DepartmentManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
+
+    /**
+     * Get all row from database.
+     *
+     * @return array
+     */
+    public function selectAllOrderedByName(): array
+    {
+        return $this->pdo->query('SELECT * FROM ' . self::TABLE . " ORDER BY name;")->fetchAll();
+    }
 }

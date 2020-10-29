@@ -43,7 +43,7 @@ class OfferController extends AbstractController
         $transactions = $transactionManager->selectAll();
 
         $departmentManager = new DepartmentManager();
-        $departments = $departmentManager->selectAll();
+        $departments = $departmentManager->selectAllOrderedByName();
 
         $errors = [];
         $product = $category = $transaction = $department = "";
