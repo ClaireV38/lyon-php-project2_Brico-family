@@ -1,10 +1,27 @@
 {% extends 'layout.html.twig' %}
 {% block title %}je recherche{% endblock %}
 {% block content %}
-    <div class= "consult_offers_list_container">
+    <div class="consult_list_offers_filter">
+    </div>
+    <div class= "consult_list_offers_container">
         <h1>Je cherche un </h1>
         <p>descriptif recherche</p>
-        <div class="consult_offer_card">
+        <form action="list.html.twig" method="post">
+            <input type="radio" id="vente" name="transaction" value="vente">
+            <label for="vente">Vente</label>
+            <input type="radio" id="location" name="transaction" value="location">
+            <label for="location">Location</label>
+            <select name="department" id="department">
+                <option value="default" selected>département</option>
+                <option value="département-1">département_1</option>
+            </select>
+            <select name="city" id="city">
+                <option value="default" selected>city</option>
+                <option value="département-1">city_1</option>
+            </select>
+            <input type="button" value="go!" class="consult_list_offers_button">
+        </form>
+        <div class="consult_list_offers_card">
             <div class  = "consult_list_offers_image">
                <img src="https://via.placeholder.com/100" alt="product_1"></a>
             </div>
