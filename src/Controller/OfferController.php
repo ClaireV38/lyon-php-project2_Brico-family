@@ -65,7 +65,7 @@ class OfferController extends AbstractController
             $department = $_POST['department'];
 
             if (empty($errors)) {
-                header('Location:/offer/search');
+                header('Location:/offer/listOffers');
             }
         }
 
@@ -86,8 +86,8 @@ class OfferController extends AbstractController
     }
 
 
-    public function search()
+    public function listOffers()
     {
-        return $this->twig->render('Offer/search.html.twig');
+        return $this->twig->render('Offer/listOffers.html.twig');
     }
 }
