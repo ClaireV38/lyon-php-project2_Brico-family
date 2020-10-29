@@ -6,4 +6,5 @@ namespace App\Model;
 class OfferManager
 {
 
+
 }

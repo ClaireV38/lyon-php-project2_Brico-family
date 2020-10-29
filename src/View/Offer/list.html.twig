@@ -12,8 +12,9 @@
             <input type="radio" id="location" name="transaction" value="location">
             <label for="location">Location</label>
             <select name="department" id="department">
-                <option value="default" selected>département</option>
-                <option value="département-1">département_1</option>
+                {% for deparment in deparments %}
+                <option value="default" selected>{{ department.name }}</option>
+                {% endfor %}
             </select>
             <select name="city" id="city">
                 <option value="default" selected>city</option>

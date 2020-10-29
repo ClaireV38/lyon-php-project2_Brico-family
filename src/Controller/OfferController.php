@@ -31,4 +31,8 @@ class OfferController extends AbstractController
     {
         return $this->twig->render('Offer/list.html.twig');
     }
+
+   /* public function listDepartments()
+    {
+    }*/
 }
