@@ -38,7 +38,7 @@
                 ">
                     <option value="" disabled selected>Selectionnez une catégorie d'outil</option>
                     {% for category in categories.tools %}
-                        <option value="{{ category }}">{{ category }}</option>
+                        <option value="{{ category.name }}">{{ category.name }}</option>
                     {% endfor %}
                 </select>
                 <select name="materials_categories" id="materials_categories" class="form-control
@@ -48,7 +48,7 @@
                 ">
                     <option value="" disabled selected>Selectionnez une catégorie de matériau</option>
                     {% for category in categories.materials %}
-                        <option value="{{ category }}">{{ category }}</option>
+                        <option value="{{ category.name }}">{{ category.name }}</option>
                     {% endfor %}
                 </select>
             </div>
