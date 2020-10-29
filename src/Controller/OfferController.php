@@ -9,6 +9,8 @@
 
 namespace App\Controller;
 
+use App\Model\CategoryManager;
+
 /**
  * Class OfferController
  *
@@ -25,9 +27,14 @@ class OfferController extends AbstractController
      */
     public function index()
     {
+
+        $categoryManager = new CategoryManager();
+        $toolCategories = $categoryManager->selectByProduct('Tool');
+        $materialCategories = $categoryManager->selectByProduct('Material');
+
         $categories = [
-            'tools' => ['toolsCategoryA', 'toolsCategoryB', 'toolsCategoryC'],
-            'materials' => ['materialsCategoryA', 'materialsCategoryB', 'materialsCategoryC']
+            'tools' => $toolCategories,
+            'materials' => $materialCategories
         ];
 
         $transactions = ['A louer', 'A vendre'];
