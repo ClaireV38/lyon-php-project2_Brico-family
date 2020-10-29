@@ -20,7 +20,7 @@ use App\Model\DepartmentManager;
 class OfferController extends AbstractController
 {
     /**
-     * Display item listing
+     * Display home form
      *
      * @return string
      * @throws \Twig\Error\LoaderError
@@ -86,6 +86,14 @@ class OfferController extends AbstractController
     }
 
 
+    /**
+     * Display list Offers
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function listOffers()
     {
         return $this->twig->render('Offer/listOffers.html.twig');

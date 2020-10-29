@@ -29,7 +29,7 @@ class DepartmentManager extends AbstractManager
 
 
     /**
-     * Get all row from database.
+     * Get all row from database ordered by name
      *
      * @return array
      */
