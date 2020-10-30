@@ -30,7 +30,7 @@ class ProductManager extends AbstractManager
     /**
      * Get one row from database by product.
      *
-     * @param  string $productName
+     * @param  string $productTypeName
      *
      * @return array
      */

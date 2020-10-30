@@ -63,7 +63,7 @@
                     {% if offerInfos.transaction is not same as ('') %}
                         <option value="{{ offerInfos.transaction }}">{{ offerInfos.transaction }}</option>
                     {% endif %}
-                    {% for transaction in transactions if transaction is not same as (offerInfos.transaction) %}
+                    {% for transaction in transactions if transaction.name is not same as (offerInfos.transaction) %}
                         <option value="{{ transaction.name }}">{{ transaction.name }}</option>
                     {% endfor %}
                 </select>
@@ -74,7 +74,7 @@
                     {% if offerInfos.department is not same as ('') %}
                         <option value="{{ offerInfos.department }}">{{ offerInfos.department }}</option>
                     {% endif %}
-                    {% for department in departments if department is not same as (infos.department) %}
+                    {% for department in departments if department.name is not same as (offerInfos.department) %}
                         <option value="{{ department.name }}">{{ department.name }}</option>
                     {% endfor %}
                 </select>
