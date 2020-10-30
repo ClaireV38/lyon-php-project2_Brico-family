@@ -37,10 +37,12 @@ class ProductManager extends AbstractManager
     public function selectByProductType(string $productTypeName)
     {
         // prepared request
-        $statement = $this->pdo->query("SELECT " . self::TABLE . ".name  FROM ". self::TABLE .
+        $statement = $this->pdo->prepare("SELECT " . self::TABLE . ".name  FROM ". self::TABLE .
         " INNER JOIN product_type ON " . self::TABLE . ".product_type_id = product_type.id
-        WHERE product_type.name = '". $productTypeName .
-        "' ORDER BY " . self::TABLE . ".name ASC");
+        WHERE product_type.name = :productTypeName 
+        ORDER BY " . self::TABLE . ".name ASC");
+        $statement->bindValue('productTypeName', $productTypeName, \PDO::PARAM_STR);
+        $statement->execute();
 
         return $statement->fetchAll();
     }
