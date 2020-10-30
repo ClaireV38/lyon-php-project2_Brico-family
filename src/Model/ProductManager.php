@@ -17,7 +17,7 @@ class ProductManager extends AbstractManager
     /**
      *
      */
-    const TABLE = 'category';
+    const TABLE = 'product';
 
     /**
      *  Initializes this class.
@@ -34,12 +34,12 @@ class ProductManager extends AbstractManager
      *
      * @return array
      */
-    public function selectByProductType(string $productName)
+    public function selectByProductType(string $productTypeName)
     {
         // prepared request
         $statement = $this->pdo->query("SELECT " . self::TABLE . ".name  FROM ". self::TABLE .
-        " INNER JOIN product ON " . self::TABLE . ".product_id = product.id
-        WHERE product.name = '". $productName .
+        " INNER JOIN product_type ON " . self::TABLE . ".product_type_id = product_type.id
+        WHERE product_type.name = '". $productTypeName .
         "' ORDER BY " . self::TABLE . ".name ASC");
 
         return $statement->fetchAll();
