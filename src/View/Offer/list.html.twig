@@ -5,20 +5,22 @@
     </div>
     <div class= "consult_list_offers_container">
         <h1>Je cherche un </h1>
-        <p>descriptif recherche</p>
+        <p>outil</p>
         <form action="list.html.twig" method="post">
             <input type="radio" id="vente" name="transaction" value="vente">
             <label for="vente">Vente</label>
             <input type="radio" id="location" name="transaction" value="location">
             <label for="location">Location</label>
             <select name="department" id="department">
-                {% for deparment in deparments %}
-                <option value="default" selected>{{ department.name }}</option>
-                {% endfor %}
+                <select name="department" id="department">
+                    {% for deparment in deparments %}
+                        <option value="default" selected>{{ department.name }}</option>
+                    {% endfor %}
+                </select>
             </select>
             <select name="city" id="city">
-                <option value="default" selected>city</option>
-                <option value="département-1">city_1</option>
+                <option value="default" selected>ville</option>
+                <option value="département-1">ville-1</option>
             </select>
             <input type="button" value="go!" class="consult_list_offers_button">
         </form>
