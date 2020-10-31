@@ -35,6 +35,9 @@ class DepartmentManager extends AbstractManager
      */
     public function selectAllOrderedByName(): array
     {
-        return $this->pdo->query('SELECT * FROM ' . self::TABLE . " ORDER BY name;")->fetchAll();
+        $statement = $this->pdo->prepare('SELECT * FROM ' . self::TABLE . " ORDER BY name;");
+        $statement->execute();
+
+        return $statement->fetchAll();
     }
 }

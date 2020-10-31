@@ -1,5 +1,101 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Hello Wilder !</h1>
+    <div class="looking_for_block container">
+        <h1>Je cherche</h1>
+        <form method="post" action="/home/index">
+            <div class="form-check-inline">
+                <div>
+                    <input type="radio" name="product_type" id="tool"
+                           class="form-check-input" value="tool"
+                            {% if offerInfos.productType is same as ('tool') %}
+                                checked
+                            {% endif %}
+                    />
+                    <label for="tool" class="form-check-label">Un outil</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="product_type" id="material"
+                           class="form-check-input" value="material"
+                            {% if offerInfos.productType is same as ('material') %}
+                                checked
+                            {% endif %}
+                    />
+                    <label for="material" class="form-check-label">Un matériau</label>
+                </div>
+            </div>
+            <div class="errors">
+                {% if errors.productType is defined %}
+                    {{ errors.productType }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <select name="tools_products" id="tools_products" class="form-control
+                {% if offerInfos.productType is not same as ('tool') %}
+                    invisible
+                {% endif %}
+                ">
+                    <option value="" disabled selected>Selectionnez une catégorie d'outil</option>
+                    {% for product in products.tools %}
+                        <option value="{{ product.name }}">{{ product.name }}</option>
+                    {% endfor %}
+                </select>
+                <select name="materials_products" id="materials_products" class="form-control
+                {% if offerInfos.productType is not same as ('material') %}
+                    invisible
+                {% endif %}
+                ">
+                    <option value="" disabled selected>Selectionnez une catégorie de matériau</option>
+                    {% for product in products.materials %}
+                        <option value="{{ product.name }}">{{ product.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="errors">
+                {% if errors.product is defined %}
+                    {{ errors.product }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="transaction">Recherchez vous un produit à la vente ou à la location ?</label>
+                <select name="transaction" id="transaction" class="form-control">
+                    {% if offerInfos.transaction is not same as ('') %}
+                        <option value="{{ offerInfos.transaction }}">{{ offerInfos.transaction }}</option>
+                    {% endif %}
+                    {% for transaction in transactions if transaction.name is not same as (offerInfos.transaction) %}
+                        <option value="{{ transaction.name }}">{{ transaction.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="department">département de recherche :</label>
+                <select name="department" id="department" class="form-control">
+                    {% if offerInfos.department is not same as ('') %}
+                        <option value="{{ offerInfos.department }}">{{ offerInfos.department }}</option>
+                    {% endif %}
+                    {% for department in departments if department.name is not same as (offerInfos.department) %}
+                        <option value="{{ department.name }}">{{ department.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" name="btn-index-search" value="submit" class="btn btn-light">Go !</button>
+        </form>
+    </div>
+{% endblock %}
+{% block javascript %}
+<script>
+    const selectToolsproducts = document.querySelector("#tools_products");
+    const btnCheckTool = document.querySelector('#tool');
+    const selectMaterialsproducts = document.querySelector("#materials_products");
+    const btnCheckMaterial = document.querySelector("#material");
+    btnCheckTool.addEventListener('change', function() {
+    selectToolsproducts.classList.remove("invisible");
+    selectMaterialsproducts.classList.add("invisible");
+});
+    btnCheckMaterial.addEventListener('change', function() {
+    selectMaterialsproducts.classList.remove("invisible");
+    selectToolsproducts.classList.add("invisible");
+});
+</script>
 {% endblock %}
