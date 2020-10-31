@@ -36,8 +36,12 @@
                     invisible
                 {% endif %}
                 ">
-                    <option value="" disabled selected>Selectionnez une catégorie d'outil</option>
-                    {% for product in products.tools %}
+                    {% if offerInfos.product is not same as ('') %}
+                        <option value="{{ offerInfos.product }}">{{ offerInfos.product }}</option>
+                    {% else %}
+                        <option value="" disabled selected>Selectionnez une catégorie d'outil</option>
+                    {% endif %}
+                    {% for product in products.tools if product.name is not same as offerInfos.product %}
                         <option value="{{ product.name }}">{{ product.name }}</option>
                     {% endfor %}
                 </select>
@@ -46,8 +50,12 @@
                     invisible
                 {% endif %}
                 ">
-                    <option value="" disabled selected>Selectionnez une catégorie de matériau</option>
-                    {% for product in products.materials %}
+                    {% if offerInfos.product is not same as ('') %}
+                        <option value="{{ offerInfos.product }}">{{ offerInfos.product }}</option>
+                    {% else %}
+                        <option value="" disabled selected>Selectionnez une catégorie de matériaux</option>
+                    {% endif %}
+                    {% for product in products.materials if product.name is not same as offerInfos.product %}
                         <option value="{{ product.name }}">{{ product.name }}</option>
                     {% endfor %}
                 </select>
@@ -62,22 +70,36 @@
                 <select name="transaction" id="transaction" class="form-control">
                     {% if offerInfos.transaction is not same as ('') %}
                         <option value="{{ offerInfos.transaction }}">{{ offerInfos.transaction }}</option>
+                    {% else %}
+                        <option value="" disabled selected>Selectionnez un type de transaction</option>
                     {% endif %}
                     {% for transaction in transactions if transaction.name is not same as (offerInfos.transaction) %}
                         <option value="{{ transaction.name }}">{{ transaction.name }}</option>
                     {% endfor %}
                 </select>
             </div>
+            <div class="errors">
+                {% if errors.transaction is defined %}
+                    {{ errors.transaction }}
+                {% endif %}
+            </div>
             <div class="form-group">
                 <label for="department">département de recherche :</label>
                 <select name="department" id="department" class="form-control">
                     {% if offerInfos.department is not same as ('') %}
                         <option value="{{ offerInfos.department }}">{{ offerInfos.department }}</option>
+                    {% else %}
+                        <option value="" disabled selected>Selectionnez un departement</option>
                     {% endif %}
                     {% for department in departments if department.name is not same as (offerInfos.department) %}
                         <option value="{{ department.name }}">{{ department.name }}</option>
                     {% endfor %}
                 </select>
+            </div>
+            <div class="errors">
+                {% if errors.department is defined %}
+                    {{ errors.department }}
+                {% endif %}
             </div>
             <button type="submit" name="btn-index-search" value="submit" class="btn btn-light">Go !</button>
         </form>
