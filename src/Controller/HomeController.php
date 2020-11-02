@@ -70,13 +70,6 @@ class HomeController extends AbstractController
                 $department = $_POST['department'];
             }
 
-            $offerInfos = [
-                'product' => $product,
-                'productType' => $productType,
-                'transaction' => $transaction,
-                'department' => $department
-            ];
-
             if (empty($errors)) {
                 header("Location:/offer/results/?product=$product&productType=$productType".
                 "&transaction=$transaction&department=$department");
