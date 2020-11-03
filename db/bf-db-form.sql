@@ -16,19 +16,19 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `category`
+-- Table structure for table `product`
 --
 
-DROP TABLE IF EXISTS `category`;
+DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `category` (
+CREATE TABLE `product` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `product_id` int NOT NULL,
+  `product_type_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_categorie_product_id_idx` (`product_id`),
-  CONSTRAINT `fk_categorie_product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
+  KEY `fk_product_product_type_idx` (`product_type_id`),
+  CONSTRAINT `fk_product_product_type_id` FOREIGN KEY (`product_type_id`) REFERENCES `product_type` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -96,13 +96,13 @@ CREATE TABLE `offer` (
   `price` float NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int NOT NULL,
-  `categorie_id` int NOT NULL,
+  `product_id` int NOT NULL,
   `transaction_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_offer_category_idx` (`categorie_id`),
+  KEY `fk_offer_product_idx` (`product_id`),
   KEY `fk_offer_transaction_idx` (`transaction_id`),
   KEY `fk_offer_user_idx` (`user_id`),
-  CONSTRAINT `fk_offer_category` FOREIGN KEY (`categorie_id`) REFERENCES `category` (`id`),
+  CONSTRAINT `fk_offer_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `fk_offer_transaction` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`id`),
   CONSTRAINT `fk_offer_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -112,10 +112,10 @@ CREATE TABLE `offer` (
 -- Table structure for table `product`
 --
 
-DROP TABLE IF EXISTS `product`;
+DROP TABLE IF EXISTS `product_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `product` (
+CREATE TABLE `product_type` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
