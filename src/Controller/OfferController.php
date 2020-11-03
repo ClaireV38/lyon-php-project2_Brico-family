@@ -33,4 +33,9 @@ class OfferController extends AbstractController
     {
         return $this->twig->render('Offer/results.html.twig');
     }
+
+    public function add()
+    {
+        return $this->twig->render('Offer/add.html.twig');
+    }
 }

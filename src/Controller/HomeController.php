@@ -26,7 +26,6 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-
         $productManager = new ProductManager();
         $toolproducts = $productManager->selectByProductType('Tool');
         $materialproducts = $productManager->selectByProductType('Material');
@@ -45,27 +44,37 @@ class HomeController extends AbstractController
         $errors = [];
         $productType = $product = $transaction = $department = "";
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-index-search']) && !empty($_POST)) {
-            if (!isset($_POST['product_type'])) {
+            if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
+                $errors['product'] = 'Veuillez choisir une catégorie de produit';
+            } elseif (!isset($_POST['product_type'])) {
                 $errors['productType'] = 'Veuillez choisir un type de produit';
             } else {
                 $productType = $_POST['product_type'];
+                if (isset($_POST['tools_products']) && $productType === 'tool') {
+                    $product = $_POST['tools_products'];
+                } else {
+                    $product = $_POST['materials_products'];
+                }
             }
 
-            if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
-                $errors['product'] = 'Veuillez choisir une catégorie de produit';
-            } elseif (isset($_POST['tools_products'])) {
-                $product = $_POST['tools_products'];
+
+            if (!isset($_POST['transaction'])) {
+                $errors['transaction'] = 'Veuillez choisir un type de transaction';
             } else {
-                $product = $_POST['materials_products'];
+                $transaction = $_POST['transaction'];
             }
-            $transaction = $_POST['transaction'];
-            $department = $_POST['department'];
+
+            if (!isset($_POST['department'])) {
+                $errors['department'] = 'Veuillez choisir un departement';
+            } else {
+                $department = $_POST['department'];
+            }
 
             if (empty($errors)) {
-                header('Location:/offer/results');
+                header("Location:/offer/results/?product=$product&productType=$productType".
+                "&transaction=$transaction&department=$department");
             }
         }
-
         $offerInfos = [
             'product' => $product,
             'productType' => $productType,
