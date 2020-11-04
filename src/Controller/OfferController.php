@@ -8,6 +8,14 @@ use App\Model\OfferManager;
 
 class OfferController extends AbstractController
 {
+    /**
+     * Display form for the user to add on offer and insert it into DB
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function add()
     {
         $productManager = new ProductManager();
