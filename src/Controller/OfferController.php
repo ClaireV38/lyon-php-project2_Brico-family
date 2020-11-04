@@ -69,7 +69,7 @@ class OfferController extends AbstractController
                 ];
                 $offerManager = new OfferManager();
                 $offerManager->insert($offerInfos);
-                header('Location:/offer/addSucces/');
+                header('Location:/offer/addSuccess/');
             }
         }
         $offerInfos = [
@@ -89,8 +89,8 @@ class OfferController extends AbstractController
         ]);
     }
 
-    public function addSucces()
+    public function addSuccess()
     {
-        return $this->twig->render('Offer/addSucces.html.twig');
+        return $this->twig->render('Offer/addSuccess.html.twig');
     }
 }
