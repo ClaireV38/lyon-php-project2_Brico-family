@@ -12,6 +12,7 @@ namespace App\Controller;
 use App\Model\ProductManager;
 use App\Model\TransactionManager;
 use App\Model\DepartmentManager;
+use App\Model\CityManager;
 
 /**
  * Class OfferController
@@ -31,11 +32,16 @@ class OfferController extends AbstractController
      */
     public function results()
     {
-        return $this->twig->render('Offer/results.html.twig');
-    }
+        $departmentManager = new DepartmentManager();
+        $departments = $departmentManager->selectAllOrderedByName();
 
-    public function add()
-    {
-        return $this->twig->render('Offer/add.html.twig');
+        $cityManager = new CityManager();
+        $cities = $cityManager->selectAllOrderedByName();
+
+
+        return $this->twig->render('Offer/results.html.twig', [
+            'departments' => $departments,
+            'cities' => $cities,
+        ]);
     }
 }
