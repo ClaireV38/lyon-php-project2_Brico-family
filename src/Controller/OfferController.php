@@ -64,7 +64,8 @@ class OfferController extends AbstractController
                     'transaction' => $transaction,
                     'offerTitle' => $offerTitle,
                     'description' => $description,
-                    'price' => $price
+                    'price' => $price,
+                    'userId' => 1
                 ];
                 $offerManager = new OfferManager();
                 $offerManager->insert($offerInfos);
@@ -79,6 +80,7 @@ class OfferController extends AbstractController
             'description' => $description,
             'price' => $price
         ];
+
         return $this->twig->render('Offer/add.html.twig', [
             'transactions' => $transactions,
             'products' => $products,
