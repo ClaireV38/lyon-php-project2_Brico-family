@@ -60,7 +60,6 @@ class HomeController extends AbstractController
                 }
             }
 
-
             if (!isset($_POST['transaction'])) {
                 $errors['transaction'] = 'Veuillez choisir un type de transaction';
             } else {
