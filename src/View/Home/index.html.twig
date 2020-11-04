@@ -101,6 +101,30 @@
                     {{ errors.department }}
                 {% endif %}
             </div>
+            <div class="form-group">
+            <label for="city">ville :</label>
+            <select name="city" id="city" class="form-control">
+                {% if offerInfos.city is defined and  offerInfos.city is not same as ('')  %}
+                <option value="{{ offerInfos.city }}">{{ offerInfos.city }}</option>
+                {% else %}
+                <option value="" disabled selected>Selectionnez</option>
+                {% endif %}
+                {% for department in departments %}
+                    <optgroup label="{{ department.name }}">
+                        {% for dep,cityTab in citiesByDepartment if dep is same as (department.name) %}
+                            {% for city in cityTab %}
+                            <option label="{{city.name}}" value="{{city.name}}">{{city.name}}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </optgroup>
+                {% endfor %}
+            </select>
+            <div class="errors">
+                {% if errors.city is defined %}
+                    {{ errors.city }}
+                {% endif %}
+            </div>
+            </div>
             <button type="submit" name="btn-index-search" value="submit" class="btn btn-light">Go !</button>
         </form>
     </div>

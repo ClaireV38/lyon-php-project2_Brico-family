@@ -11,6 +11,7 @@ namespace App\Controller;
 use App\Model\ProductManager;
 use App\Model\DepartmentManager;
 use App\Model\TransactionManager;
+use App\Model\CityManager;
 use App\Controller\OfferController;
 
 class HomeController extends AbstractController
@@ -41,8 +42,14 @@ class HomeController extends AbstractController
         $departmentManager = new DepartmentManager();
         $departments = $departmentManager->selectAllOrderedByName();
 
+        $cityManager = new CityManager();
+        $citiesByDepartment = [];
+        foreach ($departments as $department) {
+            $citiesByDepartment[$department['name']] = $cityManager->selectCityByDepartement($department['name']);
+        }
+
         $errors = [];
-        $productType = $product = $transaction = $department = "";
+        $productType = $product = $transaction = $department = $city = "";
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-index-search']) && !empty($_POST)) {
             if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
                 $errors['product'] = 'Veuillez choisir une catégorie de produit';
@@ -72,8 +79,14 @@ class HomeController extends AbstractController
                 $department = $_POST['department'];
             }
 
+            if (!isset($_POST['city'])) {
+                $errors['city'] = 'Veuillez choisir une ville';
+            } else {
+                $city = $_POST['city'];
+            }
+
             if (empty($errors)) {
-                header("Location:/offer/results/?product=$product&productType=$productType".
+                header("Location:/Offer/results/?product=$product&productType=$productType".
                 "&transaction=$transaction&department=$department");
             }
         }
@@ -81,11 +94,13 @@ class HomeController extends AbstractController
             'product' => $product,
             'productType' => $productType,
             'transaction' => $transaction,
-            'department' => $department
+            'department' => $department,
+            'city' => $city
         ];
 
         return $this->twig->render('Home/index.html.twig', [
             'departments' => $departments,
+            'citiesByDepartment' => $citiesByDepartment,
             'transactions' => $transactions,
             'products' => $products,
             'errors' => $errors,

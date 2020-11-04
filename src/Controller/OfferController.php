@@ -91,4 +91,9 @@ class OfferController extends AbstractController
     {
         return $this->twig->render('Offer/addSucces.html.twig');
     }
+
+    public function result()
+    {
+        return $this->twig->render('Offer/addSucces.html.twig');
+    }
 }
