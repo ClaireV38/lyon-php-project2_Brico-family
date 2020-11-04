@@ -23,7 +23,7 @@ class OfferController extends AbstractController
 
         $errors = [];
         $productType = $product = $offerTitle = $transaction = $description = $price = "";
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-index-search']) && !empty($_POST)) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-add']) && !empty($_POST)) {
             if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
                 $errors['product'] = 'Veuillez choisir une catégorie de produit';
             }
@@ -57,10 +57,9 @@ class OfferController extends AbstractController
                 $errors['price'] = "Veuillez renseigner un prix à votre produit";
             }
             if (empty($errors)) {
-                header('Location:/offer/addSucces');
+                header('Location:/offer/addSucces/');
             }
         }
-        var_dump($_POST);
         $offerInfos = [
             'product' => $product,
             'productType' => $productType,
@@ -77,7 +76,7 @@ class OfferController extends AbstractController
         ]);
     }
 
-    public function addConfirm()
+    public function addSucces()
     {
         return $this->twig->render('Offer/addSucces.html.twig');
     }
