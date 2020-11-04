@@ -1,9 +1,17 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: sylvain
+ * Date: 07/03/18
+ * Time: 18:20
+ * PHP version 7
+ */
 
 namespace App\Model;
 
-use App\Controller\AbstractController;
-
+/**
+ *
+ */
 class CityManager extends AbstractManager
 {
     /**
@@ -19,13 +27,17 @@ class CityManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function selectCityByDepartement($departmentName):array
+
+    /**
+     * Get all row from database ordered by name
+     *
+     * @return array
+     */
+    public function selectAllOrderedByName(): array
     {
-        $statement = $this->pdo->prepare("SELECT " . self::TABLE . ".name FROM " . self::TABLE .
-        " INNER JOIN department ON department.id = " . self::TABLE . ".department_id 
-        WHERE department.name = :departmentName ORDER BY " . self::TABLE . ".name ASC;");
-        $statement->bindValue('departmentName', $departmentName, \PDO::PARAM_STR);
+        $statement = $this->pdo->prepare('SELECT * FROM ' . self::TABLE . " ORDER BY name;");
         $statement->execute();
+
         return $statement->fetchAll();
     }
 }

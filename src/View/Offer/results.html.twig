@@ -7,7 +7,7 @@
     <div class="consult_list_offers_filter">
     </div>
     <div class= "consult_list_offers_container">
-        <h1>Je cherche un </h1>
+        <h1>Je cherche un</h1>
         <p>outil</p>
         <form action="results.html.twig" method="post">
             <input type="radio" id="vente" name="transaction" value="vente">
@@ -32,9 +32,9 @@
             </div>
             <div class="card-body">
                 <div class="tool_cartd_title">
-                    <h3>Titre:</h3><p>
-                    <h4>Prix:</h4><p></p>
-                    <h4>Localisation:</h4><p></p>
+                    <h3>Titre: {{ offerInfos.offerTitle }}</h3><p>
+                    <h4>Prix:{{ offerInfos.price }}</h4><p></p>
+                    <h4>Localisation:{{ department.name }}</h4><p></p>
                 </div>
             </div>
         </div>
