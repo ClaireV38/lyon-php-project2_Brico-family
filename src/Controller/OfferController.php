@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\ProductManager;
 use App\Model\TransactionManager;
+use App\Model\OfferManager;
 
 class OfferController extends AbstractController
 {
@@ -57,6 +58,16 @@ class OfferController extends AbstractController
                 $errors['price'] = "Veuillez renseigner un prix à votre produit";
             }
             if (empty($errors)) {
+                $offerInfos = [
+                    'product' => $product,
+                    'productType' => $productType,
+                    'transaction' => $transaction,
+                    'offerTitle' => $offerTitle,
+                    'description' => $description,
+                    'price' => $price
+                ];
+                $offerManager = new OfferManager();
+                $offerManager->insert($offerInfos);
                 header('Location:/offer/addSucces/');
             }
         }
