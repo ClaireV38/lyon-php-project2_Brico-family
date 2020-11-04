@@ -18,9 +18,10 @@ class OfferManager extends AbstractManager
     }
 
     /**
+     *  insert user offer datas into DB
+     *
      *  @param array $offerInfos
      *  @return int
-     *  insrert user offer datas into DB
      */
     public function insert(array $offerInfos): int
     {
