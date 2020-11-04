@@ -19,17 +19,13 @@ class CityManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-
-    /**
-     * Get all row from database ordered by name
-     *
-     * @return array
-     */
-    public function selectAllOrderedByName(): array
+    public function selectCityByDepartement($departmentName):array
     {
-        $statement = $this->pdo->prepare('SELECT * FROM ' . self::TABLE . " ORDER BY name;");
+        $statement = $this->pdo->prepare("SELECT " . self::TABLE . ".name FROM " . self::TABLE .
+        " INNER JOIN department ON department.id = " . self::TABLE . ".department_id 
+        WHERE department.name = :departmentName ORDER BY " . self::TABLE . ".name ASC;");
+        $statement->bindValue('departmentName', $departmentName, \PDO::PARAM_STR);
         $statement->execute();
-
         return $statement->fetchAll();
     }
 }
