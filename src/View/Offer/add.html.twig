@@ -87,6 +87,11 @@
                     {% endfor %}
                 </select>
             </div>
+            <div class="errors">
+                {% if errors.transaction is defined %}
+                    {{ errors.transaction }}
+                {% endif %}
+            </div>
             <div class="form-group">
                 <label for="description">Description de l'annonce </label>
                 <textarea required class="form-control" name="description" id="description" rows="3" placeholder="Ecrire une description">{{ offerInfos.description }}</textarea>
