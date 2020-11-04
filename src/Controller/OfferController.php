@@ -68,7 +68,7 @@ class OfferController extends AbstractController
             'description' => $description,
             'price' => $price
         ];
-        return $this->twig->render('offer/add.html.twig', [
+        return $this->twig->render('Offer/add.html.twig', [
             'transactions' => $transactions,
             'products' => $products,
             'errors' => $errors,
