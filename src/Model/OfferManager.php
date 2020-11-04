@@ -17,6 +17,11 @@ class OfferManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
+    /**
+     *  @param array $offerInfos
+     *  @return int
+     *  insrert user offer datas into DB
+     */
     public function insert(array $offerInfos): int
     {
         $statement = $this->pdo->prepare("SELECT id FROM product WHERE name = :productName");
