@@ -1,7 +1,133 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    {% include '_searchForm.html.twig' %}
+    <div class="looking_for_block container-md">
+        <h1>Je cherche</h1>
+        <form method="post" action="/home/index">
+            <div class="form-check-inline">
+                <div>
+                    <input type="radio" name="product_type" id="tool"
+                           class="form-check-input" value="tool"
+                            {% if offerInfos.productType is same as ('tool') %}
+                                checked
+                            {% endif %}
+                    />
+                    <label for="tool" class="form-check-label">Un outil</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="product_type" id="material"
+                           class="form-check-input" value="material"
+                            {% if offerInfos.productType is same as ('material') %}
+                                checked
+                            {% endif %}
+                    />
+                    <label for="material" class="form-check-label">Un matériau</label>
+                </div>
+            </div>
+            <div class="errors">
+                {% if errors.productType is defined %}
+                    {{ errors.productType }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <select name="tools_products" id="tools_products" class="form-control
+                {% if offerInfos.productType is not same as ('tool') %}
+                    invisible
+                {% endif %}
+                ">
+                    {% if offerInfos.product is not same as ('') %}
+                        <option value="{{ offerInfos.product }}">{{ offerInfos.product }}</option>
+                    {% else %}
+                        <option value="" disabled selected>Selectionnez une catégorie</option>
+                    {% endif %}
+                    {% for product in products.tools if product.name is not same as offerInfos.product %}
+                        <option value="{{ product.name }}">{{ product.name }}</option>
+                    {% endfor %}
+                </select>
+                <select name="materials_products" id="materials_products" class="form-control
+                {% if offerInfos.productType is not same as ('material') %}
+                    invisible
+                {% endif %}
+                ">
+                    {% if offerInfos.product is not same as ('') %}
+                        <option value="{{ offerInfos.product }}">{{ offerInfos.product }}</option>
+                    {% else %}
+                        <option value="" disabled selected>Selectionnez une catégorie</option>
+                    {% endif %}
+                    {% for product in products.materials if product.name is not same as offerInfos.product %}
+                        <option value="{{ product.name }}">{{ product.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="errors">
+                {% if errors.product is defined %}
+                    {{ errors.product }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="transaction">Recherchez vous un produit à la vente ou à la location ?</label>
+                <select name="transaction" id="transaction" class="form-control">
+                    {% if offerInfos.transaction is not same as ('') %}
+                        <option value="{{ offerInfos.transaction }}">{{ offerInfos.transaction }}</option>
+                    {% else %}
+                        <option value="" disabled selected>Selectionnez</option>
+                    {% endif %}
+                    {% for transaction in transactions if transaction.name is not same as (offerInfos.transaction) %}
+                        <option value="{{ transaction.name }}">{{ transaction.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="errors">
+                {% if errors.transaction is defined %}
+                    {{ errors.transaction }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="department">département de recherche :</label>
+                <select name="department" id="department" class="form-control">
+                    {% if offerInfos.department is not same as ('') %}
+                        <option value="{{ offerInfos.department }}">{{ offerInfos.department }}</option>
+                    {% else %}
+                        <option value="" disabled selected>Selectionnez</option>
+                    {% endif %}
+                    {% for department in departments if department.name is not same as (offerInfos.department) %}
+                        <option value="{{ department.name }}">{{ department.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="errors">
+                {% if errors.department is defined %}
+                    {{ errors.department }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="city">ville :</label>
+                <select name="city" id="city" class="form-control">
+                    {% if offerInfos.city is defined and  offerInfos.city is not same as ('')  %}
+                        <option value="{{ offerInfos.city }}">{{ offerInfos.city }}</option>
+                    {% else %}
+                        <option value="" disabled selected>Selectionnez</option>
+                    {% endif %}
+                    {% for department in departments %}
+                        <optgroup label="{{ department.name }}">
+                            {% for dep,cityTab in citiesByDepartment if dep is same as (department.name) %}
+                                {% for city in cityTab %}
+                                    <option label="{{city.name}}" value="{{city.name}}">{{city.name}}</option>
+                                {% endfor %}
+                            {% endfor %}
+                        </optgroup>
+                    {% endfor %}
+                </select>
+                <div class="errors">
+                    {% if errors.city is defined %}
+                        {{ errors.city }}
+                    {% endif %}
+                </div>
+            </div>
+            <button type="submit" name="btn-index-search" value="submit" class="btn btn-light">Go !</button>
+        </form>
+    </div>
     <div class="box_button_add">
         <a class="container-md button_add" href="/offer/add">Je dépose une annonce</a>
     </div>
