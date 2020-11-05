@@ -33,10 +33,10 @@ class OfferController extends AbstractController
     public function results()
     {
         $departmentManager = new DepartmentManager();
-        $departments = $departmentManager->selectAllOrderedByName();
+        $departments = $departmentManager->selectAll();
 
         $cityManager = new CityManager();
-        $cities = $cityManager->selectAllOrderedByName();
+        $cities = $cityManager->selectAll();
 
 
         return $this->twig->render('Offer/results.html.twig', [
