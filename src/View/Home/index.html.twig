@@ -93,8 +93,8 @@
                     {% endif %}
                     {% for department in departments %}
                         <optgroup label="{{ department.name }}">
-                            {% for dep,cityTab in citiesByDepartment if dep is same as (department.name) %}
-                                {% for city in cityTab %}
+                            {% for dep,citiesTab in citiesByDepartment if dep is same as (department.name) %}
+                                {% for city in citiesTab %}
                                     <option label="{{city.name}}" value="{{city.name}}">{{city.name}}</option>
                                 {% endfor %}
                             {% endfor %}
