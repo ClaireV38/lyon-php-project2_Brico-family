@@ -33,7 +33,7 @@ class OfferController extends AbstractController
     public function results()
     {
         $departmentManager = new DepartmentManager();
-        $departments = $departmentManager->selectAll();
+        $departments = $departmentManager->selectAllOrderedByName();
 
         $cityManager = new CityManager();
         $cities = $cityManager->selectAll();
