@@ -73,20 +73,14 @@ class HomeController extends AbstractController
                 $transaction = $_POST['transaction'];
             }
 
-            if (!isset($_POST['department'])) {
-                $errors['department'] = 'Veuillez choisir un departement';
-            } else {
-                $department = $_POST['department'];
-            }
-
             if (!isset($_POST['city'])) {
                 $errors['city'] = 'Veuillez choisir une ville';
             } else {
                 $city = $_POST['city'];
             }
-
+            
             if (empty($errors)) {
-                header("Location:/Offer/results/?product=$product&productType=$productType".
+                header("Location:../Offer/results/?product=$product&productType=$productType".
                 "&transaction=$transaction&department=$department&city=$city");
             }
         }

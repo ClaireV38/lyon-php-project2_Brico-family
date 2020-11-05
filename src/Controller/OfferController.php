@@ -97,11 +97,28 @@ class OfferController extends AbstractController
         ]);
     }
 
+
+    /**
+     * Display success message for the user after adding an offer
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function addSuccess()
     {
         return $this->twig->render('Offer/addSuccess.html.twig');
     }
 
+    /**
+     * Display offers corresponding
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function results()
     {
         return $this->twig->render('Offer/results.html.twig');

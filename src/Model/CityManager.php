@@ -24,7 +24,7 @@ class CityManager extends AbstractManager
      *
      * @return array
      */
-    public function selectCityByDepartement($departmentName):array
+    public function selectCityByDepartement($departmentName): array
     {
         $statement = $this->pdo->prepare("SELECT " . self::TABLE . ".name FROM " . self::TABLE .
             " INNER JOIN department ON department.id = " . self::TABLE . ".department_id 
