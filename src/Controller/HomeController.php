@@ -78,7 +78,7 @@ class HomeController extends AbstractController
             } else {
                 $city = $_POST['city'];
             }
-            
+
             if (empty($errors)) {
                 header("Location:../Offer/results/?product=$product&productType=$productType".
                 "&transaction=$transaction&department=$department&city=$city");
