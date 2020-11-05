@@ -11,7 +11,6 @@ namespace App\Controller;
 use App\Model\ProductManager;
 use App\Model\DepartmentManager;
 use App\Model\TransactionManager;
-use App\Controller\OfferController;
 
 class HomeController extends AbstractController
 {
@@ -56,7 +55,6 @@ class HomeController extends AbstractController
                     $product = $_POST['materials_products'];
                 }
             }
-
 
             if (!isset($_POST['transaction'])) {
                 $errors['transaction'] = 'Veuillez choisir un type de transaction';

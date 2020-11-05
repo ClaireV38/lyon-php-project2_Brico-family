@@ -8,7 +8,7 @@ h1 {
     text-align: center;
 }
 
-.container-md {
+.container-md, .container {
     background-color: var(--primary-color);
     border-radius: 10px;
     width: 90%;
