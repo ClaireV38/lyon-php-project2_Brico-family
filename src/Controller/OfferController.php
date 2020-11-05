@@ -8,6 +8,14 @@ use App\Model\OfferManager;
 
 class OfferController extends AbstractController
 {
+    /**
+     * Display form for the user to add on offer and insert it into DB
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function add()
     {
         $productManager = new ProductManager();
@@ -64,11 +72,12 @@ class OfferController extends AbstractController
                     'transaction' => $transaction,
                     'offerTitle' => $offerTitle,
                     'description' => $description,
-                    'price' => $price
+                    'price' => $price,
+                    'userId' => 1
                 ];
                 $offerManager = new OfferManager();
                 $offerManager->insert($offerInfos);
-                header('Location:/offer/addSucces/');
+                header('Location:/offer/addSuccess/');
             }
         }
         $offerInfos = [
@@ -79,6 +88,7 @@ class OfferController extends AbstractController
             'description' => $description,
             'price' => $price
         ];
+
         return $this->twig->render('Offer/add.html.twig', [
             'transactions' => $transactions,
             'products' => $products,
@@ -87,8 +97,8 @@ class OfferController extends AbstractController
         ]);
     }
 
-    public function addSucces()
+    public function addSuccess()
     {
-        return $this->twig->render('Offer/addSucces.html.twig');
+        return $this->twig->render('Offer/addSuccess.html.twig');
     }
 }
