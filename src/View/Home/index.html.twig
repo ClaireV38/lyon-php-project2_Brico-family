@@ -41,7 +41,7 @@
                     {% else %}
                         <option value="" disabled selected>Selectionnez une catégorie</option>
                     {% endif %}
-                    {% for product in products.tools if product.name is not same as offerInfos.product %}
+                    {% for product in products.tools if product.name is not same as (offerInfos.product) %}
                         <option value="{{ product.name }}">{{ product.name }}</option>
                     {% endfor %}
                 </select>
@@ -55,7 +55,7 @@
                     {% else %}
                         <option value="" disabled selected>Selectionnez une catégorie</option>
                     {% endif %}
-                    {% for product in products.materials if product.name is not same as offerInfos.product %}
+                    {% for product in products.materials if product.name is not same as (offerInfos.product) %}
                         <option value="{{ product.name }}">{{ product.name }}</option>
                     {% endfor %}
                 </select>
