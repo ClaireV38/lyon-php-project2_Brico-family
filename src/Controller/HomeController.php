@@ -80,7 +80,7 @@ class HomeController extends AbstractController
             }
 
             if (empty($errors)) {
-                header("Location:../Offer/results/?product=$product&productType=$productType".
+                header("Location: /offer/results/?product=$product&productType=$productType".
                 "&transaction=$transaction&department=$department&city=$city");
             }
         }
