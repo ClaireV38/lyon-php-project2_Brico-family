@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Controller;
 
 use App\Model\ProductManager;
@@ -18,6 +19,7 @@ class OfferController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
+
     public function add()
     {
         $productManager = new ProductManager();

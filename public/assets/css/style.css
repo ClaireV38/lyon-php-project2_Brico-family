@@ -1,3 +1,4 @@
+
 :root {
     --primary-color: #F2E186;
     --radio-button-color: maroon;
@@ -81,6 +82,7 @@ input[type='radio']:checked:before {
     color: maroon;
     background-color: var(--on-hover-button);
 }
+
 .consult_list_offers_container{
     display: block;
     min-width: 500px;
@@ -171,7 +173,14 @@ input[type='radio']:checked:before {
     width: 50px;
     font-size: 13px;
 }
+
 @media screen and (min-width: 1000px) {
+
+    .home_page_content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 
     .box_button_add {
         display: flex;
@@ -194,6 +203,7 @@ input[type='radio']:checked:before {
     }
 
 }
+
 
 
 
