@@ -119,6 +119,7 @@ input[type='radio']:checked:before {
     justify-content: space-around;
     background-color: #F2E186;
     margin: auto;
+    margin-bottom: 15px;
     border-radius: 10px;
     max-width: 75%;
 }
