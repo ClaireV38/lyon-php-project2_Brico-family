@@ -88,6 +88,7 @@ input[type='radio']:checked:before {
 
 }
 .consult_list_offers_container h1{
+    height: 50px;
     font-size: 20px ;
     text-align: center;
     display: flex;
@@ -170,11 +171,6 @@ input[type='radio']:checked:before {
     font-size: 13px;
 }
 @media screen and (min-width: 1000px) {
-    main {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
 
     .box_button_add {
         display: flex;
