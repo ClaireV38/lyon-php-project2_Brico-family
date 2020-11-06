@@ -23,18 +23,20 @@
                 </select>
             <input type="button" value="go!" class="consult_list_offers_button">
         </form>
+        {% for offer in offers %}
         <div class="consult_list_offers_card">
             <div class  = "consult_list_offers_image">
                 <img src="https://via.placeholder.com/100" alt="product_1">
             </div>
             <div class="card-body">
                 <div class="tool_cartd_title">
-                    <h3>Titre: {{ offerInfos.offerTitle }}</h3><p>
-                    <h4>Prix:{{ offerInfos.price }}</h4><p></p>
-                    <h4>Localisation:{{ department.name }}</h4><p></p>
+                    <h3>Titre: {{ offer.title }}</h3><p>
+                    <h4>Prix: {{ offer.price }} euros</h4><p></p>
+                    <h4>Localisation:</h4><p></p>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
 
 {% endblock %}
