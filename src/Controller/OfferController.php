@@ -77,7 +77,7 @@ class OfferController extends AbstractController
                 ];
                 $offerManager = new OfferManager();
                 $offerManager->insert($offerInfos);
-                header('Location:/offer/addSuccess/');
+                header('Location: /offer/addSuccess/');
             }
         }
         $offerInfos = [
