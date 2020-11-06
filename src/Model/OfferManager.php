@@ -47,4 +47,24 @@ class OfferManager extends AbstractManager
             return (int)$this->pdo->lastInsertId();
         }
     }
+
+    public function selectOfferByResearchForm($offerInfos)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM" . self::TABLE .
+        "INNER JOIN product ON" . self::TABLE . ".product_id = product.id
+        INNER JOIN transaction ON" . self::TABLE .".transaction_id = transaction.id
+        INNER JOIN user ON" . self::TABLE . ".user_id = user_id
+        INNER JOIN city ON user.city_id = city.id
+        WHERE product.name = :productName, 
+        transaction.name = :transactionName,
+        city.name = :cityName
+        ORDER BY offer.title ASC");
+        $statement->bindValue('product.name', $offerInfos['product'], \PDO::PARAM_STR);
+        $statement->bindValue('transaction.name', $offerInfos['transaction'], \PDO::PARAM_STR);
+        $statement->bindValue('city.name', $offerInfos['city'], \PDO::PARAM_STR);
+        $statement->execute();
+
+        $resultsOffer = $statement->fetchAll();
+        return $resultsOffer;
+    }
 }
