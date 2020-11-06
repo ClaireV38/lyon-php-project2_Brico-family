@@ -1,3 +1,89 @@
+<<<<<<< HEAD
+=======
+:root {
+    --primary-color: #F2E186;
+    --radio-button-color: maroon;
+    --on-hover-button: #f1bc83;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container-md, .container {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    width: 90%;
+    padding-bottom: 1rem;
+}
+
+.form-check-inline {
+    width: 100%;
+    justify-content: space-around;
+}
+
+.form-control:focus {
+    border-color: #d2691e;
+    box-shadow: 0 0 0 0.2rem rgba( 210,105,30,0.25);
+}
+
+input[type='radio'] {
+    width:15px;
+    height:15px;
+    border:1px solid black;
+    border-radius:50%;
+    outline:none;
+}
+
+input[type='radio']:hover {
+    box-shadow:0 0 1px 0px orange inset;
+}
+
+input[type='radio']:before {
+    content:'';
+    display:block;
+    width:60%;
+    height:60%;
+    margin: 20% auto;
+    border-radius:50%;
+}
+input[type='radio']:checked:before {
+    background: var(--radio-button-color);
+}
+
+
+.btn {
+    display: block;
+    margin: auto;
+}
+
+.errors {
+    color: red;
+}
+
+.invisible {
+    display: none;
+}
+
+.button_add {
+    margin: 60px auto;
+    padding: 0.75rem;
+    display: block;
+    height: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    color: black;
+}
+
+.button_add:hover {
+    text-decoration: none;
+    color: maroon;
+    background-color: var(--on-hover-button);
+}
+>>>>>>> e17793cd1bd0600b2fa4f76b8070e7033b058857
 .consult_list_offers_container{
     display: block;
     min-width: 500px;
@@ -5,6 +91,10 @@
 
 }
 .consult_list_offers_container h1{
+<<<<<<< HEAD
+=======
+    height: 50px;
+>>>>>>> e17793cd1bd0600b2fa4f76b8070e7033b058857
     font-size: 20px ;
     text-align: center;
     display: flex;
@@ -85,4 +175,31 @@
     border-radius: 10px;
     width: 50px;
     font-size: 13px;
+<<<<<<< HEAD
 }
+=======
+}
+@media screen and (min-width: 1000px) {
+
+    .box_button_add {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+    }
+
+    .looking_for_block {
+        width: 50%;
+    }
+
+
+    .button_add {
+        margin: auto 1.2rem;
+        max-width: 550px;
+    }
+
+}
+
+
+
+>>>>>>> e17793cd1bd0600b2fa4f76b8070e7033b058857

@@ -17,4 +17,8 @@ define('APP_DEV', true);
 define('APP_VIEW_PATH', __DIR__ . '/../src/View/');
 define('APP_CACHE_PATH', __DIR__ . '/../temp/cache/');
 
+<<<<<<< HEAD
 define('HOME_PAGE', 'offer/index');
+=======
+define('HOME_PAGE', 'Home/index');
+>>>>>>> e17793cd1bd0600b2fa4f76b8070e7033b058857
