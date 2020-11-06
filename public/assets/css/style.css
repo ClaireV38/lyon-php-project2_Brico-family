@@ -1,3 +1,4 @@
+
 :root {
     --primary-color: #F2E186;
     --radio-button-color: maroon;
@@ -81,6 +82,7 @@ input[type='radio']:checked:before {
     color: maroon;
     background-color: var(--on-hover-button);
 }
+
 .consult_list_offers_container{
     display: block;
     min-width: 500px;
@@ -88,6 +90,8 @@ input[type='radio']:checked:before {
 
 }
 .consult_list_offers_container h1{
+    margin-top: 20px;
+    height: 50px;
     font-size: 20px ;
     text-align: center;
     display: flex;
@@ -169,8 +173,10 @@ input[type='radio']:checked:before {
     width: 50px;
     font-size: 13px;
 }
+
 @media screen and (min-width: 1000px) {
-    main {
+
+    .home_page_content {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -192,8 +198,12 @@ input[type='radio']:checked:before {
         margin: auto 1.2rem;
         max-width: 550px;
     }
+    .consult_list_offers_card{
+        max-width: 600px;
+    }
 
 }
+
 
 
 
