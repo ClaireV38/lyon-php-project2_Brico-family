@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 :root {
     --primary-color: #F2E186;
     --radio-button-color: maroon;
@@ -83,7 +82,7 @@ input[type='radio']:checked:before {
     color: maroon;
     background-color: var(--on-hover-button);
 }
->>>>>>> e17793cd1bd0600b2fa4f76b8070e7033b058857
+
 .consult_list_offers_container{
     display: block;
     min-width: 500px;
@@ -91,10 +90,7 @@ input[type='radio']:checked:before {
 
 }
 .consult_list_offers_container h1{
-<<<<<<< HEAD
-=======
     height: 50px;
->>>>>>> e17793cd1bd0600b2fa4f76b8070e7033b058857
     font-size: 20px ;
     text-align: center;
     display: flex;
@@ -175,11 +171,15 @@ input[type='radio']:checked:before {
     border-radius: 10px;
     width: 50px;
     font-size: 13px;
-<<<<<<< HEAD
 }
-=======
-}
+
 @media screen and (min-width: 1000px) {
+
+    .home_page_content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 
     .box_button_add {
         display: flex;
@@ -202,4 +202,4 @@ input[type='radio']:checked:before {
 
 
 
->>>>>>> e17793cd1bd0600b2fa4f76b8070e7033b058857
+
