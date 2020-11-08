@@ -5,7 +5,12 @@
         <div class="card-body">
             <div class="first_row">
                 <h3 class="card-title">Titre : {{ detailsOffer.title }}</h3>
-                <div class="transaction_logo">{{ detailsOffer.transaction_name }}</div>
+                <div class="transaction_logo
+                {% if detailsOffer.transaction_name == 'Location' %}
+                yellow
+                {% endif %}
+                ">
+                    {{ detailsOffer.transaction_name }}</div>
             </div>
             <h4>Prix :</h4><p>{{ detailsOffer.price }} euros</p>
             <h4>Description :</h4><p>{{ detailsOffer.description }}</p>

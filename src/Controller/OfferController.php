@@ -134,7 +134,7 @@ class OfferController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function details(int $id = 1)
+    public function details(int $id = 2)
     {
         $offerManager = new OfferManager();
         $detailsOffer = $offerManager->selectOneWithDetailsById($id);
