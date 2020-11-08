@@ -141,6 +141,6 @@ class OfferController extends AbstractController
         var_dump($detailsOffer);
 
 
-        return $this->twig->render('Offer/details.html.twig');
+        return $this->twig->render('Offer/details.html.twig', ['detailsOffer' => $detailsOffer]);
     }
 }
