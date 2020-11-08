@@ -63,7 +63,7 @@ class OfferManager extends AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
 
-        $resultOffer = $statement->fetchAll();
+        $resultOffer = $statement->fetch();
         return $resultOffer;
     }
 }

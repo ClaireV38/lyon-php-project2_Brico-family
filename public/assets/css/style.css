@@ -106,7 +106,26 @@ input[type='radio']:checked:before {
         max-width: 550px;
     }
 
+    .card {
+        max-width: 600px;
+    }
+
+    .first_row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    .transaction_logo {
+        background-color: orange;
+        border-radius: 6px;
+        padding: 4px;
+    }
+
 }
+
+
 
 
 
