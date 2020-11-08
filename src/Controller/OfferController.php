@@ -137,8 +137,10 @@ class OfferController extends AbstractController
     public function details(int $id = 1)
     {
         $offerManager = new OfferManager();
-        $item = $offerManager->selectOneById($id);
+        $detailsOffer = $offerManager->selectOneWithDetailsById($id);
+        var_dump($detailsOffer);
 
-        return $this->twig->render('Item/show.html.twig', ['item' => $item]);
+
+        return $this->twig->render('Offer/details.html.twig');
     }
 }

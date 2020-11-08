@@ -47,4 +47,19 @@ class OfferManager extends AbstractManager
             return (int)$this->pdo->lastInsertId();
         }
     }
+
+    public function selectOneWithDetailsById($id)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM " . self::TABLE .
+        " INNER JOIN product ON " . self::TABLE . " .product_id = product.id
+        INNER JOIN transaction ON " . self::TABLE ." .transaction_id = transaction.id
+        INNER JOIN user ON " . self::TABLE . " .user_id = user_id
+        INNER JOIN city ON user.city_id = city.id
+        WHERE " .  self::TABLE . ".id=:id ");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        $resultOffer = $statement->fetchAll();
+        return $resultOffer;
+    }
 }
