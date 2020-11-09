@@ -41,7 +41,7 @@
                     {% else %}
                         <option value="" disabled selected>Selectionnez une catégorie</option>
                     {% endif %}
-                    {% for product in products.tools if product.name is not same as offerInfos.product %}
+                    {% for product in products.tools if product.name is not same as (offerInfos.product) %}
                         <option value="{{ product.name }}">{{ product.name }}</option>
                     {% endfor %}
                 </select>
@@ -55,7 +55,7 @@
                     {% else %}
                         <option value="" disabled selected>Selectionnez une catégorie</option>
                     {% endif %}
-                    {% for product in products.materials if product.name is not same as offerInfos.product %}
+                    {% for product in products.materials if product.name is not same as (offerInfos.product) %}
                         <option value="{{ product.name }}">{{ product.name }}</option>
                     {% endfor %}
                 </select>
@@ -84,28 +84,34 @@
                 {% endif %}
             </div>
             <div class="form-group">
-                <label for="department">département de recherche :</label>
-                <select name="department" id="department" class="form-control">
-                    {% if offerInfos.department is not same as ('') %}
-                        <option value="{{ offerInfos.department }}">{{ offerInfos.department }}</option>
+                <label for="city">ville :</label>
+                <select name="city" id="city" class="form-control">
+                    {% if offerInfos.city is defined and  offerInfos.city is not same as ('')  %}
+                        <option value="{{ offerInfos.city }}">{{ offerInfos.city }}</option>
                     {% else %}
                         <option value="" disabled selected>Selectionnez</option>
                     {% endif %}
-                    {% for department in departments if department.name is not same as (offerInfos.department) %}
-                        <option value="{{ department.name }}">{{ department.name }}</option>
+                    {% for department in departments %}
+                        <optgroup label="{{ department.name }}">
+                            {% for dep,citiesTab in citiesByDepartment if dep is same as (department.name) %}
+                                {% for city in citiesTab %}
+                                    <option label="{{city.name}}" value="{{city.name}}">{{city.name}}</option>
+                                {% endfor %}
+                            {% endfor %}
+                        </optgroup>
                     {% endfor %}
                 </select>
-            </div>
-            <div class="errors">
-                {% if errors.department is defined %}
-                    {{ errors.department }}
-                {% endif %}
+                <div class="errors">
+                    {% if errors.city is defined %}
+                        {{ errors.city }}
+                    {% endif %}
+                </div>
             </div>
             <button type="submit" name="btn-index-search" value="submit" class="btn btn-light">Go !</button>
         </form>
     </div>
     <div class="box_button_add">
-        <a class="container-md button_add" href="offer/add">Je dépose une annonce</a>
+        <a class="container-md button_add" href="/offer/add">Je dépose une annonce</a>
     </div>
 {% endblock %}
 {% block javascript %}
@@ -115,12 +121,12 @@
     const selectMaterialsproducts = document.querySelector("#materials_products");
     const btnCheckMaterial = document.querySelector("#material");
     btnCheckTool.addEventListener('change', function() {
-    selectToolsproducts.classList.remove("invisible");
-    selectMaterialsproducts.classList.add("invisible");
-});
+        selectToolsproducts.classList.remove("invisible");
+        selectMaterialsproducts.classList.add("invisible");
+    });
     btnCheckMaterial.addEventListener('change', function() {
-    selectMaterialsproducts.classList.remove("invisible");
-    selectToolsproducts.classList.add("invisible");
-});
+        selectMaterialsproducts.classList.remove("invisible");
+        selectToolsproducts.classList.add("invisible");
+    });
 </script>
 {% endblock %}
