@@ -15,7 +15,9 @@
 
 <body>
 <main>
-    {% block content %}{% endblock %}
+    {% block content %}
+        {% include '/../_navbar.html.twig' %}
+    {% endblock %}
 </main>
     {% block javascript %}
     {% endblock %}
