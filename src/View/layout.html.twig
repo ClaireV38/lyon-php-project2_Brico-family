@@ -14,9 +14,11 @@
 </head>
 
 <body>
+{% include '_navbar.html.twig' %}
+
 <main>
+
     {% block content %}
-        {% include '/../_navbar.html.twig' %}
     {% endblock %}
 </main>
     {% block javascript %}
