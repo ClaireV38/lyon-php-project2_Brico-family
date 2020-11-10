@@ -81,33 +81,19 @@ input[type='radio']:checked:before {
     color: maroon;
     background-color: var(--on-hover-button);
 }
-.mainTitle{
-    padding: 0px;
-}
-.header_navAndTitle
-{
-    border: solid blue;
-}
 
+/*navbar*/
+.navbar{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 20px;
+    background-color: var(--primary-color);
+}
 .navbar-toggler{
     border:none;
 }
-.navAndTitle{
-    background-color: var(--primary-color);
-    display: flex;
-    justify-content: center;
-}
-.navbar{
-    display: flex;
-    flex-direction: column;
-}
-.nav-menu{
-    display: flex;
-    flex-direction: column;
-}
-.brico_header_title{
-    padding-top: 1rem;
-}
+
+/*fin navbar*/
 
 @media screen and (min-width: 1000px) {
     main {
