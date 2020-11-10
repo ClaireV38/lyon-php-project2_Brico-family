@@ -82,6 +82,28 @@ input[type='radio']:checked:before {
     background-color: var(--on-hover-button);
 }
 
+
+.first_row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.transaction_logo {
+    background-color: orange;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+span {
+    font-size: 0.8em;
+}
+
 @media screen and (min-width: 1000px) {
     main {
         display: flex;
@@ -108,23 +130,6 @@ input[type='radio']:checked:before {
 
     .card {
         max-width: 600px;
-    }
-
-    .first_row {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-    }
-
-    .transaction_logo {
-        background-color: orange;
-        border-radius: 6px;
-        padding: 4px;
-    }
-
-    .yellow {
-        background-color: yellow;
     }
 
 }

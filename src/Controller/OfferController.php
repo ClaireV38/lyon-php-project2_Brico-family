@@ -138,9 +138,15 @@ class OfferController extends AbstractController
     {
         $offerManager = new OfferManager();
         $detailsOffer = $offerManager->selectOneWithDetailsById($id);
-        var_dump($detailsOffer);
 
+        $sellerShow="";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_seller_show']) && !empty($_POST)) {
+            $sellerShow = trim($_POST['seller_show']);
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_seller_hide']) && !empty($_POST)) {
+            $sellerShow = trim($_POST['seller_hide']);
+        }
 
-        return $this->twig->render('Offer/details.html.twig', ['detailsOffer' => $detailsOffer]);
+        return $this->twig->render('Offer/details.html.twig', ['detailsOffer' => $detailsOffer, 'sellerShow' => $sellerShow]);
     }
 }
