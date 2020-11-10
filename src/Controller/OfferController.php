@@ -58,9 +58,13 @@ class OfferController extends AbstractController
             $price = trim($_POST['price']);
             if (empty($offerTitle)) {
                 $errors['offerTitle'] = "Veuillez renseigner le titre de votre annonce";
+            } elseif (mb_strlen($offerTitle) > 50) {
+                $errors['offerTitle'] = "le titre de l'annonce ne doit pas dépasser 50 caractères";
             }
             if (empty($description)) {
                 $errors['description'] = "Veuillez renseigner une description";
+            } elseif (mb_strlen($description) > 250) {
+                $errors['description'] = "la description ne doit pas dépasser 250 caractères";
             }
             if (empty($price)) {
                 $errors['price'] = "Veuillez renseigner un prix à votre produit";
@@ -80,21 +84,17 @@ class OfferController extends AbstractController
                 header('Location:/offer/addSuccess/');
             }
         }
-        $offerInfos = [
-            'product' => $product,
+        $offerInfos = ['product' => $product,
             'productType' => $productType,
             'transaction' => $transaction,
             'offerTitle' => $offerTitle,
             'description' => $description,
-            'price' => $price
-        ];
+            'price' => $price];
 
-        return $this->twig->render('Offer/add.html.twig', [
-            'transactions' => $transactions,
+        return $this->twig->render('Offer/add.html.twig', ['transactions' => $transactions,
             'products' => $products,
             'errors' => $errors,
-            'offerInfos' => $offerInfos,
-        ]);
+            'offerInfos' => $offerInfos,]);
     }
 
 
