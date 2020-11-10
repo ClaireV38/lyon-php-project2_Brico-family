@@ -82,6 +82,28 @@ input[type='radio']:checked:before {
     background-color: var(--on-hover-button);
 }
 
+.input-file{
+    cursor: pointer;
+    color: #47473b;
+    font-weight: bold;
+}
+.input-file:hover{
+    color: maroon;
+}
+
+.input-submit-file{
+    text-decoration: none;
+    border: antiquewhite;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px 15px;
+}
+.input-submit-file:hover{
+    background-color: #F2E186;
+    border-style: solid;
+    border-color: #47473b;
+}
+
 @media screen and (min-width: 1000px) {
     main {
         display: flex;
