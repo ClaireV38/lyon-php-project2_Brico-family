@@ -90,6 +90,14 @@ input[type='radio']:checked:before {
     align-items: baseline;
 }
 
+.top_right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: 1rem;
+}
+
 .transaction_logo {
     background-color: orange;
     border-radius: 6px;
@@ -98,6 +106,10 @@ input[type='radio']:checked:before {
 
 .yellow {
     background-color: yellow;
+}
+
+.seller_details {
+    margin-top: 1.5rem;
 }
 
 span {

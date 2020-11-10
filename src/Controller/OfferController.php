@@ -134,7 +134,7 @@ class OfferController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function details(int $id = 2)
+    public function details(int $id = 14)
     {
         $offerManager = new OfferManager();
         $detailsOffer = $offerManager->selectOneWithDetailsById($id);
@@ -147,6 +147,8 @@ class OfferController extends AbstractController
             $sellerShow = trim($_POST['seller_hide']);
         }
 
-        return $this->twig->render('Offer/details.html.twig', ['detailsOffer' => $detailsOffer, 'sellerShow' => $sellerShow]);
+        return $this->twig->render('Offer/details.html.twig', [
+            'detailsOffer' => $detailsOffer,
+            'sellerShow' => $sellerShow]);
     }
 }

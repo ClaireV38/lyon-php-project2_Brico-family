@@ -5,26 +5,30 @@
         <div class="card-body">
             <div class="first_row">
                 <h3 class="card-title">Titre : {{ detailsOffer.title }}</h3>
-                <div class="transaction_logo
-                {% if detailsOffer.transaction_name == 'Location' %}
-                yellow
-                {% endif %}
-                ">
-                    {{ detailsOffer.transaction_name }}</div>
+                <div class="top_right">
+                    <div class="transaction_logo
+                    {% if detailsOffer.transaction_name == 'Location' %}
+                    yellow
+                    {% endif %}
+                    ">
+                        {{ detailsOffer.transaction_name }}
+                    </div>
+                    {{ detailsOffer.price }} €
+                </div>
             </div>
-            <div class="raw">
-                <h3>Prix : <span> {{ detailsOffer.price }} euros </span></h3>
             <h4>Description :</h4><p class="card-text">{{ detailsOffer.description }}</p>
                 {% if sellerShow == 'show' %}
             <form method="post" action="/offer/details">
                 <input type="hidden" name="seller_hide" value="hide" />
                 <button type="submit" name="btn_seller_hide" class="btn btn-light">Cacher les coordonées du vendeur</button>
             </form>
-                    <h4>Prenom :<span> {{ detailsOffer.seller_firstname }} </span></h4>
-                    <h4>Nom :<span> {{ detailsOffer.seller_lastname }} </span></h4>
-                    <h4>Email :<span> {{ detailsOffer.seller_email }} </span></h4>
-                    <h4>Telephone :<span> {{ detailsOffer.seller_phone_number }} </span></h4>
-                    <h4>Ville :<span> {{ detailsOffer.seller_city }} </span></h4>
+                    <div class="seller_details">
+                        <h4>Prenom :<span> {{ detailsOffer.seller_firstname }} </span></h4>
+                        <h4>Nom :<span> {{ detailsOffer.seller_lastname }} </span></h4>
+                        <h4>Email :<span> {{ detailsOffer.seller_email }} </span></h4>
+                        <h4>Telephone :<span> {{ detailsOffer.seller_phone_number }} </span></h4>
+                        <h4>Ville :<span> {{ detailsOffer.seller_city }} </span></h4>
+                    </div>
                 {% else %}
                     <form method="post" action="/offer/details">
                         <input type="hidden" name="seller_show" value="show" />
