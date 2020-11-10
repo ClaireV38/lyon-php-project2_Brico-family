@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Model\ProductManager;
@@ -101,30 +100,30 @@ class OfferController extends AbstractController
         ]);
     }
 
+
+    /**
+     * Display success message for the user after adding an offer
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function addSuccess()
     {
         return $this->twig->render('Offer/addSuccess.html.twig');
     }
 
+    /**
+     * Display offers corresponding
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function results()
     {
-        $departmentManager = new DepartmentManager();
-        $departments = $departmentManager->selectAllOrderedByName();
-
-        $cityManager = new CityManager();
-        $cities = $cityManager->selectAll();
-
-        $offers = [
-        0 => ['title' => 'le titre', 'description' => 'blabla', 'price' => 20],
-        1 => ['title' => 'le titre 2', 'description' => 'blablabla2', 'price' => 12],
-        2 => ['title' => 'le titre 3', 'description' => 'blablabla3', 'price' => 2000],
-        ];
-
-
-        return $this->twig->render('Offer/results.html.twig', [
-            'departments' => $departments,
-            'cities' => $cities,
-            'offers' => $offers,
-        ]);
+        return $this->twig->render('Offer/results.html.twig');
     }
 }

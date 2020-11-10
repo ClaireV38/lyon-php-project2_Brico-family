@@ -13,6 +13,7 @@ use App\Model\ProductManager;
 use App\Model\DepartmentManager;
 use App\Model\TransactionManager;
 use App\Model\CityManager;
+use App\Controller\OfferController;
 
 class HomeController extends AbstractController
 {
