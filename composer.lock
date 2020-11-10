@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92deccaababec509a622646c1844b923",
+    "content-hash": "bfa385f88045f28e5e97c632df56d287",
     "packages": [
         {
             "name": "symfony/polyfill-ctype",
@@ -308,16 +308,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "1.10.16",
+            "version": "1.10.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "217f0272673c72087862c40cf91ac07eb438d778"
+                "reference": "09d42e18394d8594be24e37923031c4b7442a1cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/217f0272673c72087862c40cf91ac07eb438d778",
-                "reference": "217f0272673c72087862c40cf91ac07eb438d778",
+                "url": "https://api.github.com/repos/composer/composer/zipball/09d42e18394d8594be24e37923031c4b7442a1cb",
+                "reference": "09d42e18394d8594be24e37923031c4b7442a1cb",
                 "shasum": ""
             },
             "require": {
@@ -398,7 +398,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T07:55:59+00:00"
+            "time": "2020-10-30T21:31:58+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -743,16 +743,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.9.0",
+            "version": "2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "2ec31f3adc54c71a59c5e3c2143d7a0e2f8899f8"
+                "reference": "307fb34a5ab697461ec4c9db865b20ff2fd40771"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/2ec31f3adc54c71a59c5e3c2143d7a0e2f8899f8",
-                "reference": "2ec31f3adc54c71a59c5e3c2143d7a0e2f8899f8",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/307fb34a5ab697461ec4c9db865b20ff2fd40771",
+                "reference": "307fb34a5ab697461ec4c9db865b20ff2fd40771",
                 "shasum": ""
             },
             "require": {
@@ -800,7 +800,7 @@
                 "throwable",
                 "whoops"
             ],
-            "time": "2020-10-20T12:00:00+00:00"
+            "time": "2020-11-01T12:00:00+00:00"
         },
         {
             "name": "gitonomy/gitlib",
@@ -1347,20 +1347,20 @@
         },
         {
             "name": "nette/php-generator",
-            "version": "v3.4.1",
+            "version": "v3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/php-generator.git",
-                "reference": "7051954c534cebafd650efe8b145ac75b223cb66"
+                "reference": "fe54415cd22d01bee1307a608058bf131978610a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/php-generator/zipball/7051954c534cebafd650efe8b145ac75b223cb66",
-                "reference": "7051954c534cebafd650efe8b145ac75b223cb66",
+                "url": "https://api.github.com/repos/nette/php-generator/zipball/fe54415cd22d01bee1307a608058bf131978610a",
+                "reference": "fe54415cd22d01bee1307a608058bf131978610a",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^2.4.2 || ^3.0",
+                "nette/utils": "^3.1.2",
                 "php": ">=7.1"
             },
             "require-dev": {
@@ -1375,7 +1375,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "3.5-dev"
                 }
             },
             "autoload": {
@@ -1407,7 +1407,7 @@
                 "php",
                 "scaffolding"
             ],
-            "time": "2020-06-19T14:31:47+00:00"
+            "time": "2020-11-04T11:26:26+00:00"
         },
         {
             "name": "nette/robot-loader",
@@ -3224,7 +3224,8 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.2",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "ext-fileinfo": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

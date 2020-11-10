@@ -118,6 +118,11 @@
             <div class="file-upload" >
                     <input type="file" name="files[]" multiple="multiple" class="input-file">
             </div>
+            <div class="advice">
+                {% if advice.files is defined %}
+                    {{ advice.files }}
+                {% endif %}
+            </div>
             <button type="submit" name="btn-add" value="submit" class="btn btn-light">Go !</button>
         </form>
     </div>

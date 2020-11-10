@@ -59,6 +59,9 @@ input[type='radio']:checked:before {
     color: red;
 }
 
+.advice{
+    color: green;
+}
 .invisible {
     display: none;
 }
