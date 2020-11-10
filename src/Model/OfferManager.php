@@ -51,14 +51,10 @@ class OfferManager extends AbstractManager
     public function selectOneWithDetailsById($id)
     {
         $statement = $this->pdo->prepare("SELECT " .self::TABLE . ".id, title, description, price,
-         user.id as seller_id, product.name as product_name, transaction.name as transaction_name,
-         user.firstname as seller_firstname, user.lastname as seller_lastname, user.email as seller_email,
-         user.phone_number as seller_phone_number, city.name as seller_city
+         user_id as seller_id, product.name as product_name, transaction.name as transaction_name
          FROM " . self::TABLE .
         " INNER JOIN product ON " . self::TABLE . " .product_id = product.id
         INNER JOIN transaction ON " . self::TABLE ." .transaction_id = transaction.id
-        INNER JOIN user ON " . self::TABLE . " .user_id = user_id
-        INNER JOIN city ON user.city_id = city.id
         WHERE " .  self::TABLE . ".id=:id ");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();

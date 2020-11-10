@@ -6,6 +6,7 @@ use App\Model\ProductManager;
 use App\Model\TransactionManager;
 use App\Model\DepartmentManager;
 use App\Model\OfferManager;
+use App\Model\UserManager;
 
 class OfferController extends AbstractController
 {
@@ -134,21 +135,25 @@ class OfferController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function details(int $id = 14)
+    public function details(int $id = 1)
     {
         $offerManager = new OfferManager();
         $detailsOffer = $offerManager->selectOneWithDetailsById($id);
 
         $sellerShow="";
+        $sellerDetails = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_seller_show']) && !empty($_POST)) {
             $sellerShow = trim($_POST['seller_show']);
+            $userManager = new UserManager();
+            $sellerDetails = $userManager->selectOneWithLocationById($detailsOffer['seller_id']);
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_seller_hide']) && !empty($_POST)) {
             $sellerShow = trim($_POST['seller_hide']);
         }
 
         return $this->twig->render('Offer/details.html.twig', [
-            'detailsOffer' => $detailsOffer,
-            'sellerShow' => $sellerShow]);
+        'detailsOffer' => $detailsOffer,
+        'sellerShow' => $sellerShow,
+        'sellerDetails' => $sellerDetails]);
     }
 }

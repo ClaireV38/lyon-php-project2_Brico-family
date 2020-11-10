@@ -4,7 +4,7 @@
     <div class="container-md card offer_container">
         <div class="card-body">
             <div class="first_row">
-                <h3 class="card-title">Titre : {{ detailsOffer.title }}</h3>
+                <h3 class="card-title"> {{ detailsOffer.title }}</h3>
                 <div class="top_right">
                     <div class="transaction_logo
                     {% if detailsOffer.transaction_name == 'Location' %}
@@ -23,11 +23,25 @@
                 <button type="submit" name="btn_seller_hide" class="btn btn-light">Cacher les coordonées du vendeur</button>
             </form>
                     <div class="seller_details">
-                        <h4>Prenom :<span> {{ detailsOffer.seller_firstname }} </span></h4>
-                        <h4>Nom :<span> {{ detailsOffer.seller_lastname }} </span></h4>
-                        <h4>Email :<span> {{ detailsOffer.seller_email }} </span></h4>
-                        <h4>Telephone :<span> {{ detailsOffer.seller_phone_number }} </span></h4>
-                        <h4>Ville :<span> {{ detailsOffer.seller_city }} </span></h4>
+                        <h4>coordonnées du vendeur :</h4>
+                        <p>
+                            {{ sellerDetails.firstname }} {{ sellerDetails.lastname }}
+                        </p>
+                        <p><img
+                                    src="/assets/images/icon_email.png"
+                                    alt="icon email" height="20px"/>
+                            <span> {{ sellerDetails.email }} </span></p>
+                        <p><img
+                                    src="/assets/images/icon_phone.png"
+                                    alt="icon phone" height="20px"/>
+                            <span> {{ sellerDetails.phone_number }} </span>
+                        </p>
+                        <p><img
+                                    src="/assets/images/icon_city.png"
+                                    alt="icon city" height="20px"/>
+                            <span>
+                                {{ sellerDetails.user_city }} ({{ sellerDetails.user_department }}) </span>
+                        </p>
                     </div>
                 {% else %}
                     <form method="post" action="/offer/details">
