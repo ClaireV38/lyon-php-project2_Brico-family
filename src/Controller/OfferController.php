@@ -80,6 +80,50 @@ class OfferController extends AbstractController
                 header('Location:/offer/addSuccess/');
             }
         }
+        if (!empty($_FILES['files']['name'][0])) {
+            $files = $_FILES['files'];
+
+            $uploaded = array();
+            $failed = array();
+
+            $allowed = array('png','gif', 'jpg');
+
+            foreach ($files['name'] as $position => $fileName) {
+                $fileTmp = $files['tmp_name'][$position];
+                $fileSize = $files['size'][$position];
+                $fileError = $files['error'][$position];
+
+                $fileExt = explode('.', $fileName);
+                $fileExt = strtolower(end($fileExt));
+
+                if (in_array($fileExt, $allowed)) {
+                    if ($fileError === 0) {
+                        if ($fileSize <= 1000000) {
+                            $fileNameNew = uniqid('') . '.' . $fileExt;
+                            $fileDestination = '../public/uploads/' . $fileNameNew;
+
+                            if (move_uploaded_file($fileTmp, $fileDestination)) {
+                                $uploaded[$position] = $fileDestination;
+                            } else {
+                                $failed[$position] = "Une erreur s'est produite durant l'upload de votre fichier:
+                                {$fileName} Veuillez réessayer plus tard s'il vous plait.";
+                            }
+                        } else {
+                            $failed[$position] = "Votre fichier {$fileName} est trop large.";
+                        }
+                    } else {
+                        $failed[$position] = "Une erreur est survenue durant l'upload de votre fichier: {$fileError}";
+                    }
+                } else {
+                    $failed[$position] = "L'extension {$fileExt} n'est pas autorisée.
+                    Pour rappel, les extensions autorisées sont: png, jpg, gif.";
+                }
+                if (!empty($failed)) {
+                    echo $failed[$position];
+                }
+            }
+        }
+
         $offerInfos = [
             'product' => $product,
             'productType' => $productType,
@@ -96,7 +140,6 @@ class OfferController extends AbstractController
             'offerInfos' => $offerInfos,
         ]);
     }
-
 
     /**
      * Display success message for the user after adding an offer
