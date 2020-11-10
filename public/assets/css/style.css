@@ -93,7 +93,11 @@ input[type='radio']:checked:before {
     border:none;
 }
 
-/*fin navbar*/
+.navbar-toggler:focus{
+    outline: none;
+}
+
+/*endnavbar*/
 
 @media screen and (min-width: 1000px) {
     main {
@@ -119,6 +123,16 @@ input[type='radio']:checked:before {
         max-width: 550px;
     }
 
+    /*navbar*/
+
+    .navbar{
+        display: flex;
+        flex-direction: row;
+    }
+    .navbar-brand{
+        padding-right: 30px;
+    }
+    /*endnavbar*/
 }
 
 
