@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
+<div class="home_page_content container-fluid">
     <div class="looking_for_block container-md">
         <h1>Je cherche</h1>
         <form method="post" action="/home/index">
@@ -113,6 +114,7 @@
     <div class="box_button_add">
         <a class="container-md button_add" href="/offer/add">Je dépose une annonce</a>
     </div>
+</div>
 {% endblock %}
 {% block javascript %}
 <script>
