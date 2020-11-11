@@ -7,6 +7,7 @@ use App\Model\TransactionManager;
 use App\Model\DepartmentManager;
 use App\Model\OfferManager;
 use App\Model\UserManager;
+use App\Model\ImageManager;
 
 class OfferController extends AbstractController
 {
@@ -142,6 +143,9 @@ class OfferController extends AbstractController
         $offerManager = new OfferManager();
         $detailsOffer = $offerManager->selectOneWithDetailsById($id);
 
+        $imageManager = new ImageManager();
+        $offerImages = $imageManager->selectAllByOfferId($id);
+
         $sellerShow="";
         $sellerDetails = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_seller_show']) && !empty($_POST)) {
@@ -156,6 +160,7 @@ class OfferController extends AbstractController
         return $this->twig->render('Offer/details.html.twig', [
         'detailsOffer' => $detailsOffer,
         'sellerShow' => $sellerShow,
-        'sellerDetails' => $sellerDetails]);
+        'sellerDetails' => $sellerDetails,
+        'images' => $offerImages]);
     }
 }

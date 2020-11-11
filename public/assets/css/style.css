@@ -84,6 +84,7 @@ input[type='radio']:checked:before {
     background-color: var(--on-hover-button);
 }
 
+/* offer details*/
 
 .first_row {
     width: 100%;
@@ -144,6 +145,13 @@ span {
     margin-left: 3px;
 }
 
+.carousel {
+    max-width: 90%;
+    margin:  1rem auto 0 auto;
+}
+
+/*end offer details*/
+
 @media screen and (min-width: 1000px) {
     main {
         display: flex;
@@ -168,20 +176,15 @@ span {
         max-width: 550px;
     }
 
+    /* offer details*/
+
     .card {
         max-width: 600px;
     }
 
+    /* offer details*/
 }
 
-.carousel {
-    max-width: 90%;
-    margin:  1rem auto 0 auto;
-}
-
-.img-fluid {
-    width: 1000px;
-}
 
 
 
