@@ -3,8 +3,8 @@
 {% block title %}Offres liées à ma recherche{% endblock %}
 
 {% block content %}
-{{ dump(resultsOffer) }}
-    <div class="looking_for_block container-md">
+
+    <div class="looking_for_block container-md container-custom">
         <h1>Je cherche</h1>
         <form method="post" action="/offer/results">
             <div class="form-check-inline">
@@ -110,7 +110,7 @@
                     {% endif %}
                 </div>
             </div>
-            <button type="submit" name="btn-index-search" value="submit" class="btn btn-light">Go !</button>
+            <button type="submit" name="btn-index-search" value="submit" class="btn btn-custom btn-light">Go !</button>
         </form>
         </div>
         {% for resultOffer in resultsOffer %}

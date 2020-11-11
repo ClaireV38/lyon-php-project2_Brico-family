@@ -51,7 +51,6 @@ class OfferManager extends AbstractManager
 
     public function selectOfferByResearchForm($offerInfos)
     {
-        var_dump($offerInfos);
         $statement = $this->pdo->prepare("SELECT title, description, price, created_at, city.name AS cityname,
         firstname, lastname, email, phone_number FROM " . self::TABLE .
         " INNER JOIN product ON " . self::TABLE . ".product_id = product.id

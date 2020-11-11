@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div class="looking_for_block container">
+    <div class="looking_for_block container container-custom">
         <h1>Je dépose mon annonce</h1>
         <form method="post" action="/Offer/add" novalidate>
             <div class="form-check-inline">
@@ -129,7 +129,7 @@
                     <label class="custom-file-label" for="customFile">Image</label>
                 </div>
             </div>
-            <button type="submit" name="btn-add" value="submit" class="btn btn-light">Go !</button>
+            <button type="submit" name="btn-add" value="submit" class="btn btn-custom btn-light">Go !</button>
         </form>
     </div>
 {% endblock %}

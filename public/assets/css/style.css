@@ -9,7 +9,7 @@ h1 {
     text-align: center;
 }
 
-.container-md, .container {
+.container-custom {
     background-color: var(--primary-color);
     border-radius: 10px;
     width: 90%;
@@ -51,7 +51,7 @@ input[type='radio']:checked:before {
 }
 
 
-.btn {
+.btn-custom {
     display: block;
     margin: auto;
 }
@@ -113,23 +113,23 @@ input[type='radio']:checked:before {
     font-size: 10px;
 }
 .consult_list_offers_card{
-    height: 120px;
+    /*height: 120px;*/
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    background-color: #F2E186;
+    justify-content: space-between;
+    /*background-color: #F2E186;
     margin: auto;
     margin-bottom: 15px;
     border-radius: 10px;
-    max-width: 75%;
+    max-width: 100%;*/
 }
 
 .consult_list_offers_card img{
-    border-radius: 10px;
+    /*border-radius: 10px;*/
 }
 
 .consult_list_offers_card .card-body{
-    padding-left:1.25rem;
+    /*padding-left:1.25rem;*/
 }
 
 .consult_list_offers_image{
@@ -200,7 +200,7 @@ input[type='radio']:checked:before {
         max-width: 550px;
     }
     .consult_list_offers_card{
-        max-width: 600px;
+        /*max-width: 600px;*/
     }
 
 }
