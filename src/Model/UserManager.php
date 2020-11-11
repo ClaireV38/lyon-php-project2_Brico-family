@@ -28,8 +28,8 @@ class UserManager extends AbstractManager
     {
         $statement = $this->pdo->prepare("SELECT " .self::TABLE . ".id, firstname, lastname, email,
          phone_number, city.name as user_city, department.name as user_department
-          FROM . self::TABLE . 
-          JOIN city ON " .self::TABLE . ".city_id = city.id
+          FROM ". self::TABLE . 
+          " JOIN city ON " .self::TABLE . ".city_id = city.id
           JOIN department ON city.department_id = department.id
           WHERE " .self::TABLE . ".id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
