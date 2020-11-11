@@ -32,7 +32,7 @@ class OfferController extends AbstractController
         $imageErrors = [];
         $advice = [];
         $errors = [];
-        $productType = $product = $offerTitle = $transaction = $description = $price = $files = "";
+        $productType = $product = $offerTitle = $transaction = $description = $price = "";
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-add']) && !empty($_POST)) {
             if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
                 $errors['product'] = 'Veuillez choisir une catégorie de produit';
@@ -70,68 +70,78 @@ class OfferController extends AbstractController
             if (empty($price)) {
                 $errors['price'] = "Veuillez renseigner un prix à votre produit";
             }
+
             if (!empty($offerImages)) {
                 $images = $_FILES['images'];
-                $allowed = ['jpeg', 'png'];
+                $allowed = ['jpeg', 'png', 'jpg', 'pdf'];
                 foreach ($images['name'] as $index => $imagesName) {
+                    $uploadStatus = $images['error'][$index]; //1 == error
+                    if ($uploadStatus) {
+                        $imageErrors[$imagesName] = "Une erreur est survenue. 
+                        Impossible de charger le fichier: $imagesName";
+                        continue;
+                    }
                     $imagesTmp = $images['tmp_name'][$index];
                     $imagesSize = $images['size'][$index];
                     $imagesError = $images['error'][$index];
-                    $type = mime_content_type($imagesTmp);
+                    $tempName = $_FILES['images']['tmp_name'][$index];
+                    $type = mime_content_type($tempName);
                     $imagesExt = explode('/', $type)[1];
                     $imagesNameNew = uniqid('') . '.' . $imagesExt;
                     $imagesDestination = 'uploads/' . $imagesNameNew;
                     if (!in_array($imagesExt, $allowed)) {
-                        $imageErrors[$index] = "$imagesName - Seuls les extensions 'png' et 'jpg' sont autorisées.";
+                        $imageErrors[$index] = "$imagesExt n'est pas autorisée-Extensions acceptées: jpg, jpeg et png";
                     }
                     if ($imagesSize >= 1000000) {
-                        $imageErrors[$index] = "$imagesName - Taille max: 1Mo.";
+                        $imageErrors[$index] = "$imagesName La taille de l'image doit être inférieur à 1Mo. 
+                        Taille actuelle du fichier = ". round($imagesSize / 1000000, 2) . "Mo.";
+
                     }
                     if ($imagesError !== 0) {
                         $imageErrors[$index] = "$imagesError - Une erreur est survenue avec l'image $imagesName.";
                     }
-                    if (empty($imageErrors[$index]) && empty($errors)) {
-                        move_uploaded_file($imagesTmp, $imagesDestination);
-                    }
+                }
+                if (empty($errors) && empty($imageErrors[$index])) {
+                    move_uploaded_file($imagesTmp, $imagesDestination);
+                    $offerInfos = [
+                        'product' => $product,
+                        'productType' => $productType,
+                        'transaction' => $transaction,
+                        'offerTitle' => $offerTitle,
+                        'description' => $description,
+                        'price' => $price,
+                        'userId' => 1
+                    ];
+                    $offerManager = new OfferManager();
+                    $offerManager->insert($offerInfos);
+                    header('Location:/offer/addSuccess/');
                 }
             }
-            if (empty($errors)) {
-                $offerInfos = [
-                    'product' => $product,
-                    'productType' => $productType,
-                    'transaction' => $transaction,
-                    'offerTitle' => $offerTitle,
-                    'description' => $description,
-                    'price' => $price,
-                    'userId' => 1
-                ];
 
-                $offerManager = new OfferManager();
-                $offerManager->insert($offerInfos);
-                header('Location:/offer/addSuccess/');
-            }
+
         }
 
-        $offerInfos = [
-            'product' => $product,
-            'productType' => $productType,
-            'transaction' => $transaction,
-            'offerTitle' => $offerTitle,
-            'description' => $description,
-            'advice' => $advice,
-            'imageErrors' => $imageErrors,
-            'price' => $price
-        ];
 
-        return $this->twig->render('Offer/add.html.twig', [
-            'transactions' => $transactions,
-            'products' => $products,
-            'errors' => $errors,
-            'offerInfos' => $offerInfos,
-            'advice' => $advice,
-            'imageErrors' => $imageErrors
-        ]);
-    }
+            $offerInfos = [
+                'product' => $product,
+                'productType' => $productType,
+                'transaction' => $transaction,
+                'offerTitle' => $offerTitle,
+                'description' => $description,
+                'advice' => $advice,
+                'imageErrors' => $imageErrors,
+                'price' => $price
+            ];
+
+            return $this->twig->render('Offer/add.html.twig', [
+                'transactions' => $transactions,
+                'products' => $products,
+                'errors' => $errors,
+                'offerInfos' => $offerInfos,
+                'advice' => $advice,
+                'imageErrors' => $imageErrors
+            ]);
+        }
 
     /**
      * Display success message for the user after adding an offer
