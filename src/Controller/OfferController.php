@@ -93,7 +93,6 @@ class OfferController extends AbstractController
             'transaction' => $transaction,
             'offerTitle' => $offerTitle,
             'description' => $description,
-            'advice' => $advice,
             'price' => $price
         ];
 
