@@ -51,18 +51,20 @@ class OfferManager extends AbstractManager
 
     public function selectOfferByResearchForm($offerInfos)
     {
-        $statement = $this->pdo->prepare("SELECT * FROM" . self::TABLE .
-        "INNER JOIN product ON" . self::TABLE . ".product_id = product.id
-        INNER JOIN transaction ON" . self::TABLE .".transaction_id = transaction.id
-        INNER JOIN user ON" . self::TABLE . ".user_id = user_id
+        var_dump($offerInfos);
+        $statement = $this->pdo->prepare("SELECT title, description, price, created_at, city.name AS cityname,
+        firstname, lastname, email, phone_number FROM " . self::TABLE .
+        " INNER JOIN product ON " . self::TABLE . ".product_id = product.id
+        INNER JOIN transaction ON " . self::TABLE .".transaction_id = transaction.id
+        INNER JOIN user ON " . self::TABLE . ".user_id = user_id
         INNER JOIN city ON user.city_id = city.id
-        WHERE product.name = :productName
-        AND transaction.name = :transactionName
-        AND city.name = :cityName
+        WHERE product.name = :product
+        AND transaction.name = :transaction
+        AND city.name = :city
         ORDER BY offer.title ASC");
-        $statement->bindValue('product.name', $offerInfos['product'], \PDO::PARAM_STR);
-        $statement->bindValue('transaction.name', $offerInfos['transaction'], \PDO::PARAM_STR);
-        $statement->bindValue('city.name', $offerInfos['city'], \PDO::PARAM_STR);
+        $statement->bindValue('product', $offerInfos['product'], \PDO::PARAM_STR);
+        $statement->bindValue('transaction', $offerInfos['transaction'], \PDO::PARAM_STR);
+        $statement->bindValue('city', $offerInfos['city'], \PDO::PARAM_STR);
         $statement->execute();
 
         return $statement->fetchAll();
