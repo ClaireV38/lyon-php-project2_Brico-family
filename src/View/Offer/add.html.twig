@@ -116,12 +116,17 @@
                 {% endif %}
             </div>
             <div class="file-upload" >
-                    <input type="file" name="files[]" multiple="multiple" class="input-file">
+                    <input type="file" name="images[]" multiple="multiple" class="input-file">
             </div>
             <div class="advice">
-                {% if advice.files is defined %}
-                    {{ advice.files }}
+                {% if advice.images is defined %}
+                    {{ advice.images }}
                 {% endif %}
+            </div>
+            <div class="errors">
+                {% for error in imageErrors %}
+                    {{ error }}
+                {% endfor %}
             </div>
             <button type="submit" name="btn-add" value="submit" class="btn btn-light">Go !</button>
         </form>

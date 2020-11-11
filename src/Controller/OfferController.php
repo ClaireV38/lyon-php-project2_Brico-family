@@ -29,9 +29,10 @@ class OfferController extends AbstractController
 
         $transactionManager = new TransactionManager();
         $transactions = $transactionManager->selectAll();
+        $imageErrors = [];
         $advice = [];
         $errors = [];
-        $productType = $product = $offerTitle = $transaction = $description = $price = "";
+        $productType = $product = $offerTitle = $transaction = $description = $price = $files = "";
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-add']) && !empty($_POST)) {
             if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
                 $errors['product'] = 'Veuillez choisir une catégorie de produit';
@@ -56,9 +57,9 @@ class OfferController extends AbstractController
             $offerTitle = trim($_POST['offerTitle']);
             $description = trim($_POST['description']);
             $price = trim($_POST['price']);
-            $files = $_FILES['files']['name'][0];
-            if (empty($files)) {
-                $advice['files'] = "Sachez qu'une annonce est 5 fois plus consultée si elle contient des photos.";
+            $offerImages = $_FILES['images']['name'][0];
+            if (empty($offerImages)) {
+                $advice['images'] = "Sachez qu'une annonce est 5 fois plus consultée si elle contient des photos.";
             }
             if (empty($offerTitle)) {
                 $errors['offerTitle'] = "Veuillez renseigner le titre de votre annonce";
@@ -69,7 +70,31 @@ class OfferController extends AbstractController
             if (empty($price)) {
                 $errors['price'] = "Veuillez renseigner un prix à votre produit";
             }
-
+            if (!empty($offerImages)) {
+                $images = $_FILES['images'];
+                $allowed = ['jpeg', 'png'];
+                foreach ($images['name'] as $index => $imagesName) {
+                    $imagesTmp = $images['tmp_name'][$index];
+                    $imagesSize = $images['size'][$index];
+                    $imagesError = $images['error'][$index];
+                    $type = mime_content_type($imagesTmp);
+                    $imagesExt = explode('/', $type)[1];
+                    $imagesNameNew = uniqid('') . '.' . $imagesExt;
+                    $imagesDestination = 'uploads/' . $imagesNameNew;
+                    if (!in_array($imagesExt, $allowed)) {
+                        $imageErrors[$index] = "$imagesName - Seuls les extensions 'png' et 'jpg' sont autorisées.";
+                    }
+                    if ($imagesSize >= 1000000) {
+                        $imageErrors[$index] = "$imagesName - Taille max: 1Mo.";
+                    }
+                    if ($imagesError !== 0) {
+                        $imageErrors[$index] = "$imagesError - Une erreur est survenue avec l'image $imagesName.";
+                    }
+                    if (empty($imageErrors[$index]) && empty($errors)) {
+                        move_uploaded_file($imagesTmp, $imagesDestination);
+                    }
+                }
+            }
             if (empty($errors)) {
                 $offerInfos = [
                     'product' => $product,
@@ -93,6 +118,8 @@ class OfferController extends AbstractController
             'transaction' => $transaction,
             'offerTitle' => $offerTitle,
             'description' => $description,
+            'advice' => $advice,
+            'imageErrors' => $imageErrors,
             'price' => $price
         ];
 
@@ -102,6 +129,7 @@ class OfferController extends AbstractController
             'errors' => $errors,
             'offerInfos' => $offerInfos,
             'advice' => $advice,
+            'imageErrors' => $imageErrors
         ]);
     }
 
