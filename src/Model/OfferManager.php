@@ -47,4 +47,15 @@ class OfferManager extends AbstractManager
             return (int)$this->pdo->lastInsertId();
         }
     }
+
+    public function insertImages(array $offerImages, int $offerId)
+    {
+        $statement = $this->pdo->prepare("INSERT INTO image (name, path, offer_id) VALUES (:name, :path, :offer_id)");
+        $statement->bindValue('name', $offerImages['name'], \PDO::PARAM_STR);
+        $statement->bindValue('path', $offerImages['path'], \PDO::PARAM_STR);
+        $statement->bindValue('offer_id', $offerId, \PDO::PARAM_INT);
+        if ($statement->execute()) {
+            return (int)$this->pdo->lastInsertId();
+        }
+    }
 }
