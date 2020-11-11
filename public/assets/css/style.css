@@ -59,6 +59,9 @@ input[type='radio']:checked:before {
     color: red;
 }
 
+.advice{
+    color: green;
+}
 .invisible {
     display: none;
 }
@@ -101,7 +104,13 @@ input[type='radio']:checked:before {
     display:none;
 }
 
-/*endnavbar*/
+.input-file{
+    cursor: pointer;
+    color: #47473b;
+}
+.input-file:hover{
+    color: maroon;
+}
 
 @media screen and (min-width: 1000px) {
     main {

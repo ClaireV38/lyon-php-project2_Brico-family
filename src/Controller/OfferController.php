@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\ProductManager;
 use App\Model\TransactionManager;
 use App\Model\OfferManager;
+use App\Model\ImageManager;
 
 class OfferController extends AbstractController
 {
@@ -30,9 +31,13 @@ class OfferController extends AbstractController
         $transactionManager = new TransactionManager();
         $transactions = $transactionManager->selectAll();
 
+        $imageErrors = [];
+        $advice = [];
         $errors = [];
         $productType = $product = $offerTitle = $transaction = $description = $price = "";
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-add']) && !empty($_POST)) {
+        $imagesNameNew = $imagesDestination = $imagesTmp = $images ="";
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'&& !empty($_POST)) {
             if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
                 $errors['product'] = 'Veuillez choisir une catégorie de produit';
             }
@@ -69,7 +74,41 @@ class OfferController extends AbstractController
             if (empty($price)) {
                 $errors['price'] = "Veuillez renseigner un prix à votre produit";
             }
-            if (empty($errors)) {
+            if (empty($_FILES['images']['name'][0])) {
+                $advice['images'] = "Sachez qu'une annonce est 5 fois plus consultée si elle contient des photos.";
+            }
+            if (!empty($_FILES['images']['name'][0])) {
+                $images = $_FILES['images'];
+                $allowed = ['jpeg', 'png', 'jpg', 'pdf'];
+                foreach ($images['name'] as $index => $imagesName) {
+                    $uploadStatus = $images['error'][$index]; //1 == error
+                    if ($uploadStatus) {
+                        $imageErrors[$imagesName] = "Une erreur est survenue. 
+                        Impossible de charger le fichier: $imagesName";
+                        continue;
+                    }
+                    $imagesTmp = $images['tmp_name'][$index];
+                    $imagesSize = $images['size'][$index];
+                    $imagesError = $images['error'][$index];
+                    $tempName = $_FILES['images']['tmp_name'][$index];
+                    $type = mime_content_type($tempName);
+                    $imagesExt = explode('/', $type)[1];
+                    $imagesNameNew = uniqid('') . '.' . $imagesExt;
+                    $imagesDestination = 'uploads/' . $imagesNameNew;
+                    if (!in_array($imagesExt, $allowed)) {
+                        $imageErrors[$index] = "$imagesExt n'est pas autorisée-Extensions acceptées: jpg, jpeg et png";
+                    }
+                    if ($imagesSize >= 1000000) {
+                        $imageErrors[$index] = "$imagesName La taille de l'image doit être inférieur à 1Mo. 
+                        Taille actuelle du fichier = ". round($imagesSize / 1000000, 2) . "Mo.";
+                    }
+                    if ($imagesError !== 0) {
+                        $imageErrors[$index] = "$imagesError - Une erreur est survenue avec l'image $imagesName.";
+                    }
+                }
+            }
+            if (empty($errors) && empty($imageErrors)) {
+                move_uploaded_file($imagesTmp, $imagesDestination);
                 $offerInfos = [
                     'product' => $product,
                     'productType' => $productType,
@@ -77,26 +116,46 @@ class OfferController extends AbstractController
                     'offerTitle' => $offerTitle,
                     'description' => $description,
                     'price' => $price,
-                    'userId' => 1
+                    'userId' => 1,
                 ];
+                $offerImages = [
+                    'name' => $imagesNameNew,
+                    'path' => $imagesDestination,
+                ];
+
                 $offerManager = new OfferManager();
-                $offerManager->insert($offerInfos);
+                $id = $offerManager->insert($offerInfos);
+                if (!empty($_FILES['images']['name'][0])) {
+                    foreach ($images['name'] as $index => $imagesName) {
+                        $imageManager = new ImageManager();
+                        $imageManager->insertImages($offerImages, $id);
+                    }
+                }
                 header('Location:/offer/addSuccess/');
             }
         }
-        $offerInfos = ['product' => $product,
-            'productType' => $productType,
-            'transaction' => $transaction,
-            'offerTitle' => $offerTitle,
-            'description' => $description,
-            'price' => $price];
 
-        return $this->twig->render('Offer/add.html.twig', ['transactions' => $transactions,
-            'products' => $products,
-            'errors' => $errors,
-            'offerInfos' => $offerInfos,]);
+            $offerInfos = [
+                'product' => $product,
+                'productType' => $productType,
+                'transaction' => $transaction,
+                'offerTitle' => $offerTitle,
+                'description' => $description,
+                'price' => $price,
+                'advice' => $advice,
+                'imageErrors' => $imageErrors,
+                'name' => $imagesNameNew,
+                'path' => $imagesDestination
+            ];
+            return $this->twig->render('Offer/add.html.twig', [
+                'transactions' => $transactions,
+                'products' => $products,
+                'errors' => $errors,
+                'offerInfos' => $offerInfos,
+                'advice' => $advice,
+                'imageErrors' => $imageErrors
+            ]);
     }
-
 
     /**
      * Display success message for the user after adding an offer
