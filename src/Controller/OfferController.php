@@ -129,14 +129,16 @@ class OfferController extends AbstractController
     /**
      * Display offer informations specified by $id
      *
-     * @param int $id
+     * @param string $id
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function details(int $id = 2)
+    public function details(string $id = '2')
     {
+        $id = intval(trim($id));
+
         $offerManager = new OfferManager();
         $detailsOffer = $offerManager->selectOneWithDetailsById($id);
 
