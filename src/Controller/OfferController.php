@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\ProductManager;
 use App\Model\TransactionManager;
 use App\Model\OfferManager;
+use App\Model\ImageManager;
 
 class OfferController extends AbstractController
 {
@@ -29,12 +30,14 @@ class OfferController extends AbstractController
 
         $transactionManager = new TransactionManager();
         $transactions = $transactionManager->selectAll();
+
         $imageErrors = [];
         $advice = [];
         $errors = [];
         $productType = $product = $offerTitle = $transaction = $description = $price = "";
-        $imagesNameNew = $imagesDestination = $imagesTmp = $images = "";
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-add']) && !empty($_POST)) {
+        $imagesNameNew = $imagesDestination = $imagesTmp = $images ="";
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'&& !empty($_POST)) {
             if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
                 $errors['product'] = 'Veuillez choisir une catégorie de produit';
             }
@@ -58,10 +61,6 @@ class OfferController extends AbstractController
             $offerTitle = trim($_POST['offerTitle']);
             $description = trim($_POST['description']);
             $price = trim($_POST['price']);
-            $offerImages = $_FILES['images']['name'][0];
-            if (empty($offerImages)) {
-                $advice['images'] = "Sachez qu'une annonce est 5 fois plus consultée si elle contient des photos.";
-            }
             if (empty($offerTitle)) {
                 $errors['offerTitle'] = "Veuillez renseigner le titre de votre annonce";
             }
@@ -71,8 +70,10 @@ class OfferController extends AbstractController
             if (empty($price)) {
                 $errors['price'] = "Veuillez renseigner un prix à votre produit";
             }
-
-            if (!empty($offerImages)) {
+            if (empty($_FILES['images']['name'][0])) {
+                $advice['images'] = "Sachez qu'une annonce est 5 fois plus consultée si elle contient des photos.";
+            }
+            if (!empty($_FILES['images']['name'][0])) {
                 $images = $_FILES['images'];
                 $allowed = ['jpeg', 'png', 'jpg', 'pdf'];
                 foreach ($images['name'] as $index => $imagesName) {
@@ -102,7 +103,7 @@ class OfferController extends AbstractController
                     }
                 }
             }
-            if (empty($errors) && empty($imageErrors[$index])) {
+            if (empty($errors) && empty($imageErrors)) {
                 move_uploaded_file($imagesTmp, $imagesDestination);
                 $offerInfos = [
                     'product' => $product,
@@ -120,8 +121,11 @@ class OfferController extends AbstractController
 
                 $offerManager = new OfferManager();
                 $id = $offerManager->insert($offerInfos);
-                foreach ($images['name'] as $index => $imagesName) {
-                    $offerManager->insertImages($offerImages, $id);
+                if (!empty($_FILES['images']['name'][0])) {
+                    foreach ($images['name'] as $index => $imagesName) {
+                        $imageManager = new ImageManager();
+                        $imageManager->insertImages($offerImages, $id);
+                    }
                 }
                 header('Location:/offer/addSuccess/');
             }
