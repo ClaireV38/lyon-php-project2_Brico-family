@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <div class="looking_for_block container-md container-custom">
+    <div class="looking_for_block container-md container-custom mb-3">
         <h1>Je cherche</h1>
         <form method="post" action="/offer/results">
             <div class="form-check-inline">
@@ -114,18 +114,40 @@
         </form>
         </div>
         {% for resultOffer in resultsOffer %}
-        <div class="consult_list_offers_card">
-            <div class  = "consult_list_offers_image">
-                <img src="https://via.placeholder.com/100" alt="product_1">
-            </div>
-            <div class="card-body">
-                <div class="tool_cartd_title">
-                    <h3>Titre: {{ resultOffer.title }}</h3><p>
-                    <h4>Prix: {{ resultOffer.price }} euros</h4><p></p>
-                    <h4>Localisation: {{ resultOffer.cityname }}</h4><p></p>
+            <!--<div class="consult_list_offers_card">
+                <div class  = "consult_list_offers_image">
+                    <img src="https://via.placeholder.com/100" alt="product_1">
+                </div>
+                <div class="card-body">
+                    <div class="tool_cartd_title">
+                        <h3>Titre: {{ resultOffer.title }}</h3><p>
+                        <h4>Prix: {{ resultOffer.price }} euros</h4><p></p>
+                        <h4>Localisation: {{ resultOffer.cityname }}</h4><p></p>
+                    </div>
+                </div>
+            </div>-->
+            <div class="looking_for_block mx-auto">
+                <div class="card mb-3 mx-auto card-custom">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-md-3" style="padding: 1rem">
+                            <img src="https://via.placeholder.com/100" class="" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="">
+                                <h5 class="card-title">{{ resultOffer.title }}</h5>
+                                <div>
+                                    <div>
+                                        Prix: {{ resultOffer.price }} €
+                                    </div>
+                                    <div>
+                                        Localisation: {{ resultOffer.cityname }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
 
 {% endblock %}

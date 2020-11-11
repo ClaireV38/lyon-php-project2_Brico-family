@@ -83,96 +83,10 @@ input[type='radio']:checked:before {
     background-color: var(--on-hover-button);
 }
 
-.consult_list_offers_container{
-    display: block;
-    min-width: 500px;
-    align-items: center;
-
-}
-.consult_list_offers_container h1{
-    margin-top: 20px;
-    height: 50px;
-    font-size: 20px ;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    flex-wrap: nowrap
-}
-.consult_list_offers_container p{
-    font-size: 15px ;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    flex-wrap: nowrap
-}
-.consult_list_offers_container h3{
-    font-size: 15px;
-}
-
-.consult_list_offers_container h4{
-    font-size: 10px;
-}
-.consult_list_offers_card{
-    /*height: 120px;*/
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    /*background-color: #F2E186;
-    margin: auto;
-    margin-bottom: 15px;
+.card-custom {
+    border: 0;
     border-radius: 10px;
-    max-width: 100%;*/
-}
-
-.consult_list_offers_card img{
-    /*border-radius: 10px;*/
-}
-
-.consult_list_offers_card .card-body{
-    /*padding-left:1.25rem;*/
-}
-
-.consult_list_offers_image{
-    padding:10px;
-}
-
-.consult_list_offer_select{
-
-    display: flex;
-    align-items: center;
-}
-
-
-.consult_list_offers_container form{
-    display:flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #F2E186;
-    border-radius: 10px;
-    margin:auto;
-    margin-bottom: 10px;
-    max-width: 75%;
-
-}
-
-.consult_list_offers_container form select{
-    background-color: #FFFFFF;
-    border:none;
-    border-radius: 10px;
-    width: 100px;
-    font-size: 13px;
-}
-.consult_list_offers_container form label{
-    margin-top:0.5rem;
-    font-size: 10px;
-}
-
-.consult_list_offers_button{
-    background-color: #FFFFFF;
-    border:none;
-    border-radius: 10px;
-    width: 50px;
-    font-size: 13px;
+    background-color: var(--primary-color);
 }
 
 @media screen and (min-width: 1000px) {
@@ -199,10 +113,6 @@ input[type='radio']:checked:before {
         margin: auto 1.2rem;
         max-width: 550px;
     }
-    .consult_list_offers_card{
-        /*max-width: 600px;*/
-    }
-
 }
 
 
