@@ -136,7 +136,7 @@ class OfferController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function details(string $id = '2')
+    public function details(string $id = '3')
     {
         $id = intval(trim($id));
 

@@ -13,13 +13,13 @@
             <div class="carousel-inner carousel_inner_custom">
                 <div class="carousel-item active carousel_item_custom">
                     <div class="d-block w-100 img_product_content">
-                        <img src="{{ images[0].path }}" class="img_product" alt="...">
+                        <img src="{{ images[0].path }}" class="img_product" alt="{{ detailsOffer.title }} 0">
                     </div>
                 </div>
                 {% for key,image in images if key > 0 %}
                     <div class="carousel-item carousel_item_custom">
                         <div class="d-block w-100 img_product_content carousel_item_custom">
-                            <img src="{{ image.path }}" class="img_product" alt="...">
+                            <img src="{{ image.path }}" class="img_product" alt="{{ detailsOffer.title }} {{ key }}">
                         </div>
                     </div>
                 {% endfor %}
