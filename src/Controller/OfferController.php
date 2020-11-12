@@ -76,9 +76,13 @@ class OfferController extends AbstractController
             if (empty($_FILES['images']['name'][0])) {
                 $advice['images'] = "Sachez qu'une annonce est 5 fois plus consultée si elle contient des photos.";
             }
+
             if (!empty($_FILES['images']['name'][0])) {
                 $images = $_FILES['images'];
                 $allowed = ['jpeg', 'png', 'jpg', 'pdf'];
+                if (count($_FILES['images']['name']) >= 5) {
+                    $imageErrors[] =  'Un maximum de 5 photos est autorisé.';
+                }
                 foreach ($images['name'] as $index => $imagesName) {
                     $uploadStatus = $images['error'][$index];
                     $imagesSize = $images['size'][$index];
@@ -96,7 +100,7 @@ class OfferController extends AbstractController
                         $imagesNameNew = uniqid('') . '.' . $imagesExt;
                         $imagesDestination = 'uploads/' . $imagesNameNew;
                         if (!in_array($imagesExt, $allowed)) {
-                            $imageErrors[$index] = "$imagesExt n'est pas autorisée-Extensions acceptées: 
+                            $imageErrors[$index] = "$imagesExt n'est pas autorisée - Extensions acceptées: 
                             jpg, jpeg et png";
                         }
                         if (empty($imageErrors)) {
@@ -119,7 +123,6 @@ class OfferController extends AbstractController
                     'price' => $price,
                     'userId' => 1,
                 ];
-
                 $offerManager = new OfferManager();
                 $imageManager = new ImageManager();
                 $id = $offerManager->insert($offerInfos);
@@ -146,7 +149,6 @@ class OfferController extends AbstractController
             'advice' => $advice,
             'imageErrors' => $imageErrors
         ]);
-
     }
 
     /**
