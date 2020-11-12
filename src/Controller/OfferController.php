@@ -146,32 +146,6 @@ class OfferController extends AbstractController
         $imageManager = new ImageManager();
         $offerImages = $imageManager->selectAllByOfferId($id);
 
-
-        function resize_image(string $imagePath, int $newWidth, int $newHeight, string $destPath)
-        {
-            list($width, $height) = getimagesize($imagePath);
-            $newwidth = 500;
-            $newheight = 300;
-
-            $thumb = imagecreatetruecolor($newWidth, $newHeight);
-            $extension = pathinfo($imagePath, PATHINFO_EXTENSION);
-            if ($extension !== 'jpg' && $extension !== 'png' && $extension !== 'jpeg') {
-                return "file type error";
-            } elseif ($extension == 'png') {
-                $source = imagecreatefrompng($imagePath);
-            } else {
-                $source = imagecreatefromjpeg($imagePath);
-            }
-
-            imagecopyresampled($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-            imagejpeg($thumb, $destPath);
-        }
-
-       // foreach ($offerImages as $image) {
-       //     resize_image("." . $image['path'], 500, 300, "./assets/uploads/miniatures/" . $image['name']);
-       // }
-
         $sellerShow="";
         $sellerDetails = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_seller_show']) && !empty($_POST)) {
