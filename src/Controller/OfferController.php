@@ -36,7 +36,6 @@ class OfferController extends AbstractController
         $errors = [];
         $offerImages = [];
         $productType = $product = $offerTitle = $transaction = $description = $price = "";
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
                 $errors['product'] = 'Veuillez choisir une catégorie de produit';
@@ -81,36 +80,32 @@ class OfferController extends AbstractController
                 $images = $_FILES['images'];
                 $allowed = ['jpeg', 'png', 'jpg', 'pdf'];
                 foreach ($images['name'] as $index => $imagesName) {
-                    $uploadStatus = $images['error'][$index]; //1 == error
-                    if ($uploadStatus) {
-                        $imageErrors[$imagesName] = "Une erreur est survenue. 
+                    $uploadStatus = $images['error'][$index];
+                    $imagesSize = $images['size'][$index];
+                    if ($imagesSize >= 1000000 || $uploadStatus === 1) {
+                        $imageErrors[$index] = "$imagesName La taille de l'image doit être inférieur à 1Mo.";
+                    } elseif ($uploadStatus !== 1 && $uploadStatus !== 0) {
+                        $imageErrors[$imagesName] = "Une erreur est survenue.
                         Impossible de charger le fichier: $imagesName";
                         continue;
-                    }
-                    $imagesTmp = $images['tmp_name'][$index];
-                    $imagesSize = $images['size'][$index];
-                    $imagesError = $images['error'][$index];
-                    $tempName = $_FILES['images']['tmp_name'][$index];
-                    $type = mime_content_type($tempName);
-                    $imagesExt = explode('/', $type)[1];
-                    $imagesNameNew = uniqid('') . '.' . $imagesExt;
-                    $imagesDestination = 'uploads/' . $imagesNameNew;
-                    if (!in_array($imagesExt, $allowed)) {
-                        $imageErrors[$index] = "$imagesExt n'est pas autorisée-Extensions acceptées: jpg, jpeg et png";
-                    }
-                    if ($imagesSize >= 1000000) {
-                        $imageErrors[$index] = "$imagesName La taille de l'image doit être inférieur à 1Mo. 
-                        Taille actuelle du fichier = " . round($imagesSize / 1000000, 2) . "Mo.";
-                    }
-                    if ($imagesError !== 0) {
-                        $imageErrors[$index] = "$imagesError - Une erreur est survenue avec l'image $imagesName.";
-                    }
-                    if (empty($imageErrors)) {
-                        move_uploaded_file($imagesTmp, $imagesDestination);
-                        $offerImages[] = [
-                            'name' => $imagesNameNew,
-                            'path' => $imagesDestination,
-                        ];
+                    } else {
+                        $imagesTmp = $images['tmp_name'][$index];
+                        $tempName = $_FILES['images']['tmp_name'][$index];
+                        $type = mime_content_type($tempName);
+                        $imagesExt = explode('/', $type)[1];
+                        $imagesNameNew = uniqid('') . '.' . $imagesExt;
+                        $imagesDestination = 'uploads/' . $imagesNameNew;
+                        if (!in_array($imagesExt, $allowed)) {
+                            $imageErrors[$index] = "$imagesExt n'est pas autorisée-Extensions acceptées: 
+                            jpg, jpeg et png";
+                        }
+                        if (empty($imageErrors)) {
+                            move_uploaded_file($imagesTmp, $imagesDestination);
+                            $offerImages[] = [
+                                'name' => $imagesNameNew,
+                                'path' => $imagesDestination,
+                            ];
+                        }
                     }
                 }
             }
