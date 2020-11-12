@@ -76,7 +76,6 @@ class OfferController extends AbstractController
             if (empty($_FILES['images']['name'][0])) {
                 $advice['images'] = "Sachez qu'une annonce est 5 fois plus consultée si elle contient des photos.";
             }
-
             if (!empty($_FILES['images']['name'][0])) {
                 $images = $_FILES['images'];
                 $allowed = ['jpeg', 'png', 'jpg', 'pdf'];
