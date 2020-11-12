@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div class="looking_for_block container-md container_custom">
+    <div class="looking_for_block container-md">
         <h1>Je cherche</h1>
         <form method="post" action="/home/index">
             <div class="form-check-inline">
@@ -111,7 +111,7 @@
         </form>
     </div>
     <div class="box_button_add">
-        <a class="container-md container_custom button_add" href="/offer/add">Je dépose une annonce</a>
+        <a class="container-md button_add" href="/offer/add">Je dépose une annonce</a>
     </div>
 {% endblock %}
 {% block javascript %}
