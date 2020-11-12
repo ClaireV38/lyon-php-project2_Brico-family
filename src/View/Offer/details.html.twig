@@ -1,53 +1,63 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div id="carouselExampleIndicators" class="carousel slide carousel_custom" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            {% for key,image in images if key > 0 %}
-            <li data-target="#carouselExampleIndicators" data-slide-to="{{ key }}"></li>
-            {% endfor %}
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{{ images[0].path }}" class="d-block w-500 img-fluid" alt="...">
+    <div id="details_content">
+        {% if images is not empty %}
+        <div id="carouselExampleIndicators" class="carousel slide carousel_custom" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                {% for key,image in images if key > 0 %}
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ key }}"></li>
+                {% endfor %}
+            </ol>
+            <div class="carousel-inner carousel_inner_custom">
+                <div class="carousel-item active carousel_item_custom">
+                    <div class="d-block w-100 img_product_content">
+                        <img src="{{ images[0].path }}" class="img_product" alt="...">
+                    </div>
+                </div>
+                {% for key,image in images if key > 0 %}
+                    <div class="carousel-item carousel_item_custom">
+                        <div class="d-block w-100 img_product_content carousel_item_custom">
+                            <img src="{{ image.path }}" class="img_product" alt="...">
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-            {% for key,image in images if key > 0 %}
-            <div class="carousel-item">
-                <img src="{{ image.path }}" class="d-block w-100 img-fluid" alt="...">
-            </div>
-            {% endfor %}
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-    <div class="container-md card card_custom container_custom">
-        <div class="card-body">
-            <div class="first_row">
-                <h3 class="card-title"> {{ detailsOffer.title }}</h3>
-                <div class="top_right">
-                    <div class="transaction_logo
+        {% endif %}
+        <div class="container-md card card_custom container_custom">
+            <div class="card-body">
+                <div class="first_row">
+                    <h3 class="card-title"> {{ detailsOffer.title }}</h3>
+                    <div class="top_right">
+                        <div class="transaction_logo
                     {% if detailsOffer.transaction_name == 'Location' %}
                     yellow
                     {% endif %}
                     ">
-                        {{ detailsOffer.transaction_name }}
+                            {{ detailsOffer.transaction_name }}
+                        </div>
+                        {{ detailsOffer.price }} €
                     </div>
-                    {{ detailsOffer.price }} €
                 </div>
-            </div>
-            <h4>Description :</h4><p class="card-text">{{ detailsOffer.description }}</p>
+                <h4>Description :</h4>
+                <p class="card-text">{{ detailsOffer.description }}</p>
                 {% if sellerShow == 'show' %}
-            <form method="post" action="/offer/details">
-                <input type="hidden" name="seller_hide" value="hide" />
-                <button type="submit" name="btn_seller_hide" class="btn btn-light">Cacher les coordonées du vendeur</button>
-            </form>
+                    <form method="post" action="/offer/details">
+                        <input type="hidden" name="seller_hide" value="hide"/>
+                        <button type="submit" name="btn_seller_hide" class="btn btn-light">Cacher les coordonées du
+                            vendeur
+                        </button>
+                    </form>
                     <div class="seller_details">
                         <h4>coordonnées du vendeur :</h4>
                         <p>
@@ -71,10 +81,13 @@
                     </div>
                 {% else %}
                     <form method="post" action="/offer/details">
-                        <input type="hidden" name="seller_show" value="show" />
-                        <button type="submit" name="btn_seller_show" class="btn btn_custom btn-light">Voir les coordonées du vendeur</button>
+                        <input type="hidden" name="seller_show" value="show"/>
+                        <button type="submit" name="btn_seller_show" class="btn btn_custom btn-light">Voir les
+                            coordonées du vendeur
+                        </button>
                     </form>
                 {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}
