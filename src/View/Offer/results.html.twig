@@ -3,7 +3,7 @@
 {% block title %}Offres liées à ma recherche{% endblock %}
 
 {% block content %}
-    <div class="looking_for_block container-md container-custom mb-3">
+    <div class="container container-custom">
         <h1>Je cherche</h1>
         <form method="post" action="/offer/results">
             <div class="form-check-inline">
@@ -114,28 +114,19 @@
         </div>
         {% for resultOffer in resultsOffer %}
             <a href="/offer/details/{{ resultOffer.offer_id }}">
-            <div class="looking_for_block mx-auto">
-                <div class="card mb-3 mx-auto card-custom">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col-md-3" style="padding: 1rem">
+                <div class="container card-custom">
+                    <div class="row no-gutters mt-3 align-items-center" style="height: 130px">
+                        <div class="col-4 col-md-3 col-lg-2" style="height: 100px">
                             <img src="https://via.placeholder.com/100" class="" alt="...">
                         </div>
-                        <div class="col-md-8">
-                            <div class="">
-                                <h5 class="card-title">{{ resultOffer.title }}</h5>
-                                <div>
-                                    <div>
-                                        Prix: {{ resultOffer.price }} €
-                                    </div>
-                                    <div>
-                                        Localisation: {{ resultOffer.city_name }}
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col">
+                            <h5 class="card-title">{{ resultOffer.title }}</h5>
+                            <p>Prix: {{ resultOffer.price }} €</p>
+                            <span class="align-bottom">Localisation: {{ resultOffer.city_name }}</span>
                         </div>
                     </div>
                 </div>
-            </div></a>
+            </a>
         {% endfor %}
 {% endblock %}
 {% block javascript %}

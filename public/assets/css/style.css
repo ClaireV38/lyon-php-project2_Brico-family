@@ -21,7 +21,7 @@ h1 {
 .container-custom {
     background-color: var(--primary-color);
     border-radius: 10px;
-    width: 90%;
+    /*width: 90%;*/
     padding-bottom: 1rem;
 }
 
