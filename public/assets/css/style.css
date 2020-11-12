@@ -2,6 +2,8 @@
     --primary-color: #F2E186;
     --radio-button-color: maroon;
     --on-hover-button: #f1bc83;
+    --title-font-family: 'Abril Fatface', cursive;
+    --text-font-family: 'Playfair Display', serif;
 }
 
 h1 {
@@ -13,6 +15,7 @@ h1 {
     border-radius: 10px;
     width: 90%;
     padding-bottom: 1rem;
+    font-family: var(--text-font-family);
 }
 
 .form-check-inline {
@@ -100,9 +103,35 @@ input[type='radio']:checked:before {
 .nav_logo{
     display:none;
 }
-
 /*endnavbar*/
 
+.intro-signin{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 10px;
+}
+.intro-signin h2{
+    font-family: var(--title-font-family);
+}
+
+.btn-go{
+    padding: 6px 40px;
+    font-family: var(--title-font-family);
+    font-size: larger;
+}
+
+.account-creation{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-account-creation{
+    font-family: var(--title-font-family);
+    font-size: larger;
+}
 @media screen and (min-width: 1000px) {
     main {
         display: flex;
