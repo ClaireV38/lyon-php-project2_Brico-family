@@ -3,7 +3,6 @@
 {% block title %}Offres liées à ma recherche{% endblock %}
 
 {% block content %}
-
     <div class="looking_for_block container-md container-custom mb-3">
         <h1>Je cherche</h1>
         <form method="post" action="/offer/results">
@@ -114,18 +113,7 @@
         </form>
         </div>
         {% for resultOffer in resultsOffer %}
-            <!--<div class="consult_list_offers_card">
-                <div class  = "consult_list_offers_image">
-                    <img src="https://via.placeholder.com/100" alt="product_1">
-                </div>
-                <div class="card-body">
-                    <div class="tool_cartd_title">
-                        <h3>Titre: {{ resultOffer.title }}</h3><p>
-                        <h4>Prix: {{ resultOffer.price }} euros</h4><p></p>
-                        <h4>Localisation: {{ resultOffer.cityname }}</h4><p></p>
-                    </div>
-                </div>
-            </div>-->
+            <a href="/offer/details/{{ resultOffer.offer_id }}">
             <div class="looking_for_block mx-auto">
                 <div class="card mb-3 mx-auto card-custom">
                     <div class="row no-gutters align-items-center">
@@ -140,16 +128,15 @@
                                         Prix: {{ resultOffer.price }} €
                                     </div>
                                     <div>
-                                        Localisation: {{ resultOffer.cityname }}
+                                        Localisation: {{ resultOffer.city_name }}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div></a>
         {% endfor %}
-
 {% endblock %}
 {% block javascript %}
 <script>
