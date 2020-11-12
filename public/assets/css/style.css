@@ -85,6 +85,14 @@ input[type='radio']:checked:before {
     background-color: var(--on-hover-button);
 }
 
+.input-file{
+    cursor: pointer;
+    color: #47473b;
+}
+.input-file:hover{
+    color: maroon;
+}
+
 /*navbar*/
 .navbar{
     display: flex;
@@ -102,14 +110,6 @@ input[type='radio']:checked:before {
 
 .nav_logo{
     display:none;
-}
-
-.input-file{
-    cursor: pointer;
-    color: #47473b;
-}
-.input-file:hover{
-    color: maroon;
 }
 
 @media screen and (min-width: 1000px) {

@@ -11,7 +11,7 @@ class OfferController extends AbstractController
 {
     /**
      * Display form for the user to add on offer and insert it into DB
-     *
+     * Add images from offer into DB
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -34,10 +34,10 @@ class OfferController extends AbstractController
         $imageErrors = [];
         $advice = [];
         $errors = [];
+        $offerImages = [];
         $productType = $product = $offerTitle = $transaction = $description = $price = "";
-        $imagesNameNew = $imagesDestination = $imagesTmp = $images ="";
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST'&& !empty($_POST)) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
                 $errors['product'] = 'Veuillez choisir une catégorie de produit';
             }
@@ -100,15 +100,21 @@ class OfferController extends AbstractController
                     }
                     if ($imagesSize >= 1000000) {
                         $imageErrors[$index] = "$imagesName La taille de l'image doit être inférieur à 1Mo. 
-                        Taille actuelle du fichier = ". round($imagesSize / 1000000, 2) . "Mo.";
+                        Taille actuelle du fichier = " . round($imagesSize / 1000000, 2) . "Mo.";
                     }
                     if ($imagesError !== 0) {
                         $imageErrors[$index] = "$imagesError - Une erreur est survenue avec l'image $imagesName.";
                     }
+                    if (empty($imageErrors)) {
+                        move_uploaded_file($imagesTmp, $imagesDestination);
+                        $offerImages[] = [
+                            'name' => $imagesNameNew,
+                            'path' => $imagesDestination,
+                        ];
+                    }
                 }
             }
             if (empty($errors) && empty($imageErrors)) {
-                move_uploaded_file($imagesTmp, $imagesDestination);
                 $offerInfos = [
                     'product' => $product,
                     'productType' => $productType,
@@ -118,43 +124,34 @@ class OfferController extends AbstractController
                     'price' => $price,
                     'userId' => 1,
                 ];
-                $offerImages = [
-                    'name' => $imagesNameNew,
-                    'path' => $imagesDestination,
-                ];
 
                 $offerManager = new OfferManager();
+                $imageManager = new ImageManager();
                 $id = $offerManager->insert($offerInfos);
-                if (!empty($_FILES['images']['name'][0])) {
-                    foreach ($images['name'] as $index => $imagesName) {
-                        $imageManager = new ImageManager();
-                        $imageManager->insertImages($offerImages, $id);
+                if (!empty($offerImages)) {
+                    foreach ($offerImages as $image) {
+                        $imageManager->insertImages($image, $id);
                     }
                 }
                 header('Location:/offer/addSuccess/');
             }
         }
 
-            $offerInfos = [
-                'product' => $product,
-                'productType' => $productType,
-                'transaction' => $transaction,
-                'offerTitle' => $offerTitle,
-                'description' => $description,
-                'price' => $price,
-                'advice' => $advice,
-                'imageErrors' => $imageErrors,
-                'name' => $imagesNameNew,
-                'path' => $imagesDestination
-            ];
-            return $this->twig->render('Offer/add.html.twig', [
-                'transactions' => $transactions,
-                'products' => $products,
-                'errors' => $errors,
-                'offerInfos' => $offerInfos,
-                'advice' => $advice,
-                'imageErrors' => $imageErrors
-            ]);
+        $offerInfos = ['product' => $product,
+            'productType' => $productType,
+            'transaction' => $transaction,
+            'offerTitle' => $offerTitle,
+            'description' => $description,
+            'price' => $price,
+        ];
+        return $this->twig->render('Offer/add.html.twig', [
+            'transactions' => $transactions,
+            'products' => $products,
+            'errors' => $errors,
+            'offerInfos' => $offerInfos,
+            'advice' => $advice,
+            'imageErrors' => $imageErrors
+        ]);
     }
 
     /**
