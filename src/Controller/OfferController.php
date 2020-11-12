@@ -168,9 +168,9 @@ class OfferController extends AbstractController
             imagejpeg($thumb, $destPath);
         }
 
-        foreach ($offerImages as $image) {
-            resize_image("." . $image['path'], 500, 300, "./assets/uploads/miniatures/" . $image['name']);
-        }
+       // foreach ($offerImages as $image) {
+       //     resize_image("." . $image['path'], 500, 300, "./assets/uploads/miniatures/" . $image['name']);
+       // }
 
         $sellerShow="";
         $sellerDetails = [];
