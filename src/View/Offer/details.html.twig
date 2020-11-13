@@ -1,0 +1,93 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div id="details_content">
+        {% if images is not empty %}
+        <div id="carouselExampleIndicators" class="carousel slide carousel_custom" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                {% for key,image in images if key > 0 %}
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ key }}"></li>
+                {% endfor %}
+            </ol>
+            <div class="carousel-inner carousel_inner_custom">
+                <div class="carousel-item active carousel_item_custom">
+                    <div class="d-block w-100 img_product_content">
+                        <img src="{{ images[0].path }}" class="img_product" alt="{{ detailsOffer.title }} 0">
+                    </div>
+                </div>
+                {% for key,image in images if key > 0 %}
+                    <div class="carousel-item carousel_item_custom">
+                        <div class="d-block w-100 img_product_content carousel_item_custom">
+                            <img src="{{ image.path }}" class="img_product" alt="{{ detailsOffer.title }} {{ key }}">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        {% endif %}
+        <div class="container-md card card_custom container-custom">
+            <div class="card-body">
+                <div class="first_row">
+                    <h3 class="card-title"> {{ detailsOffer.title }}</h3>
+                    <div class="top_right">
+                        <div class="transaction_logo
+                    {% if detailsOffer.transaction_name == 'Location' %}
+                    yellow
+                    {% endif %}
+                    ">
+                            {{ detailsOffer.transaction_name }}
+                        </div>
+                        {{ detailsOffer.price }} €
+                    </div>
+                </div>
+                <h4>Description :</h4>
+                <p class="card-text">{{ detailsOffer.description }}</p>
+                {% if sellerShow == 'show' %}
+                    <form method="post" action="/offer/details">
+                        <input type="hidden" name="seller_hide" value="hide"/>
+                        <button type="submit" name="btn_seller_hide" class="btn btn-custom btn-light">Cacher les coordonées du
+                            vendeur
+                        </button>
+                    </form>
+                    <div class="seller_details">
+                        <h4>coordonnées du vendeur :</h4>
+                        <p>
+                            {{ sellerDetails.firstname }} {{ sellerDetails.lastname }}
+                        </p>
+                        <p><img
+                                    src="/assets/images/icon_email.png"
+                                    alt="icon email" height="20px"/>
+                            <span> {{ sellerDetails.email }} </span></p>
+                        <p><img
+                                    src="/assets/images/icon_phone.png"
+                                    alt="icon phone" height="20px"/>
+                            <span> {{ sellerDetails.phone_number }} </span>
+                        </p>
+                        <p><img
+                                    src="/assets/images/icon_city.png"
+                                    alt="icon city" height="20px"/>
+                            <span>
+                                {{ sellerDetails.user_city }} ({{ sellerDetails.user_department }}) </span>
+                        </p>
+                    </div>
+                {% else %}
+                    <form method="post" action="/offer/details">
+                        <input type="hidden" name="seller_show" value="show"/>
+                        <button type="submit" name="btn_seller_show" class="btn btn-custom btn-light">Voir les
+                            coordonées du vendeur
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

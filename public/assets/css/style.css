@@ -1,10 +1,15 @@
-
 :root {
     --primary-color: #F2E186;
     --radio-button-color: maroon;
     --on-hover-button: #f1bc83;
     --title-font-family: 'Abril Fatface', cursive;
     --text-font-family: 'Playfair Display', serif;
+}
+
+.home_page_content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 a {
@@ -20,16 +25,13 @@ h1 {
     text-align: center;
 }
 
-.home_page_content {
-    padding: 0;
-}
-
 .container-custom {
     background-color: var(--primary-color);
     border-radius: 10px;
     width: 90%;
     padding-bottom: 1rem;
     font-family: var(--text-font-family);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .form-check-inline {
@@ -70,10 +72,15 @@ input[type='radio']:checked:before {
 .btn-custom {
     display: block;
     margin: auto;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .errors {
     color: red;
+}
+
+.advice{
+    color: green;
 }
 
 .invisible {
@@ -103,6 +110,7 @@ input[type='radio']:checked:before {
     border: 0;
     border-radius: 10px;
     background-color: var(--primary-color);
+    width: 90%;
 }
 
 .card-custom:hover {
@@ -113,6 +121,123 @@ input[type='radio']:checked:before {
 .errors_center {
     text-align: center;
 }
+
+.input-file{
+    cursor: pointer;
+    color: #47473b;
+}
+.input-file:hover{
+    color: maroon;
+}
+
+/* offer details*/
+
+.first_row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.top_right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: 1rem;
+}
+
+.transaction_logo {
+    background-color: orange;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+h3 {
+    text-align: center;
+}
+
+.seller_details {
+    margin-top: 1.5rem;
+    background-color: white;
+    padding: 0.2rem;
+    border-radius: 3px;
+}
+
+h4 {
+    font-size: 1.3rem;
+}
+
+.seller_details p {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.seller_details p img {
+    margin-top: 2px;
+}
+
+.seller_details p:last-child {
+    margin-bottom: 0px;
+}
+
+span {
+    margin-left: 3px;
+}
+
+#details_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carousel_custom {
+    width: 90%;
+    max-width: 600px;
+    margin:  1rem auto;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.carousel_inner_custom {
+    box-sizing: border-box;
+    margin: auto;
+    width: 100%;
+    height: 200px;
+}
+
+.carousel_item_custom {
+    margin: auto;
+    width: 100%;
+}
+
+.img_product_content {
+    width: 100%;
+    margin: 0;
+}
+
+.img_product {
+    width: 100%;
+    object-fit: contain;
+    height: 200px;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    background-color: grey;
+}
+
+.card_custom {
+    max-width: 600px;
+}
+
+/*end offer details*/
 
 /*navbar*/
 .navbar{
@@ -132,6 +257,7 @@ input[type='radio']:checked:before {
 .nav_logo{
     display:none;
 }
+
 /*endnavbar*/
 
 .intro-signin{
@@ -164,13 +290,6 @@ input[type='radio']:checked:before {
 
 @media screen and (min-width: 1000px) {
 
-    .home_page_content {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 10px;
-    }
-
     .box_button_add {
         display: flex;
         justify-content: center;
@@ -187,6 +306,24 @@ input[type='radio']:checked:before {
         margin: auto 1.2rem;
         max-width: 550px;
     }
+
+    /* offer details*/
+    .carousel_custom {
+        max-width: 600px;
+    }
+
+    .carousel-inner {
+        max-width: 600px;
+        height: 300px;
+        width: 100%;
+    }
+
+    .img_product {
+        object-fit: contain;
+        height: 300px;
+    }
+
+    /* end offer details*/
 
     /*navbar*/
 
@@ -205,3 +342,9 @@ input[type='radio']:checked:before {
     }
     /*endnavbar*/
 }
+
+
+
+
+
+

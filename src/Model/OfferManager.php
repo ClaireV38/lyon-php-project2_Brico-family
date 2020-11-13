@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Model;
 
 class OfferManager extends AbstractManager
@@ -67,5 +66,20 @@ class OfferManager extends AbstractManager
         $statement->execute();
 
         return $statement->fetchAll();
+    }
+
+    public function selectOneWithDetailsById($id)
+    {
+        $statement = $this->pdo->prepare("SELECT " .self::TABLE . ".id, title, description, price,
+         user_id as seller_id, product.name as product_name, transaction.name as transaction_name
+         FROM " . self::TABLE .
+        " INNER JOIN product ON " . self::TABLE . " .product_id = product.id
+        INNER JOIN transaction ON " . self::TABLE ." .transaction_id = transaction.id
+        WHERE " .  self::TABLE . ".id=:id ");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        $resultOffer = $statement->fetch();
+        return $resultOffer;
     }
 }

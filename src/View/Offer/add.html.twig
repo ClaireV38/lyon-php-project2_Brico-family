@@ -3,7 +3,8 @@
 {% block content %}
     <div class="looking_for_block container container-custom">
         <h1>Je dépose mon annonce</h1>
-        <form method="post" action="/Offer/add">
+        <form method="post" action="/Offer/add" enctype="multipart/form-data" novalidate>
+
             <div class="form-check-inline">
                 <div>
                     <input type="radio" name="product_type" id="tool"
@@ -41,7 +42,7 @@
                     {% else %}
                         <option value="" disabled selected>Selectionnez une catégorie</option>
                     {% endif %}
-                    {% for product in products.tools if product.name is not same as (offerInfos.product) %}
+                    {% for product in products.tools if product.name is not same as offerInfos.product %}
                         <option value="{{ product.name }}">{{ product.name }}</option>
                     {% endfor %}
                 </select>
@@ -55,7 +56,7 @@
                     {% else %}
                         <option value="" disabled selected>Selectionnez une catégorie</option>
                     {% endif %}
-                    {% for product in products.materials if product.name is not same as (offerInfos.product) %}
+                    {% for product in products.materials if product.name is not same as offerInfos.product %}
                         <option value="{{ product.name }}">{{ product.name }}</option>
                     {% endfor %}
                 </select>
@@ -115,19 +116,18 @@
                     {{ errors.price }}
                 {% endif %}
             </div>
-            <div class="container-fluid-add">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Image</label>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Image</label>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Image</label>
-                </div>
+            <div class="file-upload" >
+                    <input type="file" name="images[]" multiple="multiple" class="input-file">
+            </div>
+            <div class="advice">
+                {% if advice.images is defined %}
+                    {{ advice.images }}
+                {% endif %}
+            </div>
+            <div class="errors">
+                {% for error in imageErrors %}
+                    {{ error }}
+                {% endfor %}
             </div>
             <button type="submit" name="btn-add" value="submit" class="btn btn-custom btn-light">Go !</button>
         </form>
