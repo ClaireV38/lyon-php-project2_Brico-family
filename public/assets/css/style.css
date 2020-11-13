@@ -8,8 +8,8 @@
 
 .home_page_content {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    padding: 0;
 }
 
 h1 {
@@ -261,6 +261,11 @@ span {
     font-size: larger;
 }
 @media screen and (min-width: 1000px) {
+
+    .home_page_content {
+        flex-direction: row;
+        align-items: center;
+    }
 
     .box_button_add {
         display: flex;
