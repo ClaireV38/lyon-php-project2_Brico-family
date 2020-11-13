@@ -12,10 +12,11 @@
     </rule>
     <rule ref="rulesets/codesize.xml" >
         <exclude name="CyclomaticComplexity" />
+        <exclude name="NPathComplexity" />
     </rule>
     <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
         <properties>
-            <property name="reportLevel" value="15" />
+            <property name="reportLevel" value="30" />
         </properties>
     </rule>
     <rule ref="rulesets/controversial.xml" >
