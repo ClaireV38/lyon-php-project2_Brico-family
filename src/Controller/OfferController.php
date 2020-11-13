@@ -108,7 +108,7 @@ class OfferController extends AbstractController
                             move_uploaded_file($imagesTmp, $imagesDestination);
                             $offerImages[] = [
                                 'name' => $imagesNameNew,
-                                'path' => $imagesDestination,
+                                'path' => "/" . $imagesDestination,
                             ];
                         }
                     }
@@ -179,7 +179,7 @@ class OfferController extends AbstractController
     }
 
     /**
-     * Display offer informations specified by $id
+     * Display offer datas specified by $id
      *
      * @param string $id
      * @return string
@@ -187,7 +187,7 @@ class OfferController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function details(string $id)
+    public function details(string $id): string
     {
         $id = intval(trim($id));
 

@@ -265,6 +265,7 @@ span {
     .home_page_content {
         flex-direction: row;
         align-items: center;
+        width: 98%;
     }
 
     .box_button_add {
