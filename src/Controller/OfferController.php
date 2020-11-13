@@ -4,13 +4,16 @@ namespace App\Controller;
 
 use App\Model\ProductManager;
 use App\Model\TransactionManager;
+use App\Model\DepartmentManager;
 use App\Model\OfferManager;
+use App\Model\UserManager;
+use App\Model\ImageManager;
 
 class OfferController extends AbstractController
 {
     /**
      * Display form for the user to add on offer and insert it into DB
-     *
+     * Add images from offer into DB
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -30,9 +33,12 @@ class OfferController extends AbstractController
         $transactionManager = new TransactionManager();
         $transactions = $transactionManager->selectAll();
 
+        $imageErrors = [];
+        $advice = [];
         $errors = [];
+        $offerImages = [];
         $productType = $product = $offerTitle = $transaction = $description = $price = "";
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-add']) && !empty($_POST)) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
                 $errors['product'] = 'Veuillez choisir une catégorie de produit';
             }
@@ -69,7 +75,46 @@ class OfferController extends AbstractController
             if (empty($price)) {
                 $errors['price'] = "Veuillez renseigner un prix à votre produit";
             }
-            if (empty($errors)) {
+            if (empty($_FILES['images']['name'][0])) {
+                $advice['images'] = "Sachez qu'une annonce est 5 fois plus consultée si elle contient des photos.";
+            }
+            if (!empty($_FILES['images']['name'][0])) {
+                $images = $_FILES['images'];
+                $allowed = ['jpeg', 'png', 'jpg', 'pdf'];
+                if (count($_FILES['images']['name']) >= 5) {
+                    $imageErrors[] =  'Un maximum de 5 photos est autorisé.';
+                }
+                foreach ($images['name'] as $index => $imagesName) {
+                    $uploadStatus = $images['error'][$index];
+                    $imagesSize = $images['size'][$index];
+                    if ($imagesSize >= 1000000 || $uploadStatus === 1) {
+                        $imageErrors[$index] = "$imagesName La taille de l'image doit être inférieur à 1Mo.";
+                    } elseif ($uploadStatus !== 1 && $uploadStatus !== 0) {
+                        $imageErrors[$imagesName] = "Une erreur est survenue.
+                        Impossible de charger le fichier: $imagesName";
+                        continue;
+                    } else {
+                        $imagesTmp = $images['tmp_name'][$index];
+                        $tempName = $_FILES['images']['tmp_name'][$index];
+                        $type = mime_content_type($tempName);
+                        $imagesExt = explode('/', $type)[1];
+                        $imagesNameNew = uniqid('') . '.' . $imagesExt;
+                        $imagesDestination = 'uploads/' . $imagesNameNew;
+                        if (!in_array($imagesExt, $allowed)) {
+                            $imageErrors[$index] = "$imagesExt n'est pas autorisée - Extensions acceptées: 
+                            jpg, jpeg et png";
+                        }
+                        if (empty($imageErrors)) {
+                            move_uploaded_file($imagesTmp, $imagesDestination);
+                            $offerImages[] = [
+                                'name' => $imagesNameNew,
+                                'path' => $imagesDestination,
+                            ];
+                        }
+                    }
+                }
+            }
+            if (empty($errors) && empty($imageErrors)) {
                 $offerInfos = [
                     'product' => $product,
                     'productType' => $productType,
@@ -77,10 +122,16 @@ class OfferController extends AbstractController
                     'offerTitle' => $offerTitle,
                     'description' => $description,
                     'price' => $price,
-                    'userId' => 1
+                    'userId' => 1,
                 ];
                 $offerManager = new OfferManager();
-                $offerManager->insert($offerInfos);
+                $imageManager = new ImageManager();
+                $id = $offerManager->insert($offerInfos);
+                if (!empty($offerImages)) {
+                    foreach ($offerImages as $image) {
+                        $imageManager->insertImages($image, $id);
+                    }
+                }
                 header('Location:/offer/addSuccess/');
             }
         }
@@ -89,14 +140,17 @@ class OfferController extends AbstractController
             'transaction' => $transaction,
             'offerTitle' => $offerTitle,
             'description' => $description,
-            'price' => $price];
-
-        return $this->twig->render('Offer/add.html.twig', ['transactions' => $transactions,
+            'price' => $price,
+        ];
+        return $this->twig->render('Offer/add.html.twig', [
+            'transactions' => $transactions,
             'products' => $products,
             'errors' => $errors,
-            'offerInfos' => $offerInfos,]);
+            'offerInfos' => $offerInfos,
+            'advice' => $advice,
+            'imageErrors' => $imageErrors
+        ]);
     }
-
 
     /**
      * Display success message for the user after adding an offer
@@ -122,5 +176,42 @@ class OfferController extends AbstractController
     public function results()
     {
         return $this->twig->render('Offer/results.html.twig');
+    }
+
+    /**
+     * Display offer informations specified by $id
+     *
+     * @param string $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function details(string $id = '3')
+    {
+        $id = intval(trim($id));
+
+        $offerManager = new OfferManager();
+        $detailsOffer = $offerManager->selectOneWithDetailsById($id);
+
+        $imageManager = new ImageManager();
+        $offerImages = $imageManager->selectAllByOfferId($id);
+
+        $sellerShow="";
+        $sellerDetails = [];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_seller_show']) && !empty($_POST)) {
+            $sellerShow = trim($_POST['seller_show']);
+            $userManager = new UserManager();
+            $sellerDetails = $userManager->selectOneWithLocationById($detailsOffer['seller_id']);
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_seller_hide']) && !empty($_POST)) {
+            $sellerShow = trim($_POST['seller_hide']);
+        }
+
+        return $this->twig->render('Offer/details.html.twig', [
+        'detailsOffer' => $detailsOffer,
+        'sellerShow' => $sellerShow,
+        'sellerDetails' => $sellerDetails,
+        'images' => $offerImages]);
     }
 }
