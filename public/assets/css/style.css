@@ -56,7 +56,6 @@ input[type='radio']:checked:before {
     background: var(--radio-button-color);
 }
 
-
 .btn, .btn_custom {
     display: block;
     margin: auto;
@@ -67,6 +66,9 @@ input[type='radio']:checked:before {
     color: red;
 }
 
+.advice{
+    color: green;
+}
 .invisible {
     display: none;
 }
@@ -88,6 +90,14 @@ input[type='radio']:checked:before {
     text-decoration: none;
     color: maroon;
     background-color: var(--on-hover-button);
+}
+
+.input-file{
+    cursor: pointer;
+    color: #47473b;
+}
+.input-file:hover{
+    color: maroon;
 }
 
 /* offer details*/
@@ -217,8 +227,6 @@ span {
 .nav_logo{
     display:none;
 }
-
-/*endnavbar*/
 
 
 @media screen and (min-width: 1000px) {
