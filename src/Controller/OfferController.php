@@ -124,6 +124,7 @@ class OfferController extends AbstractController
      */
     public function results()
     {
+        $errors = [];
         $productType = $product = $transaction = $department = $city = "";
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET)) {
             $productType = trim($_GET['productType']);
@@ -181,6 +182,9 @@ class OfferController extends AbstractController
 
         $offerManager = new OfferManager();
         $resultsOffer = $offerManager->selectOfferByResearchForm($offerInfos);
+        if (empty($resultsOffer)) {
+            $errors['noResult'] = "aucune annonce ne correspond à votre recherche";
+        }
 
         return $this->twig->render('Offer/results.html.twig', [
             'departments' => $departments,
@@ -188,6 +192,7 @@ class OfferController extends AbstractController
             'transactions' => $transactions,
             'products' => $products,
             'offerInfos' => $offerInfos,
+            'errors' => $errors,
             'resultsOffer' => $resultsOffer
         ]);
     }

@@ -112,6 +112,11 @@
             <button type="submit" name="btn-index-search" value="submit" class="btn btn-custom btn-light">Go !</button>
         </form>
         </div>
+        <div class="errors errors_center">
+        {% if errors.noResult is defined %}
+            {{ errors.noResult }}
+        {% endif %}
+        </div>
         {% for resultOffer in resultsOffer %}
             <a href="/offer/details/{{ resultOffer.offer_id }}">
                 <div class="container card-custom">
