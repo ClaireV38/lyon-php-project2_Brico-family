@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Model\ProductManager;
 use App\Model\TransactionManager;
+use App\Model\DepartmentManager;
 use App\Model\OfferManager;
+use App\Model\UserManager;
+use App\Model\ImageManager;
 
 class OfferController extends AbstractController
 {
@@ -122,5 +125,42 @@ class OfferController extends AbstractController
     public function results()
     {
         return $this->twig->render('Offer/results.html.twig');
+    }
+
+    /**
+     * Display offer informations specified by $id
+     *
+     * @param string $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function details(string $id = '3')
+    {
+        $id = intval(trim($id));
+
+        $offerManager = new OfferManager();
+        $detailsOffer = $offerManager->selectOneWithDetailsById($id);
+
+        $imageManager = new ImageManager();
+        $offerImages = $imageManager->selectAllByOfferId($id);
+
+        $sellerShow="";
+        $sellerDetails = [];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_seller_show']) && !empty($_POST)) {
+            $sellerShow = trim($_POST['seller_show']);
+            $userManager = new UserManager();
+            $sellerDetails = $userManager->selectOneWithLocationById($detailsOffer['seller_id']);
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_seller_hide']) && !empty($_POST)) {
+            $sellerShow = trim($_POST['seller_hide']);
+        }
+
+        return $this->twig->render('Offer/details.html.twig', [
+        'detailsOffer' => $detailsOffer,
+        'sellerShow' => $sellerShow,
+        'sellerDetails' => $sellerDetails,
+        'images' => $offerImages]);
     }
 }
