@@ -79,7 +79,7 @@ class OfferController extends AbstractController
             if (!empty($_FILES['images']['name'][0])) {
                 $images = $_FILES['images'];
                 $allowed = ['jpeg', 'png', 'jpg', 'pdf'];
-                if (count($_FILES['images']['name']) >= 5) {
+                if (count($_FILES['images']['name']) > 5) {
                     $imageErrors[] =  'Un maximum de 5 photos est autorisé.';
                 }
                 foreach ($images['name'] as $index => $imagesName) {
