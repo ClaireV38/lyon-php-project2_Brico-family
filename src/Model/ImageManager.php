@@ -47,6 +47,7 @@ class ImageManager extends AbstractManager
             return (int)$this->pdo->lastInsertId();
         }
     }
+     /*+
      * Get all images corresponding to an offer.
      *
      * @param  int $offerId
