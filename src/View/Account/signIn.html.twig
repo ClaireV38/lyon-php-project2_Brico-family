@@ -6,7 +6,7 @@
             <h2> Bonjour !</h2>
             <p>Connecte-toi pour déposer ton annonce et découvrir toutes nos fonctionnalités.</p>
         </div>
-        <form method="POST" action="/Account/signin" >
+        <form method="POST" action="/Account/signIn" >
             <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -19,7 +19,7 @@
         </form>
         <div class="account-creation">
             <p>Envie de nous rejoindre ? </p>
-            <button type="submit" class="btn-account-creation btn btn-light">Créer mon compte</button>
+            <a href="/user/register" class="btn-account-creation btn btn-light">Créer mon compte</a>
         </div>
     </div>
 {% endblock %}

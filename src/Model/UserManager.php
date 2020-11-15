@@ -38,6 +38,12 @@ class UserManager extends AbstractManager
         return $statement->fetch();
     }
 
+    /**
+     * Get one user from database with his location by email
+     *
+     * @param string $email
+     * @return array
+     */
     public function selectUserByEmail(string $email): array
     {
         $query = "SELECT * FROM " . self::TABLE . " WHERE email=:email";
@@ -45,5 +51,22 @@ class UserManager extends AbstractManager
         $statement->bindValue("email", $email, \PDO::PARAM_STR);
         $statement->execute();
         return $statement->fetch();
+    }
+
+    /**
+     *insert usedr with his datas in database
+     *
+     * @param array $user
+     * @return int
+     */
+    public function insertUser(array $user): int
+    {
+        $query = "INSERT INTO " . self::TABLE . " (email, password) VALUES (:email, :password)";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue('email', $user['email'], \PDO::PARAM_STR);
+        $statement->bindValue('password', password_hash($user['password'], PASSWORD_DEFAULT), \PDO::PARAM_STR);
+        if ($statement->execute()) {
+            return (int)$this->pdo->lastInsertId();
+        }
     }
 }
