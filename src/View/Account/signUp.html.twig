@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div class="sign_up_block container-md container_custom">
+    <div class="sign_up_block container-md container-custom">
         <h1>Je crée mon compte</h1>
         <form method="post" action="/User/register" novalidate>
             <div class="form-row">
@@ -55,7 +55,7 @@
                     {% endif %}
                 </div>
             </div>
-            <button type="submit" name="btn-register" class="btn-go btn btn-light">Go !</button>
+            <button type="submit" name="btn-register" class="btn-go btn-custom btn btn-light">Go !</button>
         </form>
     </div>
 {% endblock %}
