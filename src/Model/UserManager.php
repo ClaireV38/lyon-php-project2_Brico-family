@@ -54,7 +54,7 @@ class UserManager extends AbstractManager
     }
 
     /**
-     *insert usedr with his datas in database
+     *insert user with his datas in database
      *
      * @param array $user
      * @return int

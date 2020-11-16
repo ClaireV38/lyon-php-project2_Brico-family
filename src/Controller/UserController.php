@@ -23,12 +23,17 @@ class UserController extends AbstractController
             $citiesByDepartment[$department['name']] = $cityManager->selectCityByDepartement($department['name']);
         }
 
-        $email = $password = $password2 = "";
+        $email = $password = $password2 = $firstname = $lastname = $city = $phoneNumber = "";
         $errors = [];
-        if ($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST)) {
+        if ($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST) && isset($_POST['btn-register'])) {
             $email = trim($_POST['email']);
             $password = trim($_POST['password']);
             $password2 = trim($_POST['password2']);
+            $firstname = trim($_POST['firstname']);
+            $lastname = trim($_POST['lastname']);
+            $city = trim($_POST['city']);
+            $phoneNumber = trim($_POST['phone_number']);
+
             if (empty($email)) {
                 $errors['email'] = "vous devez rentrer un email";
             }
@@ -40,6 +45,18 @@ class UserController extends AbstractController
                 } elseif ($password !== $password2) {
                     $errors['password2'] = "votre mot de passe et votre mot de passe de confirmation sont différents";
                 }
+            }
+            if (empty($firstname)) {
+                $errors['firstname'] = "vous devez rentrer votre prénom";
+            }
+            if (empty($lastname)) {
+                $errors['lastname'] = "vous devez rentrer votre nom";
+            }
+            if (empty($city)) {
+                $errors['city'] = "vous devez rentrer la ville la plus proche de chez vous";
+            }
+            if (empty($phoneNumber)) {
+                $errors['phoneNumber'] = "vous devez rentrer votre numero de téléphone";
             }
             if (empty($errors)) {
                 // insert user in DB
