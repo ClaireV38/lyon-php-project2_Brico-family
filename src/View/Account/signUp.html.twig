@@ -9,16 +9,25 @@
                     <label for="lastname">Nom</label>
                     <input type="text" class="form-control" name="lastname" id="lastname">
                 </div>
+                {% if errors.lastname is defined %}
+                    {{ errors.lastname }}
+                {% endif %}
                 <div class="form-group col-md-6">
                     <label for="firstname">Prenom</label>
                     <input type="text" class="form-control" name="firstname" id="firstname">
                 </div>
+                {% if errors.firstname is defined %}
+                    {{ errors.firstname }}
+                {% endif %}
             </div>
             <div class="form-group">
                 <label for="Email">Email</label>
                 <input type="email" class="form-control" name="email" id="Email" aria-describedby="emailHelp">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
+            {% if errors.email is defined %}
+                {{ errors.email }}
+            {% endif %}
             <div class="form-group">
                 <label for="password1">Mot de passe</label>
                 <input type="password" class="form-control" name="password" id="password1">
@@ -31,6 +40,9 @@
                 <label for="phone_number">Téléphone</label>
                 <input type="tel" class="form-control" name="phone_number" id="phone_number">
             </div>
+            {% if errors.phoneNumber is defined %}
+                {{ errors.phoneNumber }}
+            {% endif %}
             <div class="form-group">
                 <label for="city">ville :</label>
                 <select name="city" id="city" class="form-control">
