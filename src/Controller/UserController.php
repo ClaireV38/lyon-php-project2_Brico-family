@@ -82,6 +82,9 @@ class UserController extends AbstractController
                         'city' => $city,
                         "phoneNumber" => $phoneNumber
                     ]);
+                    $_SESSION['user'] = [
+                        'email' => $email,
+                    ];
                     header("Location: /");
                 } catch (\PDOException $e) {
                     $errors['form'] = $e->getMessage();

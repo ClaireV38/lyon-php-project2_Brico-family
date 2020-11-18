@@ -38,7 +38,12 @@ class UserManager extends AbstractManager
         return $statement->fetch();
     }
 
-    public function insertUser(array $user)
+    /**
+     * insert user in database
+     * @param array $user
+     * @return int
+     */
+    public function insertUser(array $user): int
     {
         $statement = $this->pdo->prepare("SELECT id FROM city WHERE name = :cityName");
         $statement->bindValue('cityName', $user['city'], \PDO::PARAM_STR);
@@ -55,7 +60,21 @@ class UserManager extends AbstractManager
         $statement->bindValue('phone_number', $user['phoneNumber'], \PDO::PARAM_STR);
         $statement->bindValue('city_id', $cityId['id'], \PDO::PARAM_STR);
         if ($statement->execute()) {
-            return $this->pdo->lastInsertId();
+            return (int)$this->pdo->lastInsertId();
         }
+    }
+
+    /**
+     * get one user by email
+     * @param string $email
+     * @return string
+     */
+    public function selectUserByEmail(string $email): string
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM " . self::TABLE . " WHERE email = :email;");
+        $statement->bindValue('email', $email, \PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetch();
     }
 }
