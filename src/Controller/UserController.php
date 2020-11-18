@@ -3,8 +3,6 @@
 
 namespace App\Controller;
 
-use App\Model\UserManager;
-
 class UserController extends AbstractController
 {
     public function signIn()
@@ -22,13 +20,7 @@ class UserController extends AbstractController
                 $errors['password'] = "Veuillez renseigner votre mot de passe";
             }
             if (empty($errors)) {
-                $userManager = new UserManager();
-                $user = $userManager->selectUserByEmail($email);
-                if (!$user) {
-                    $errors['email'] = "Nous ne vous avons pas trouvé ... Créer votre compte dès maintenant !";
-                } else {
-                        header('Location:/home/index/');
-                }
+                    header('Location:/home/index/');
             }
         }
         $signInInfos = [
