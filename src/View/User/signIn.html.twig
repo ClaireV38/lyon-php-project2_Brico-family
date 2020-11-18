@@ -6,7 +6,7 @@
             <h2> Bonjour !</h2>
             <p>Connecte-toi pour déposer ton annonce et découvrir toutes nos fonctionnalités.</p>
         </div>
-        <form method="POST" action="/Account/signin" >
+        <form method="POST" action="/User/signin" novalidate >
             <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" value="{{ signInInfos.email}}" >
