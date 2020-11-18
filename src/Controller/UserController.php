@@ -91,7 +91,6 @@ class UserController extends AbstractController
                 }
             }
         }
-
         return $this->twig->render("User/signUp.html.twig", [
             'errors' => $errors,
             'departments' => $departments,
@@ -106,5 +105,11 @@ class UserController extends AbstractController
                 "phoneNumber" => $phoneNumber
             ]
         ]);
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        header("Location: /");
     }
 }
