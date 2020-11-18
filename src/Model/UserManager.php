@@ -37,19 +37,4 @@ class UserManager extends AbstractManager
 
         return $statement->fetch();
     }
-
-    /**
-     * Get one user from database with his location by email
-     *
-     * @param string $email
-     * @return array
-     */
-    public function selectUserByEmail(string $email): array
-    {
-        $query = "SELECT * FROM " . self::TABLE . " WHERE email=:email";
-        $statement = $this->pdo->prepare($query);
-        $statement->bindValue("email", $email, \PDO::PARAM_STR);
-        $statement->execute();
-        return $statement->fetch();
-    }
 }
