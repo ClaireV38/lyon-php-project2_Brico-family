@@ -34,7 +34,7 @@
             </a>
         </div>
         {% endif %}
-        <div class="container-md card card_custom container_custom">
+        <div class="container-md card card_custom container-custom">
             <div class="card-body">
                 <div class="first_row">
                     <h3 class="card-title"> {{ detailsOffer.title }}</h3>
@@ -54,7 +54,7 @@
                 {% if sellerShow == 'show' %}
                     <form method="post" action="/offer/details/{{ detailsOffer.id }}">
                         <input type="hidden" name="seller_hide" value="hide"/>
-                        <button type="submit" name="btn_seller_hide" class="btn btn-light">Cacher les coordonées du
+                        <button type="submit" name="btn_seller_hide" class="btn btn-custom btn-light">Cacher les coordonées du
                             vendeur
                         </button>
                     </form>
@@ -82,7 +82,7 @@
                 {% else %}
                     <form method="post" action="/offer/details/{{ detailsOffer.id }}">
                         <input type="hidden" name="seller_show" value="show"/>
-                        <button type="submit" name="btn_seller_show" class="btn btn_custom btn-light">Voir les
+                        <button type="submit" name="btn_seller_show" class="btn btn-custom btn-light">Voir les
                             coordonées du vendeur
                         </button>
                     </form>
