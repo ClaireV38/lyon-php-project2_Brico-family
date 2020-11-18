@@ -72,7 +72,20 @@ class UserController extends AbstractController
                 $errors['phoneNumber'] = "Votre numero de telephone n'est pas valide";
             }
             if (empty($errors)) {
+                $userManager = new UserManager();
+                try {
+                    $userManager->insertUser([
+                        'email' => $email,
+                        'password' => $password,
+                        'firstname' => $firstname,
+                        'lastname' => $lastname,
+                        'city' => $city,
+                        "phoneNumber" => $phoneNumber
+                    ]);
                     header("Location: /");
+                } catch (\PDOException $e) {
+                    $errors['form'] = $e->getMessage();
+                }
             }
         }
 
