@@ -9,46 +9,57 @@
                     <label for="lastname">Nom</label>
                     <input type="text" class="form-control" name="lastname" id="lastname">
                 </div>
+                <div class="errors">
                 {% if errors.lastname is defined %}
                     {{ errors.lastname }}
                 {% endif %}
+                </div>
                 <div class="form-group col-md-6">
                     <label for="firstname">Prenom</label>
                     <input type="text" class="form-control" name="firstname" id="firstname">
                 </div>
+                <div class="errors">
                 {% if errors.firstname is defined %}
                     {{ errors.firstname }}
                 {% endif %}
+                </div>
             </div>
             <div class="form-group">
                 <label for="Email">Email</label>
                 <input type="email" class="form-control" name="email" id="Email" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
+            <div class="errors">
             {% if errors.email is defined %}
                 {{ errors.email }}
             {% endif %}
+            </div>
             <div class="form-group">
                 <label for="password1">Mot de passe</label>
                 <input type="password" class="form-control" name="password" id="password1">
             </div>
+            <div class="errors">
             {% if errors.password is defined %}
                 {{ errors.password }}
             {% endif %}
+            </div>
             <div class="form-group">
                 <label for="password2">Confirmation du mot de passe</label>
                 <input type="password" class="form-control" name="password2" id="password2">
             </div>
+            <div class="errors">
             {% if errors.password2 is defined %}
                 {{ errors.password2 }}
             {% endif %}
+            </div>
             <div class="form-group col-md-6">
                 <label for="phone_number">Téléphone</label>
                 <input type="tel" class="form-control" name="phone_number" id="phone_number">
             </div>
+            <div class="errors">
             {% if errors.phoneNumber is defined %}
                 {{ errors.phoneNumber }}
             {% endif %}
+            </div>
             <div class="form-group">
                 <label for="city">ville :</label>
                 <select name="city" id="city" class="form-control">

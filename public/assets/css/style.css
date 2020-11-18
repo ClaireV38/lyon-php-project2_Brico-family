@@ -124,11 +124,11 @@ input[type='radio']:checked:before {
     text-align: center;
 }
 
-.input-file{
+.input-file {
     cursor: pointer;
     color: #47473b;
 }
-.input-file:hover{
+.input-file:hover {
     color: maroon;
 }
 
@@ -305,7 +305,7 @@ span {
         width: 50%;
     }
 
-    .looking_for_block {
+    .container-custom .looking_for_block .sign_up_block {
         width: 50%;
     }
 
