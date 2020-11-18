@@ -42,10 +42,13 @@ class UserController extends AbstractController
             if (empty($email)) {
                 $errors['email'] = "vous devez rentrer un email";
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = "votre format d'email est invalide";
+                $errors['email'] = "votre format de mot de passe est invalide";
             }
             if (empty($password)) {
                 $errors['password'] = "vous devez saisir un mot de passe";
+            } elseif (!preg_match("/^(?=.*[0-9])(?=.*[A-Z]).{8,20}$/i", $password)) {
+                    $errors['password'] = "Votre mot de passe doit être entre 8 et 20 caractères et doit contenir 
+                au moins 1 majuscule et un chiffre";
             } else {
                 if (empty($password2)) {
                     $errors['password2'] = "vous devez confirmer votre mot de passe";
@@ -65,13 +68,15 @@ class UserController extends AbstractController
                 $errors['phoneNumber'] = "votre format de numero de telephone est invalide";
             }
             if (empty($errors)) {
-                // insert user in DB
                 $userManager = new UserManager();
                 try {
                     $userManager->insertUser([
                         'email' => $email,
                         'password' => $password,
-                        'city' => $city
+                        'firstname' => $firstname,
+                        'lastname' => $lastname,
+                        'city'=> $city,
+                        "phoneNumber"=> $phoneNumber
                     ]);
                     header("Location: /");
                 } catch (\PDOException $e) {
@@ -86,6 +91,12 @@ class UserController extends AbstractController
             'citiesByDepartment' => $citiesByDepartment,
             'data' => [
                 'email' => $email,
+                'password' => $password,
+                'password2' => $password2,
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'city'=> $city,
+                "phoneNumber"=> $phoneNumber
             ]
         ]);
     }
