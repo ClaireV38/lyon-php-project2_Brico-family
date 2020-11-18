@@ -68,8 +68,8 @@ class UserController extends AbstractController
             }
             if (empty($phoneNumber)) {
                 $errors['phoneNumber'] = "vous devez rentrer votre numero de téléphone";
-            } elseif (!is_numeric($phoneNumber)) {
-                $errors['phoneNumber'] = "votre format de numero de telephone est invalide";
+            } elseif (!preg_match("/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}/i", $phoneNumber)) {
+                $errors['phoneNumber'] = "Votre numero de telephone n'est pas valide";
             }
             if (empty($errors)) {
                 $userManager = new UserManager();

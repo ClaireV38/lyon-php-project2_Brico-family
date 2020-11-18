@@ -55,10 +55,11 @@ class UserManager extends AbstractManager
 
     /**
      *insert user with his datas in database
-     *
+     * @param array $user
      * @return int
      */
-    public function insertUser(): int
+    public function insertUser(array $user): int
     {
+        $user = [];
     }
 }
