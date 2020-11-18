@@ -134,6 +134,17 @@ input[type='radio']:checked:before {
 
 /* offer details*/
 
+#details_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-detail {
+    max-width: 600px;
+}
+
 .first_row {
     width: 100%;
     display: flex;
@@ -193,13 +204,6 @@ span {
     margin-left: 3px;
 }
 
-#details_content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .carousel_custom {
     width: 90%;
     max-width: 600px;
@@ -233,10 +237,6 @@ span {
 
 .carousel-control-next-icon, .carousel-control-prev-icon {
     background-color: grey;
-}
-
-.card_custom {
-    max-width: 600px;
 }
 
 /*end offer details*/
@@ -316,14 +316,18 @@ span {
     }
 
     /* offer details*/
+
+    .card-detail {
+        max-width: 50%;
+    }
+
     .carousel_custom {
-        max-width: 600px;
+        max-width: 50%;
     }
 
     .carousel-inner {
-        max-width: 600px;
+        max-width: 50%;
         height: 300px;
-        width: 100%;
     }
 
     .img_product {
