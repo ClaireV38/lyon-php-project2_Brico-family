@@ -31,11 +31,18 @@ class UserController extends AbstractController
             $password2 = trim($_POST['password2']);
             $firstname = trim($_POST['firstname']);
             $lastname = trim($_POST['lastname']);
-            $city = trim($_POST['city']);
             $phoneNumber = trim($_POST['phone_number']);
+
+            if (!isset($_POST['city'])) {
+                $errors['city'] = "vous devez rentrer la ville la plus proche de chez vous";
+            } else {
+                $city = trim($_POST['city']);
+            }
 
             if (empty($email)) {
                 $errors['email'] = "vous devez rentrer un email";
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors['email'] = "votre format d'email est invalide";
             }
             if (empty($password)) {
                 $errors['password'] = "vous devez saisir un mot de passe";
@@ -52,17 +59,20 @@ class UserController extends AbstractController
             if (empty($lastname)) {
                 $errors['lastname'] = "vous devez rentrer votre nom";
             }
-            if (empty($city)) {
-                $errors['city'] = "vous devez rentrer la ville la plus proche de chez vous";
-            }
             if (empty($phoneNumber)) {
                 $errors['phoneNumber'] = "vous devez rentrer votre numero de téléphone";
+            } elseif (!is_numeric($phoneNumber)) {
+                $errors['phoneNumber'] = "votre format de numero de telephone est invalide";
             }
             if (empty($errors)) {
                 // insert user in DB
                 $userManager = new UserManager();
                 try {
-                    $userManager->insertUser(['email' => $email, 'password' => $password]);
+                    $userManager->insertUser([
+                        'email' => $email,
+                        'password' => $password,
+                        'city' => $city
+                    ]);
                     header("Location: /");
                 } catch (\PDOException $e) {
                     $errors['form'] = $e->getMessage();

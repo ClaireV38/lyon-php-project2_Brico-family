@@ -32,10 +32,16 @@
                 <label for="password1">Mot de passe</label>
                 <input type="password" class="form-control" name="password" id="password1">
             </div>
+            {% if errors.password is defined %}
+                {{ errors.password }}
+            {% endif %}
             <div class="form-group">
                 <label for="password2">Confirmation du mot de passe</label>
                 <input type="password" class="form-control" name="password2" id="password2">
             </div>
+            {% if errors.password2 is defined %}
+                {{ errors.password2 }}
+            {% endif %}
             <div class="form-group col-md-6">
                 <label for="phone_number">Téléphone</label>
                 <input type="tel" class="form-control" name="phone_number" id="phone_number">
