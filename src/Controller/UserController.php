@@ -40,24 +40,24 @@ class UserController extends AbstractController
             }
 
             if (empty($email)) {
-                $errors['email'] = "vous devez rentrer un email";
+                $errors['email'] = "Vous devez rentrer un email";
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = "votre format de mot de passe est invalide";
+                $errors['email'] = "Votre format de mot de passe est invalide";
             }
             if (empty($password)) {
-                $errors['password'] = "vous devez saisir un mot de passe";
+                $errors['password'] = "Vous devez saisir un mot de passe";
             } elseif (!preg_match("/^(?=.*[0-9])(?=.*[A-Z]).{8,20}$/i", $password)) {
                 $errors['password'] = "Votre mot de passe doit être entre 8 et 20 caractères et doit contenir 
                 au un chiffre";
             } else {
                 if (empty($password2)) {
-                    $errors['password2'] = "vous devez confirmer votre mot de passe";
+                    $errors['password2'] = "Vous devez confirmer votre mot de passe";
                 } elseif ($password !== $password2) {
-                    $errors['password2'] = "votre mot de passe et votre mot de passe de confirmation sont différents";
+                    $errors['password2'] = "Votre mot de passe et votre mot de passe de confirmation sont différents";
                 }
             }
             if (empty($firstname)) {
-                $errors['firstname'] = "vous devez rentrer votre prénom";
+                $errors['firstname'] = "Vous devez rentrer votre prénom";
             } elseif (mb_strlen($firstname) > 30) {
                 $errors['firstname'] = "ce champ ne doit pas dépasser 30 caractères";
             }
