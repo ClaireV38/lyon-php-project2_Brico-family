@@ -56,17 +56,9 @@ class UserManager extends AbstractManager
     /**
      *insert user with his datas in database
      *
-     * @param array $user
      * @return int
      */
-    public function insertUser(array $user): int
+    public function insertUser(): int
     {
-        $query = "INSERT INTO " . self::TABLE . " (email, password) VALUES (:email, :password)";
-        $statement = $this->pdo->prepare($query);
-        $statement->bindValue('email', $user['email'], \PDO::PARAM_STR);
-        $statement->bindValue('password', password_hash($user['password'], PASSWORD_DEFAULT), \PDO::PARAM_STR);
-        if ($statement->execute()) {
-            return (int)$this->pdo->lastInsertId();
-        }
     }
 }
