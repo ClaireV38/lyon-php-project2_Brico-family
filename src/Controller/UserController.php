@@ -8,7 +8,7 @@ use App\Model\UserManager;
 
 class UserController extends AbstractController
 {
-    public function register()
+    public function signUp()
     {
         if (isset($_SESSION['user'])) {
             header("Location: /");
@@ -76,7 +76,7 @@ class UserController extends AbstractController
             }
         }
 
-        return $this->twig->render("Account/signUp.html.twig", [
+        return $this->twig->render("User/signUp.html.twig", [
             'errors' => $errors,
             'departments' => $departments,
             'citiesByDepartment' => $citiesByDepartment,
