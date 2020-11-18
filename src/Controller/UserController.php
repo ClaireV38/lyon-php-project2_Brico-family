@@ -47,7 +47,7 @@ class UserController extends AbstractController
             if (empty($password)) {
                 $errors['password'] = "vous devez saisir un mot de passe";
             } elseif (!preg_match("/^(?=.*[0-9])(?=.*[A-Z]).{8,20}$/i", $password)) {
-                    $errors['password'] = "Votre mot de passe doit être entre 8 et 20 caractères et doit contenir 
+                $errors['password'] = "Votre mot de passe doit être entre 8 et 20 caractères et doit contenir 
                 au moins 1 majuscule et un chiffre";
             } else {
                 if (empty($password2)) {
@@ -58,9 +58,13 @@ class UserController extends AbstractController
             }
             if (empty($firstname)) {
                 $errors['firstname'] = "vous devez rentrer votre prénom";
+            } elseif (mb_strlen($firstname) > 30) {
+                $errors['firstname'] = "ce champ ne doit pas dépasser 30 caractères";
             }
             if (empty($lastname)) {
                 $errors['lastname'] = "vous devez rentrer votre nom";
+            } elseif (mb_strlen($lastname) > 30) {
+                $errors['lastname'] = "ce champ ne doit pas dépasser 30 caractères";
             }
             if (empty($phoneNumber)) {
                 $errors['phoneNumber'] = "vous devez rentrer votre numero de téléphone";
@@ -75,8 +79,8 @@ class UserController extends AbstractController
                         'password' => $password,
                         'firstname' => $firstname,
                         'lastname' => $lastname,
-                        'city'=> $city,
-                        "phoneNumber"=> $phoneNumber
+                        'city' => $city,
+                        "phoneNumber" => $phoneNumber
                     ]);
                     header("Location: /");
                 } catch (\PDOException $e) {
@@ -95,8 +99,8 @@ class UserController extends AbstractController
                 'password2' => $password2,
                 'firstname' => $firstname,
                 'lastname' => $lastname,
-                'city'=> $city,
-                "phoneNumber"=> $phoneNumber
+                'city' => $city,
+                "phoneNumber" => $phoneNumber
             ]
         ]);
     }
