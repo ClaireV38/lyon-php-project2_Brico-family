@@ -34,7 +34,7 @@ class UserController extends AbstractController
             $phoneNumber = trim($_POST['phone_number']);
 
             if (!isset($_POST['city'])) {
-                $errors['city'] = "vous devez rentrer la ville la plus proche de chez vous";
+                $errors['city'] = "Vous devez rentrer la ville la plus proche de chez vous";
             } else {
                 $city = trim($_POST['city']);
             }
@@ -42,7 +42,7 @@ class UserController extends AbstractController
             if (empty($email)) {
                 $errors['email'] = "Vous devez rentrer un email";
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = "Votre format de mot de passe est invalide";
+                $errors['email'] = "Le format de votre email est invalide";
             }
             if (empty($password)) {
                 $errors['password'] = "Vous devez saisir un mot de passe";
@@ -59,17 +59,17 @@ class UserController extends AbstractController
             if (empty($firstname)) {
                 $errors['firstname'] = "Vous devez rentrer votre prénom";
             } elseif (mb_strlen($firstname) > 30) {
-                $errors['firstname'] = "ce champ ne doit pas dépasser 30 caractères";
+                $errors['firstname'] = "Ce champ ne doit pas dépasser 30 caractères";
             }
             if (empty($lastname)) {
-                $errors['lastname'] = "vous devez rentrer votre nom";
+                $errors['lastname'] = "Vous devez rentrer votre nom";
             } elseif (mb_strlen($lastname) > 30) {
-                $errors['lastname'] = "ce champ ne doit pas dépasser 30 caractères";
+                $errors['lastname'] = "Ce champ ne doit pas dépasser 30 caractères";
             }
             if (empty($phoneNumber)) {
-                $errors['phoneNumber'] = "vous devez rentrer votre numero de téléphone";
+                $errors['phoneNumber'] = "Vous devez rentrer votre numero de téléphone";
             } elseif (!preg_match("/^(0[1-68])(?:[ _.-]?(\d{2})){4}$/i", $phoneNumber)) {
-                $errors['phoneNumber'] = "Votre numero de telephone n'est pas valide";
+                $errors['phoneNumber'] = "Votre numéro de téléphone n'est pas valide";
             }
             if (empty($errors)) {
                     header("Location: /");
