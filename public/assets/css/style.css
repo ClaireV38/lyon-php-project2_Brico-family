@@ -290,6 +290,27 @@ span {
     font-size: larger;
 }
 
+/*addSuccess*/
+
+.addSuccess_card{
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-color);
+    width: 50%;
+    height: 20rem;
+    margin: auto;
+    text-align: center;
+    border-radius: 10px;
+}
+.addSuccess_card h1{
+    font-size: 30px;
+}
+.success_image{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+/*endaddSuccess*/
 @media screen and (min-width: 1000px) {
 
     .home_page_content {
@@ -353,6 +374,12 @@ span {
         height: 65px;
     }
     /*endnavbar*/
+    /*addSuccess*/
+    .success_image {
+        width: 150px;
+        height: 150px;
+    }
+
 }
 
 
