@@ -26,7 +26,7 @@ class UserController extends AbstractController
         $signInInfos = [
             'email' => $email,
         ];
-        return $this->twig->render('Account/signIn.html.twig', [
+        return $this->twig->render('User/signIn.html.twig', [
             'signInInfos' => $signInInfos,
             'errors' => $errors,
         ]);
@@ -34,6 +34,6 @@ class UserController extends AbstractController
 
     public function signUp()
     {
-        return $this->twig->render('Account/signUp.html.twig');
+        return $this->twig->render('User/signUp.html.twig');
     }
 }
