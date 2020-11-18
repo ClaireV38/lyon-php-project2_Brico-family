@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Model\OfferManager;
 use App\Model\ProductManager;
 use App\Model\DepartmentManager;
 use App\Model\TransactionManager;
@@ -80,8 +81,17 @@ class HomeController extends AbstractController
             }
 
             if (empty($errors)) {
+                $offerInfos = [
+                    'product' => $product,
+                    'productType' => $productType,
+                    'transaction' => $transaction,
+                    'department' => $department,
+                    'city' => $city
+                ];
+                $offerManager = new OfferManager();
+                $offerManager->selectOfferByResearchForm($offerInfos);
                 header("Location: /offer/results/?product=$product&productType=$productType".
-                "&transaction=$transaction&department=$department&city=$city");
+                    "&transaction=$transaction&department=$department&city=$city");
             }
         }
         $offerInfos = [
