@@ -29,8 +29,8 @@ class UserController extends AbstractController
             $email = trim($_POST['email']);
             $password = trim($_POST['password']);
             $password2 = trim($_POST['password2']);
-            $firstname = trim($_POST['firstname']);
-            $lastname = trim($_POST['lastname']);
+            $lastname = strtoupper(trim($_POST['lastname']));
+            $firstname = ucfirst(strtolower(trim($_POST['firstname'])));
             $phoneNumber = trim($_POST['phone_number']);
 
             if (!isset($_POST['city'])) {
