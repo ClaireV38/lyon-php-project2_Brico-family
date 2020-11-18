@@ -8,15 +8,24 @@
 
 .home_page_content {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    padding: 0;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
 }
 
 h1 {
     text-align: center;
 }
 
-.container_custom {
+.container-custom {
     background-color: var(--primary-color);
     border-radius: 10px;
     width: 90%;
@@ -59,7 +68,8 @@ input[type='radio']:checked:before {
     background: var(--radio-button-color);
 }
 
-.btn, .btn_custom {
+
+.btn-custom {
     display: block;
     margin: auto;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -72,6 +82,7 @@ input[type='radio']:checked:before {
 .advice{
     color: green;
 }
+
 .invisible {
     display: none;
 }
@@ -95,6 +106,24 @@ input[type='radio']:checked:before {
     background-color: var(--on-hover-button);
 }
 
+.card-custom {
+    border: 0;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    width: 90%;
+    font-family: var(--text-font-family);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.card-custom:hover {
+    transition-duration: 1s;
+    background-color: var(--on-hover-button);
+}
+
+.errors_center {
+    text-align: center;
+}
+
 .input-file{
     cursor: pointer;
     color: #47473b;
@@ -104,6 +133,17 @@ input[type='radio']:checked:before {
 }
 
 /* offer details*/
+
+#details_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-detail {
+    max-width: 600px;
+}
 
 .first_row {
     width: 100%;
@@ -164,13 +204,6 @@ span {
     margin-left: 3px;
 }
 
-#details_content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .carousel_custom {
     width: 90%;
     max-width: 600px;
@@ -204,10 +237,6 @@ span {
 
 .carousel-control-next-icon, .carousel-control-prev-icon {
     background-color: grey;
-}
-
-.card_custom {
-    max-width: 600px;
 }
 
 /*end offer details*/
@@ -260,7 +289,35 @@ span {
     font-family: var(--title-font-family);
     font-size: larger;
 }
+
+/*addSuccess*/
+
+.addSuccess_card{
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-color);
+    width: 50%;
+    height: 20rem;
+    margin: auto;
+    text-align: center;
+    border-radius: 10px;
+}
+.addSuccess_card h1{
+    font-size: 30px;
+}
+.success_image{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+/*endaddSuccess*/
 @media screen and (min-width: 1000px) {
+
+    .home_page_content {
+        flex-direction: row;
+        align-items: center;
+        width: 98%;
+    }
 
     .box_button_add {
         display: flex;
@@ -280,14 +337,18 @@ span {
     }
 
     /* offer details*/
+
+    .card-detail {
+        max-width: 50%;
+    }
+
     .carousel_custom {
-        max-width: 600px;
+        max-width: 50%;
     }
 
     .carousel-inner {
-        max-width: 600px;
+        max-width: 50%;
         height: 300px;
-        width: 100%;
     }
 
     .img_product {
@@ -313,6 +374,12 @@ span {
         height: 65px;
     }
     /*endnavbar*/
+    /*addSuccess*/
+    .success_image {
+        width: 150px;
+        height: 150px;
+    }
+
 }
 
 
