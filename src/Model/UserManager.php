@@ -52,14 +52,4 @@ class UserManager extends AbstractManager
         $statement->execute();
         return $statement->fetch();
     }
-
-    /**
-     *insert user with his datas in database
-     * @param array $user
-     * @return int
-     */
-    public function insertUser(array $user): int
-    {
-        $user = [];
-    }
 }
