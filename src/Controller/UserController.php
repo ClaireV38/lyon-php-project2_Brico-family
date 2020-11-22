@@ -72,10 +72,25 @@ class UserController extends AbstractController
                 $errors['phoneNumber'] = "Votre numéro de téléphone n'est pas valide";
             }
             if (empty($errors)) {
+                $userManager = new UserManager();
+                try {
+                    $userManager->insertUser([
+                        'email' => $email,
+                        'password' => $password,
+                        'firstname' => $firstname,
+                        'lastname' => $lastname,
+                        'city' => $city,
+                        "phoneNumber" => $phoneNumber
+                    ]);
+                    $_SESSION['user'] = [
+                        'email' => $email,
+                    ];
                     header("Location: /");
+                } catch (\PDOException $e) {
+                    $errors['form'] = $e->getMessage();
+                }
             }
         }
-
         return $this->twig->render("User/signUp.html.twig", [
             'errors' => $errors,
             'departments' => $departments,
@@ -90,5 +105,11 @@ class UserController extends AbstractController
                 "phoneNumber" => $phoneNumber
             ]
         ]);
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        header("Location: /");
     }
 }
