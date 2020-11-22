@@ -1,5 +1,31 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Hello world</h1>
+    <h1>Mes annonces</h1>
+    <div class="errors errors_center">
+        {% if errors.noResult is defined %}
+            {{ errors.noResult }}
+        {% endif %}
+    </div>
+    {% for userOffer in userOffers %}
+        <a href="/offer/details/{{ userOffer.offer_id }}">
+            <div class="container card-custom">
+                <div class="row no-gutters mt-3 align-items-center results">
+                    <div class="col-4 col-md-3 col-lg-2 d-flex justify-content-center">
+                        {% if userOffer.image_name %}
+                            <div class="image-offer"
+                                 style="background-image:url(/uploads/{{ resultOffer.image_name }})">
+                                <img src="/uploads/{{ resultOffer.image_name }}" alt="" />
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        <h5 class="card-title">{{ userOffer.title }}</h5>
+                        <p>Prix: {{ userOffer.price }} €</p>
+                        <span class="align-bottom">Created at: {{ userOffer.created_at }}</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
 {% endblock %}
