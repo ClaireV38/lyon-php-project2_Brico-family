@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\ProductManager;
 use App\Model\TransactionManager;
 use App\Model\DepartmentManager;
+use App\Model\CityManager;
 use App\Model\OfferManager;
 use App\Model\UserManager;
 use App\Model\ImageManager;
@@ -19,6 +20,7 @@ class OfferController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
+
     public function add()
     {
         $productManager = new ProductManager();
@@ -81,7 +83,7 @@ class OfferController extends AbstractController
             if (!empty($_FILES['images']['name'][0])) {
                 $images = $_FILES['images'];
                 $allowed = ['jpeg', 'png', 'jpg', 'pdf'];
-                if (count($_FILES['images']['name']) >= 5) {
+                if (count($_FILES['images']['name']) > 5) {
                     $imageErrors[] =  'Un maximum de 5 photos est autorisé.';
                 }
                 foreach ($images['name'] as $index => $imagesName) {
@@ -108,7 +110,7 @@ class OfferController extends AbstractController
                             move_uploaded_file($imagesTmp, $imagesDestination);
                             $offerImages[] = [
                                 'name' => $imagesNameNew,
-                                'path' => $imagesDestination,
+                                'path' => "/" . $imagesDestination,
                             ];
                         }
                     }
@@ -175,11 +177,81 @@ class OfferController extends AbstractController
      */
     public function results()
     {
-        return $this->twig->render('Offer/results.html.twig');
+        $errors = [];
+        $productType = $product = $transaction = $department = $city = "";
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET)) {
+            $productType = trim($_GET['productType']);
+            $product = trim($_GET['product']);
+            $transaction = trim($_GET['transaction']);
+            $department = trim($_GET['department']);
+            $city = trim($_GET['city']);
+        }
+
+        $productManager = new ProductManager();
+        $toolproducts = $productManager->selectByProductType('Tool');
+        $materialproducts = $productManager->selectByProductType('Material');
+
+        $products = [
+            'tools' => $toolproducts,
+            'materials' => $materialproducts
+        ];
+
+        $transactionManager = new TransactionManager();
+        $transactions = $transactionManager->selectAll();
+
+        $departmentManager = new DepartmentManager();
+        $departments = $departmentManager->selectAllOrderedByName();
+
+        $cityManager = new CityManager();
+        $citiesByDepartment = [];
+        foreach ($departments as $department) {
+            $citiesByDepartment[$department['name']] = $cityManager->selectCityByDepartement($department['name']);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-index-search']) && !empty($_POST)) {
+            if (isset($_POST['product_type'])) {
+                $productType = $_POST['product_type'];
+            }
+            if (isset($_POST['tools_products'])) {
+                $product = $_POST['tools_products'];
+            }
+
+            if (isset($_POST['transaction'])) {
+                $transaction = $_POST['transaction'];
+            }
+
+            if (isset($_POST['city'])) {
+                $city = $_POST['city'];
+            }
+        }
+
+        $offerInfos = [
+            'product' => $product,
+            'productType' => $productType,
+            'transaction' => $transaction,
+            'department' => $department,
+            'city' => $city
+        ];
+
+        $offerManager = new OfferManager();
+        $resultsOffer = $offerManager->selectOfferByResearchForm($offerInfos);
+        if (empty($resultsOffer)) {
+            $errors['noResult'] = "aucune annonce ne correspond à votre recherche";
+        }
+
+        return $this->twig->render('Offer/results.html.twig', [
+            'departments' => $departments,
+            'citiesByDepartment' => $citiesByDepartment,
+            'transactions' => $transactions,
+            'products' => $products,
+            'offerInfos' => $offerInfos,
+            'errors' => $errors,
+            'resultsOffer' => $resultsOffer
+        ]);
     }
 
     /**
-     * Display offer informations specified by $id
+     * Display offer datas specified by $id
      *
      * @param string $id
      * @return string
@@ -187,7 +259,7 @@ class OfferController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function details(string $id = '3')
+    public function details(string $id): string
     {
         $id = intval(trim($id));
 

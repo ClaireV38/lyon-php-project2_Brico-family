@@ -1,12 +1,12 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div class="looking_for_block container container_custom">
+    <div class="looking_for_block container container-custom">
         <div class="intro-signin">
             <h2> Bonjour !</h2>
             <p>Connecte-toi pour déposer ton annonce et découvrir toutes nos fonctionnalités.</p>
         </div>
-        <form method="POST" action="/User/signin" novalidate >
+        <form method="POST" action="/User/signIn" >
             <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" value="{{ signInInfos.email}}" >
@@ -25,11 +25,11 @@
                     {{ errors.password }}
                 {% endif %}
             </div>
-            <button type="submit" name="btn-signIn" class="btn-go btn btn-light">Go !</button>
+            <button type="submit" class="btn-go btn btn-custom btn-light">Go !</button>
         </form>
         <div class="account-creation">
             <p>Envie de nous rejoindre ? </p>
-            <button type="submit" name="btn-account-creation" class="btn-account-creation btn btn-light">Créer mon compte</button>
+            <a href="/User/signUp" class="btn-account-creation btn-custom btn btn-light">Créer mon compte</a>
         </div>
     </div>
 {% endblock %}

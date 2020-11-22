@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="home_page_content container-fluid">
-        <div class="looking_for_block container-md container_custom">
+        <div class="looking_for_block container-md container-custom">
             <h1>Je cherche</h1>
             <form method="post" action="/home/index">
                 <div class="form-check-inline">
@@ -108,11 +108,11 @@
                         {% endif %}
                     </div>
                 </div>
-                <button type="submit" name="btn-index-search" value="submit" class="btn btn-light">Go !</button>
+                <button type="submit" name="btn-index-search" value="submit" class="btn btn-custom btn-light">Go !</button>
             </form>
         </div>
         <div class="box_button_add">
-            <a class="container-md container_custom button_add" href="/offer/add">Je dépose une annonce</a>
+            <a class="container-custom container-md button_add" href="/offer/add">Je dépose une annonce</a>
         </div>
     </div>
 {% endblock %}
@@ -123,12 +123,12 @@
     const selectMaterialsproducts = document.querySelector("#materials_products");
     const btnCheckMaterial = document.querySelector("#material");
     btnCheckTool.addEventListener('change', function() {
-    selectToolsproducts.classList.remove("invisible");
-    selectMaterialsproducts.classList.add("invisible");
-});
+        selectToolsproducts.classList.remove("invisible");
+        selectMaterialsproducts.classList.add("invisible");
+    });
     btnCheckMaterial.addEventListener('change', function() {
-    selectMaterialsproducts.classList.remove("invisible");
-    selectToolsproducts.classList.add("invisible");
-});
+        selectMaterialsproducts.classList.remove("invisible");
+        selectToolsproducts.classList.add("invisible");
+    });
 </script>
 {% endblock %}

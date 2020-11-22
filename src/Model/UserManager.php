@@ -24,7 +24,7 @@ class UserManager extends AbstractManager
      *
      * @return array
      */
-    public function selectOneWithLocationById(int $id)
+    public function selectOneWithLocationById(int $id): array
     {
         $statement = $this->pdo->prepare("SELECT " .self::TABLE . ".id, firstname, lastname, email,
          phone_number, city.name as user_city, department.name as user_department
