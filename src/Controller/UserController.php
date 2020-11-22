@@ -28,12 +28,11 @@ class UserController extends AbstractController
                 if (!$user) {
                     $errors['email'] = "Nous ne vous avons pas trouvé ... Créer votre compte dès maintenant !";
                 } elseif (!password_verify($password, $user['password'])) {
-                        $errors['password'] = "Mauvais mot de passe";
+                    $errors['password'] = "Mauvais mot de passe";
                 } else {
                     $_SESSION['user'] = [
                         'email' => $user['email'],
                     ];
-                    header('Location:/home/index/');
                 }
             }
         }

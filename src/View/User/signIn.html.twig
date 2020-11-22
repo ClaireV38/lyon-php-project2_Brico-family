@@ -6,7 +6,7 @@
             <h2> Bonjour !</h2>
             <p>Connecte-toi pour déposer ton annonce et découvrir toutes nos fonctionnalités.</p>
         </div>
-        <form method="POST" action="/User/signIn" >
+        <form method="POST" action="/User/signin" >
             <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" value="{{ signInInfos.email}}" >
@@ -25,11 +25,11 @@
                     {{ errors.password }}
                 {% endif %}
             </div>
-            <button type="submit" class="btn-go btn btn-custom btn-light">Go !</button>
+            <button type="submit" name="btn-signIn" class="btn-signIn btn-custom btn-go btn btn-light">Go !</button>
         </form>
         <div class="account-creation">
             <p>Envie de nous rejoindre ? </p>
-            <a href="/User/signUp" class="btn-account-creation btn-custom btn btn-light">Créer mon compte</a>
+            <button type="submit" class="btn-account-creation btn btn-custom btn-light">Créer mon compte</button>
         </div>
     </div>
 {% endblock %}
