@@ -1,5 +1,91 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Hello world</h1>
+    <div class="sign_up_block container-md container-custom">
+        <h1>Je crée mon compte</h1>
+        <form method="post" action="/User/signUp" novalidate>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="lastname">Nom</label>
+                    <input type="text" class="form-control" name="lastname" id="lastname" value="{{ data.lastname }}">
+                    <div class="errors">
+                        {% if errors.lastname is defined %}
+                            {{ errors.lastname }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="firstname">Prenom</label>
+                    <input type="text" class="form-control" name="firstname" id="firstname" value="{{ data.firstname }}">
+                    <div class="errors">
+                        {% if errors.firstname is defined %}
+                            {{ errors.firstname }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control" name="email" id="Email" value="{{ data.email }}">
+            </div>
+            <div class="errors">
+                {% if errors.email is defined %}
+                    {{ errors.email }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="password1">Mot de passe</label>
+                <input type="password" class="form-control" name="password" id="password1" value="{{ data.password }}">
+            </div>
+            <div class="errors">
+                {% if errors.password is defined %}
+                    {{ errors.password }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="password2">Confirmation du mot de passe</label>
+                <input type="password" class="form-control" name="password2" id="password2" value="{{ data.password2 }}">
+            </div>
+            <div class="errors">
+                {% if errors.password2 is defined %}
+                    {{ errors.password2 }}
+                {% endif %}
+            </div>
+            <div class="form-group col-md-6 phone-group">
+                <label for="phone_number">Téléphone</label>
+                <input type="tel" class="form-control" name="phone_number"
+                       placeholder="06 06 06 06 06" id="phone_number" value="{{ data.phoneNumber }}">
+            </div>
+            <div class="errors">
+                {% if errors.phoneNumber is defined %}
+                    {{ errors.phoneNumber }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="city">ville :</label>
+                <select name="city" id="city" class="form-control">
+                    {% if data.city is defined and  data.city is not same as ('') %}
+                        <option value="{{ data.city }}">{{ data.city }}</option>
+                    {% else %}
+                        <option value="" disabled selected>Selectionnez</option>
+                    {% endif %}
+                    {% for department in departments %}
+                        <optgroup label="{{ department.name }}">
+                            {% for dep,citiesTab in citiesByDepartment if dep is same as (department.name) %}
+                                {% for city in citiesTab %}
+                                    <option label="{{ city.name }}" value="{{ city.name }}">{{ city.name }}</option>
+                                {% endfor %}
+                            {% endfor %}
+                        </optgroup>
+                    {% endfor %}
+                </select>
+                <div class="errors">
+                    {% if errors.city is defined %}
+                        {{ errors.city }}
+                    {% endif %}
+                </div>
+            </div>
+            <button type="submit" name="btn-register" class="btn-go btn-custom btn btn-light">Go !</button>
+        </form>
+    </div>
 {% endblock %}
