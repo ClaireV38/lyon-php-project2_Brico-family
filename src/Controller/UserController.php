@@ -33,6 +33,7 @@ class UserController extends AbstractController
                     $_SESSION['user'] = [
                         'email' => $user['email'],
                     ];
+                    header("Location: /");
                 }
             }
         }
