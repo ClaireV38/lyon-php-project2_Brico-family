@@ -77,6 +77,7 @@ input[type='radio']:checked:before {
 
 .errors {
     color: red;
+   margin-bottom : 7px;
 }
 
 .advice{
@@ -124,15 +125,26 @@ input[type='radio']:checked:before {
     text-align: center;
 }
 
-.input-file{
+.input-file {
     cursor: pointer;
     color: #47473b;
 }
-.input-file:hover{
+.input-file:hover {
     color: maroon;
 }
 
 /* offer details*/
+
+#details_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-detail {
+    max-width: 600px;
+}
 
 .first_row {
     width: 100%;
@@ -193,13 +205,6 @@ span {
     margin-left: 3px;
 }
 
-#details_content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .carousel_custom {
     width: 90%;
     max-width: 600px;
@@ -240,6 +245,14 @@ span {
 }
 
 /*end offer details*/
+
+/* start sign-up */
+
+.phone-group {
+    padding: 0;
+}
+
+/*end sign-up*/
 
 /*navbar*/
 .navbar{
@@ -290,7 +303,27 @@ span {
     font-size: larger;
 }
 
+/*addSuccess*/
+
+.addSuccess_card{
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-color);
+    width: 50%;
+    height: 20rem;
+    margin: auto;
+    text-align: center;
+    border-radius: 10px;
 }
+.addSuccess_card h1{
+    font-size: 30px;
+}
+.success_image{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+/*endaddSuccess*/
 @media screen and (min-width: 1000px) {
 
     .home_page_content {
@@ -306,10 +339,9 @@ span {
         width: 50%;
     }
 
-    .looking_for_block {
+    .looking_for_block, .container-custom, .sign_up_block {
         width: 50%;
     }
-
 
     .button_add {
         margin: auto 1.2rem;
@@ -317,14 +349,18 @@ span {
     }
 
     /* offer details*/
-    .carousel_custom {
-        max-width: 600px;
+
+    .card-detail {
+        max-width: 50%;
     }
 
-    .carousel-inner {
-        max-width: 600px;
+    .carousel_custom {
+        max-width: 50%;
+    }
+
+    .carousel_inner_custom {
+        max-width: 50%;
         height: 300px;
-        width: 100%;
     }
 
     .img_product {
@@ -350,6 +386,12 @@ span {
         height: 65px;
     }
     /*endnavbar*/
+
+    /*addSuccess*/
+    .success_image {
+        width: 150px;
+        height: 150px;
+    }
 
 }
 
