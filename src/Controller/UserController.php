@@ -47,7 +47,7 @@ class UserController extends AbstractController
                 $errors['password'] = "vous devez saisir un mot de passe";
             } elseif (!preg_match("/^(?=.*[0-9])(?=.*[A-Z]).{8,20}$/i", $password)) {
                 $errors['password'] = "Votre mot de passe doit être entre 8 et 20 caractères et doit contenir 
-                au un chiffre";
+                au moins un chiffre";
             } else {
                 if (empty($password2)) {
                     $errors['password2'] = "Vous devez confirmer votre mot de passe";
@@ -71,7 +71,23 @@ class UserController extends AbstractController
                 $errors['phoneNumber'] = "Votre numéro de téléphone n'est pas valide";
             }
             if (empty($errors)) {
+                $userManager = new UserManager();
+                try {
+                    $userManager->insertUser([
+                        'email' => $email,
+                        'password' => $password,
+                        'firstname' => $firstname,
+                        'lastname' => $lastname,
+                        'city' => $city,
+                        "phoneNumber" => $phoneNumber
+                    ]);
+                    $_SESSION['user'] = [
+                        'email' => $email,
+                    ];
                     header("Location: /");
+                } catch (\PDOException $e) {
+                    $errors['form'] = $e->getMessage();
+                }
             }
         }
 
