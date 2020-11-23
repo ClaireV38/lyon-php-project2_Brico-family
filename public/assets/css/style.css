@@ -244,6 +244,7 @@ span {
     max-width: 600px;
 }
 
+/*end offer details*/
 /* start sign-up */
 
 .phone-group {
@@ -251,9 +252,13 @@ span {
 }
 
 /*end sign-up*/
+/* start sign-up */
 
-/*end offer details*/
+.phone-group {
+    padding: 0;
+}
 
+/*end sign-up*/
 /*navbar*/
 .navbar{
     display: flex;
