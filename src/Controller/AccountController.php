@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\UserManager;
 use App\Model\OfferManager;
+use App\Model\ImageManager;
 
 class AccountController extends AbstractController
 {
@@ -19,10 +20,13 @@ class AccountController extends AbstractController
             header("Location: /");
         }
         $user = $this->getUser();
-        var_dump($user);
         $offerManager = new OfferManager();
         $userOffers = $offerManager->selectAllByUserId(intval($user['id']));
-        var_dump($userOffers);
+        $imageManager = new ImageManager();
+        foreach ($userOffers as $key => $userOffer) {
+            $userOffer['images'] = $imageManager->selectAllByOfferId($userOffer['offer_id']);
+            $userOffers[$key] = $userOffer;
+        }
         return $this->twig->render('Account/profil.html.twig', ['userOffers' => $userOffers]);
     }
 }

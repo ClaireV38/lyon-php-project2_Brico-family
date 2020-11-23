@@ -12,10 +12,10 @@
             <div class="container card-custom">
                 <div class="row no-gutters mt-3 align-items-center results">
                     <div class="col-4 col-md-3 col-lg-2 d-flex justify-content-center">
-                        {% if userOffer.image_name %}
+                        {% if userOffer.images[0].name %}
                             <div class="image-offer"
-                                 style="background-image:url(/uploads/{{ resultOffer.image_name }})">
-                                <img src="/uploads/{{ resultOffer.image_name }}" alt="" />
+                                 style="background-image:url(/uploads/{{ userOffer.images[0].name }})">
+                                <img src="/uploads/{{ userOffer.images[0].name }}" alt="" />
                             </div>
                         {% endif %}
                     </div>

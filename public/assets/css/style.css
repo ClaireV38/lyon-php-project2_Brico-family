@@ -244,6 +244,17 @@ span {
     max-width: 600px;
 }
 
+.image-offer {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+}
+
+.image-offer img {
+    display: none;
+}
+
 .btn-connect {
     width: fit-content;
 }
