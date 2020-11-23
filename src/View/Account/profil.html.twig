@@ -10,29 +10,32 @@
     {% for userOffer in userOffers %}
         <a href="/offer/details/{{ userOffer.offer_id }}">
             <div class="container card-custom">
-                <div class="row no-gutters mt-3 align-items-center results">
+                <div class="row no-gutters mt-3 align-items-center results profil-results">
                     <div class="col-4 col-md-3 col-lg-2 d-flex justify-content-center">
                         {% if userOffer.images[0].name %}
                             <div class="image-offer"
                                  style="background-image:url(/uploads/{{ userOffer.images[0].name }})">
-                                <img src="/uploads/{{ userOffer.images[0].name }}" alt="" />
+                                <img src="/uploads/{{ userOffer.images[0].name }}" alt=""/>
                             </div>
                         {% endif %}
                     </div>
                     <div class="col">
-                        <h5 class="card-title">{{ userOffer.title }}</h5>
+                        <div class="row1">
+                            <h5 class="card-title">{{ userOffer.title }}</h5>
+                            <div class="top_right">
+                                <div class="transaction_logo
+                            {% if userOffer.transaction_name == 'Location' %}
+                            yellow
+                            {% endif %}
+                            ">
+                                    {{ userOffer.transaction_name }}
+                                </div>
+                            </div>
+                        </div>
                         <p>Prix: {{ userOffer.price }} €</p>
-                        <span class="align-bottom">Mis en ligne le: {{ userOffer.created_at }}</span>
+                        <span class="align-bottom">Mise en ligne le : {{ userOffer.created_at }}</span>
                     </div>
-                </div>
-                <div class="top_right">
-                    <div class="transaction_logo
-                    {% if userOffer.transaction_name == 'Location' %}
-                    yellow
-                    {% endif %}
-                    ">
-                        {{ userOffer.transaction_name }}
-                    </div>
+
                 </div>
             </div>
         </a>

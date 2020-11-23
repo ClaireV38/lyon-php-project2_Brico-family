@@ -337,6 +337,20 @@ span {
     margin-bottom: 10px;
 }
 /*endaddSuccess*/
+/*profil*/
+.row1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.row1 h5 {
+    font-size: 17px;
+}
+.profil-results {
+    padding: 10px 0;
+}
+/*endprofil*/
+
 @media screen and (min-width: 1000px) {
 
     .home_page_content {
@@ -404,6 +418,12 @@ span {
         width: 150px;
         height: 150px;
     }
+    /*endaddsucces*/
+    /*profil*/
+    .row1 h5 {
+        font-size: 20px;
+    }
+    /*endprofil*/
 
 }
 
