@@ -22,7 +22,16 @@
                     <div class="col">
                         <h5 class="card-title">{{ userOffer.title }}</h5>
                         <p>Prix: {{ userOffer.price }} €</p>
-                        <span class="align-bottom">Created at: {{ userOffer.created_at }}</span>
+                        <span class="align-bottom">Mis en ligne le: {{ userOffer.created_at }}</span>
+                    </div>
+                </div>
+                <div class="top_right">
+                    <div class="transaction_logo
+                    {% if userOffer.transaction_name == 'Location' %}
+                    yellow
+                    {% endif %}
+                    ">
+                        {{ userOffer.transaction_name }}
                     </div>
                 </div>
             </div>
