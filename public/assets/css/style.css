@@ -289,9 +289,7 @@ span {
     font-family: var(--title-font-family);
     font-size: larger;
 }
-.home_main_carousel_caption{
-    font-size: 20px;
-    font-weight: bold;
+
 }
 @media screen and (min-width: 1000px) {
 
