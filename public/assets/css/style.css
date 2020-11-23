@@ -393,6 +393,15 @@ span {
         height: 150px;
     }
 
+    .carousel_inner_homepage {
+        max-height: 500px;
+    }
+
+    .carousel_inner_homepage .carousel-item img {
+        object-fit: contain;
+        height: 500px;
+    }
+
 }
 
 
