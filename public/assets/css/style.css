@@ -358,7 +358,7 @@ span {
         max-width: 50%;
     }
 
-    .carousel-inner {
+    .carousel_inner_custom {
         max-width: 50%;
         height: 300px;
     }
