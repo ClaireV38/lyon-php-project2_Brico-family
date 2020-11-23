@@ -187,7 +187,7 @@ input[type='radio']:checked:before {
     background-color: yellow;
 }
 
-h3 {
+h2, h3 {
     text-align: center;
 }
 
@@ -271,7 +271,7 @@ span {
     display: none;
 }
 
-.btn-connect {
+.btn-connect, .btn-account-update {
     width: fit-content;
 }
 

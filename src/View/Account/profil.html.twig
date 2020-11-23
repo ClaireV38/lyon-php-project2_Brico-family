@@ -1,7 +1,29 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Mes annonces</h1>
+    <h2>Mes informations</h2>
+    <div class="container container-custom">
+        <p>
+            {{ user.firstname }} {{ user.lastname }}
+        </p>
+        <p><img
+                    src="/assets/images/icon_email.png"
+                    alt="icon email" height="20px"/>
+            <span> {{ user.email }} </span></p>
+        <p><img
+                    src="/assets/images/icon_phone.png"
+                    alt="icon phone" height="20px"/>
+            <span> {{ user.phone_number }} </span>
+        </p>
+        <p><img
+                    src="/assets/images/icon_city.png"
+                    alt="icon city" height="20px"/>
+            <span>
+                                {{ user.user_city }} ({{ user.user_department }}) </span>
+        </p>
+        <a href="/Account/update" class="btn-account-update btn-custom btn btn-light">Modifier mes informations</a>
+    </div>
+    <h2>Mes annonces</h2>
     <div class="errors errors_center">
         {% if errors.noResult is defined %}
             {{ errors.noResult }}

@@ -20,6 +20,8 @@ class AccountController extends AbstractController
             header("Location: /");
         }
         $user = $this->getUser();
+        $userManager = new UserManager();
+        $user = $userManager->selectOneWithLocationById($user['id']);
         $offerManager = new OfferManager();
         $userOffers = $offerManager->selectAllByUserId(intval($user['id']));
         $imageManager = new ImageManager();
@@ -27,6 +29,6 @@ class AccountController extends AbstractController
             $userOffer['images'] = $imageManager->selectAllByOfferId($userOffer['offer_id']);
             $userOffers[$key] = $userOffer;
         }
-        return $this->twig->render('Account/profil.html.twig', ['userOffers' => $userOffers]);
+        return $this->twig->render('Account/profil.html.twig', ['user' => $user, 'userOffers' => $userOffers]);
     }
 }
