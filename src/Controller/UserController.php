@@ -31,8 +31,7 @@ class UserController extends AbstractController
             $password2 = trim($_POST['password2']);
             $lastname = strtoupper(trim($_POST['lastname']));
             $firstname = ucfirst(strtolower(trim($_POST['firstname'])));
-            $phoneNumber = trim($_POST['phone_number']);
-
+            $phoneNumber = str_replace(' ', '', trim($_POST['phone_number']));
             if (!isset($_POST['city'])) {
                 $errors['city'] = "vous devez rentrer la ville la plus proche de chez vous";
             } else {
@@ -41,7 +40,7 @@ class UserController extends AbstractController
             if (empty($email)) {
                 $errors['email'] = "vous devez rentrer un email";
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = "votre format de mot de passe est invalide";
+                $errors['email'] = "le format de votre email est invalide";
             }
             if (empty($password)) {
                 $errors['password'] = "vous devez saisir un mot de passe";
