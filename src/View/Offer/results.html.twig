@@ -120,9 +120,14 @@
         {% for resultOffer in resultsOffer %}
             <a href="/offer/details/{{ resultOffer.offer_id }}">
                 <div class="container card-custom">
-                    <div class="row no-gutters mt-3 align-items-center" style="height: 130px">
-                        <div class="col-4 col-md-3 col-lg-2" style="height: 100px">
-                            <img src="https://via.placeholder.com/100" class="" alt="...">
+                    <div class="row no-gutters mt-3 align-items-center results">
+                        <div class="col-4 col-md-3 col-lg-2 d-flex justify-content-center">
+                            {% if resultOffer.image_name %}
+                                <div class="image-offer"
+                                     style="background-image:url(/uploads/{{ resultOffer.image_name }})">
+                                    <img src="/uploads/{{ resultOffer.image_name }}" alt="" />
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="col">
                             <h5 class="card-title">{{ resultOffer.title }}</h5>

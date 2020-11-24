@@ -6,16 +6,26 @@
             <h2> Bonjour !</h2>
             <p>Connecte-toi pour déposer ton annonce et découvrir toutes nos fonctionnalités.</p>
         </div>
-        <form method="POST" action="/User/signIn" >
+        <form method="POST" action="/User/signin" >
             <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" value="{{ signInInfos.email}}" >
+            </div>
+            <div class="errors">
+                {% if errors.email is defined %}
+                    {{ errors.email }}
+                {% endif %}
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Mot de passe</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input type="password" class="form-control" name="password" id="exampleInputPassword1">
             </div>
-            <button type="submit" class="btn-go btn btn-custom btn-light">Go !</button>
+            <div class="errors">
+                {% if errors.password is defined %}
+                    {{ errors.password }}
+                {% endif %}
+            </div>
+            <button type="submit" name="btn-signIn" class="btn-signIn btn-custom btn-go btn btn-light">Go !</button>
         </form>
         <div class="account-creation">
             <p>Envie de nous rejoindre ? </p>
