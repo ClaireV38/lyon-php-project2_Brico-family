@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Model\CityManager;
+use App\Model\DepartmentManager;
 use App\Model\UserManager;
 use App\Model\OfferManager;
 use App\Model\ImageManager;
@@ -43,6 +45,15 @@ class AccountController extends AbstractController
         $user = $this->getUser();
         $userManager = new UserManager();
         $data = $userManager->selectOneWithLocationById($user['id']);
+
+        $departmentManager = new DepartmentManager();
+        $departments = $departmentManager->selectAllOrderedByName();
+
+        $cityManager = new CityManager();
+        $citiesByDepartment = [];
+        foreach ($departments as $department) {
+            $citiesByDepartment[$department['name']] = $cityManager->selectCityByDepartement($department['name']);
+        }
 
         $email = $firstname = $lastname = $city = $phoneNumber = "";
         $errors = [];
@@ -96,6 +107,8 @@ class AccountController extends AbstractController
         }
         var_dump($data);
         return $this->twig->render('Account/update.html.twig', [
+            'departments' => $departments,
+            'citiesByDepartment' => $citiesByDepartment,
             'data' => $data,
             'errors' => $errors
         ]);

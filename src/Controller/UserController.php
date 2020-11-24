@@ -79,7 +79,7 @@ class UserController extends AbstractController
             if (empty($email)) {
                 $errors['email'] = "vous devez rentrer un email";
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = "votre format de mot de passe est invalide";
+                $errors['email'] = "le format de votre email est invalide";
             }
             if (empty($password)) {
                 $errors['password'] = "vous devez saisir un mot de passe";
