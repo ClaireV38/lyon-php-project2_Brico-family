@@ -114,11 +114,27 @@ input[type='radio']:checked:before {
     width: 90%;
     font-family: var(--text-font-family);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 0;
 }
 
 .card-custom:hover {
     transition-duration: 1s;
     background-color: var(--on-hover-button);
+}
+
+.results {
+    height: 130px;
+}
+
+.image-offer {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+}
+
+.image-offer img {
+    display: none;
 }
 
 .errors_center {
