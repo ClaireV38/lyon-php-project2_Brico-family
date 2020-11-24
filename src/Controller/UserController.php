@@ -69,7 +69,7 @@ class UserController extends AbstractController
             $password2 = trim($_POST['password2']);
             $lastname = strtoupper(trim($_POST['lastname']));
             $firstname = ucfirst(strtolower(trim($_POST['firstname'])));
-            $phoneNumber = trim($_POST['phone_number']);
+            $phoneNumber = str_replace(' ', '', trim($_POST['phone_number']));
 
             if (!isset($_POST['city'])) {
                 $errors['city'] = "vous devez rentrer la ville la plus proche de chez vous";
