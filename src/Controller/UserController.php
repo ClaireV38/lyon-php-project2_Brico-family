@@ -8,6 +8,7 @@ use App\Model\UserManager;
 
 class UserController extends AbstractController
 {
+
   public function signIn()
     {
         $errors = [];
@@ -23,6 +24,17 @@ class UserController extends AbstractController
                 $errors['password'] = "Veuillez renseigner votre mot de passe";
             }
             if (empty($errors)) {
+                $userManager = new UserManager();
+                $user = $userManager->selectUserByEmail($email);
+                if (!$user) {
+                    $errors['email'] = "Nous ne vous avons pas trouvé ... Créer votre compte dès maintenant !";
+                } elseif (!password_verify($password, $user['password'])) {
+                    $errors['password'] = "Mauvais mot de passe";
+                } else {
+                    $_SESSION['user'] = [
+                        'email' => $user['email'],
+                    ];
+                }
                     header('Location:/home/index/');
             }
         }
@@ -34,7 +46,7 @@ class UserController extends AbstractController
             'errors' => $errors,
         ]);
     }
-  
+
     public function signUp()
     {
         if (isset($_SESSION['user'])) {
