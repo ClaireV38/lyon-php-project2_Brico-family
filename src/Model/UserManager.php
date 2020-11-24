@@ -38,6 +38,7 @@ class UserManager extends AbstractManager
         return $statement->fetch();
     }
 
+
     /**
      * insert user in database
      * @param array $user
