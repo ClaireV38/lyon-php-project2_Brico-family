@@ -89,16 +89,21 @@ class AccountController extends AbstractController
                 $errors['phoneNumber'] = "Votre numéro de téléphone n'est pas valide";
             }
             $data = [
+                'id' => $user['id'],
                 'email' => $email,
                 'firstname' => $firstname,
                 'lastname' => $lastname,
                 'user_city' => $city,
-                "phone_number" => $phoneNumber
+                'phone_number' => $phoneNumber
             ];
             if (empty($errors)) {
                 $userManager = new UserManager();
+                var_dump($data);
                 try {
-                //    $userManager->updateUser([$data]);
+                    $userManager->updateUser($data);
+                    $_SESSION['user'] = [
+                        'email' => $email,
+                    ];
                     header("Location: /Account/profil");
                 } catch (\PDOException $e) {
                     $errors['form'] = $e->getMessage();
