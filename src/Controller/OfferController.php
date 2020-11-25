@@ -213,19 +213,42 @@ class OfferController extends AbstractController
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-index-search']) && !empty($_POST)) {
-            if (isset($_POST['product_type'])) {
-                $productType = $_POST['product_type'];
+            if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
+                $errors['product'] = 'Veuillez choisir une catégorie de produit';
             }
-            if (isset($_POST['tools_products'])) {
-                $product = $_POST['tools_products'];
+            if (!isset($_POST['product_type'])) {
+                $errors['productType'] = 'Veuillez choisir un type de produit';
+            } else {
+                $productType = $_POST['product_type'];
+                if (isset($_POST['tools_products']) && $productType === 'tool') {
+                    $product = $_POST['tools_products'];
+                } else {
+                    if (isset($_POST['materials_products'])) {
+                        $product = $_POST['materials_products'];
+                    }
+                }
             }
 
-            if (isset($_POST['transaction'])) {
+            if (!isset($_POST['transaction'])) {
+                $errors['transaction'] = 'Veuillez choisir un type de transaction';
+            } else {
                 $transaction = $_POST['transaction'];
             }
 
-            if (isset($_POST['city'])) {
+            if (!isset($_POST['city'])) {
+                $errors['city'] = 'Veuillez choisir une ville';
+            } else {
                 $city = $_POST['city'];
+            }
+
+            if (empty($errors)) {
+                $offerInfos = [
+                    'product' => $product,
+                    'productType' => $productType,
+                    'transaction' => $transaction,
+                    'department' => $department,
+                    'city' => $city
+                ];
             }
         }
 
@@ -239,7 +262,7 @@ class OfferController extends AbstractController
 
         $offerManager = new OfferManager();
         $resultsOffer = $offerManager->selectOfferByResearchForm($offerInfos);
-        if (empty($resultsOffer)) {
+        if (empty($resultsOffer) && !empty($_POST)) {
             $errors['noResult'] = "aucune annonce ne correspond à votre recherche";
         }
 
@@ -285,10 +308,27 @@ class OfferController extends AbstractController
         }
 
         return $this->twig->render('Offer/details.html.twig', [
-        'detailsOffer' => $detailsOffer,
-        'sellerShow' => $sellerShow,
-        'sellerDetails' => $sellerDetails,
-        'images' => $offerImages]);
+            'detailsOffer' => $detailsOffer,
+            'sellerShow' => $sellerShow,
+            'sellerDetails' => $sellerDetails,
+            'images' => $offerImages]);
+    }
+
+    /**
+     * delete offer selected by user
+     */
+    public function delete()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            header("HTTP/1.0 405 Method Not Allowed");
+        }
+
+        if (!empty($_POST)) {
+            $id = intval($_POST['id']);
+            $offerManager = new OfferManager();
+            $offerManager->delete($id);
+        }
+        header("Location:/account/profil");
     }
 
     /**

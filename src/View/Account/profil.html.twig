@@ -18,8 +18,7 @@
         <p><img
                     src="/assets/images/icon_city.png"
                     alt="icon city" height="20px"/>
-            <span>
-                                {{ user.user_city }} ({{ user.user_department }}) </span>
+            <span> {{ user.user_city }} ({{ user.user_department }}) </span>
         </p>
         <a href="/Account/update" class="btn-account-update btn-custom btn btn-light">Modifier mes informations</a>
     </div>
@@ -31,7 +30,7 @@
     </div>
     {% if not userOffers %}
     <div class="errors errors_center">
-        Vous n'avez aucune annonce en ligne. Pour déposer une annonce cliquez sur "déposer une annonce" dans la page d'accueil.
+        Vous n'avez aucune annonce en ligne. Pour déposer une annonce cliquez sur "déposer une annonce".
     </div>
     {% endif %}
     {% for userOffer in userOffers %}

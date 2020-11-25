@@ -68,7 +68,6 @@ input[type='radio']:checked:before {
     background: var(--radio-button-color);
 }
 
-
 .btn-custom {
     display: block;
     margin: auto;
@@ -344,11 +343,12 @@ span {
     display: flex;
     align-items: center;
     background-color: var(--primary-color);
-    width: 50%;
     height: 20rem;
     margin: auto;
     text-align: center;
     border-radius: 10px;
+    overflow:hidden;
+    max-width: 80%;
 }
 .addSuccess_card h1{
     font-size: 30px;
@@ -421,7 +421,7 @@ span {
         max-width: 50%;
     }
 
-    .carousel-inner {
+    .carousel_inner_custom {
         max-width: 50%;
         height: 300px;
     }
@@ -449,11 +449,18 @@ span {
         height: 65px;
     }
     /*endnavbar*/
+
     /*addSuccess*/
+
     .success_image {
         width: 150px;
         height: 150px;
     }
+  
+    .addSuccess_card{
+        max-width: 50%;
+    }
+
     /*endaddsucces*/
     /*profil*/
     .row1 h5 {

@@ -8,7 +8,6 @@ use App\Model\UserManager;
 
 class UserController extends AbstractController
 {
-
     public function signIn()
     {
         $errors = [];
@@ -36,7 +35,6 @@ class UserController extends AbstractController
                     ];
                     header("Location: /");
                 }
-                    header('Location:/home/index/');
             }
         }
         $signInInfos = [
