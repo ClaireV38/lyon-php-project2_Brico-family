@@ -411,8 +411,8 @@ span {
     }
 
     .button_add {
-        margin: auto 1.2rem;
-        max-width: 550px;
+        margin: auto;
+        width: 80%;
     }
 
     /* offer details*/
