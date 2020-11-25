@@ -37,7 +37,7 @@
                 {% else %}
                     selectpicker
                 {% endif %}
-                " data-live-search="true">
+                " >
                         {% if offerInfos.product is not same as ('') %}
                             <option value="{{ offerInfos.product }}">{{ offerInfos.product }}</option>
                         {% else %}
@@ -53,7 +53,7 @@
                 {% else %}
                     selectpicker
                 {% endif %}
-                " data-live-search="true">
+                " >
                         {% if offerInfos.product is not same as ('') %}
                             <option value="{{ offerInfos.product }}">{{ offerInfos.product }}</option>
                         {% else %}
@@ -129,13 +129,17 @@
         selectToolsproducts.classList.remove("invisible");
         selectMaterialsproducts.classList.add("invisible");
         $('#tools_products').selectpicker({liveSearch: true});
+        $('#materials_products').selectpicker('hide');
         $('#tools_products').selectpicker('show');
+        $('#tools_products').selectpicker('refresh');
     });
     btnCheckMaterial.addEventListener('change', function() {
         selectMaterialsproducts.classList.remove("invisible");
         selectToolsproducts.classList.add("invisible");
         $('#materials_products').selectpicker({liveSearch: true});
+        $('#tools_products').selectpicker('hide');
         $('#materials_products').selectpicker('show');
+        $('#materials_products').selectpicker('refresh');
 });
     $(function () {
     $('#city').selectpicker({liveSearch: true});
