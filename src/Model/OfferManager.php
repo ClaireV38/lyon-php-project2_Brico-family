@@ -56,7 +56,7 @@ class OfferManager extends AbstractManager
         FROM " . self::TABLE .
         " INNER JOIN product ON " . self::TABLE . ".product_id = product.id
         INNER JOIN transaction ON " . self::TABLE .".transaction_id = transaction.id
-        INNER JOIN user ON " . self::TABLE . ".user_id = user_id
+        INNER JOIN user ON " . self::TABLE . ".user_id = user.id
         INNER JOIN city ON user.city_id = city.id
         WHERE product.name = :product
         AND transaction.name = :transaction
