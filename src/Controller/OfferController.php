@@ -66,7 +66,8 @@ class OfferController extends AbstractController
             }
             $offerTitle = trim($_POST['offerTitle']);
             $description = trim($_POST['description']);
-            $price = trim($_POST['price']);
+            $price = str_replace(',', '.', trim($_POST['price']));
+
             if (empty($offerTitle)) {
                 $errors['offerTitle'] = "Veuillez renseigner le titre de votre annonce";
             } elseif (mb_strlen($offerTitle) > 50) {
@@ -312,6 +313,23 @@ class OfferController extends AbstractController
             'sellerShow' => $sellerShow,
             'sellerDetails' => $sellerDetails,
             'images' => $offerImages]);
+    }
+
+    /**
+     * delete offer selected by user
+     */
+    public function delete()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            header("HTTP/1.0 405 Method Not Allowed");
+        }
+
+        if (!empty($_POST)) {
+            $id = intval($_POST['id']);
+            $offerManager = new OfferManager();
+            $offerManager->delete($id);
+        }
+        header("Location:/account/profil");
     }
 
     /**
