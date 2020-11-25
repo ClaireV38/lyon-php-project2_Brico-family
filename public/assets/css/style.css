@@ -333,11 +333,12 @@ span {
     display: flex;
     align-items: center;
     background-color: var(--primary-color);
-    width: 50%;
     height: 20rem;
     margin: auto;
     text-align: center;
     border-radius: 10px;
+    overflow:hidden;
+    max-width: 80%;
 }
 .addSuccess_card h1{
     font-size: 30px;
@@ -412,11 +413,14 @@ span {
     /*endnavbar*/
 
     /*addSuccess*/
+
     .success_image {
         width: 150px;
         height: 150px;
     }
-
+    .addSuccess_card{
+        max-width: 50%;
+    }
 }
 
 
