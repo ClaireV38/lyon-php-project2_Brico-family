@@ -348,7 +348,7 @@ span {
     margin-bottom: 10px;
 }
 /*endaddSuccess*/
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 992px) {
 
     .home_page_content {
         flex-direction: row;
@@ -363,8 +363,8 @@ span {
         width: 50%;
     }
 
-    .looking_for_block, .container-custom, .sign_up_block {
-        width: 50%;
+    .looking_for_block, .container-custom, .sign_up_block, .card-custom {
+        max-width: 50%;
     }
 
     .button_add {
