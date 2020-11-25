@@ -417,7 +417,7 @@ span {
         max-width: 50%;
     }
 
-    .carousel-inner {
+    .carousel_inner_custom {
         max-width: 50%;
         height: 300px;
     }
@@ -445,6 +445,7 @@ span {
         height: 65px;
     }
     /*endnavbar*/
+
     /*addSuccess*/
     .success_image {
         width: 150px;
