@@ -68,7 +68,6 @@ input[type='radio']:checked:before {
     background: var(--radio-button-color);
 }
 
-
 .btn-custom {
     display: block;
     margin: auto;
@@ -187,7 +186,7 @@ input[type='radio']:checked:before {
     background-color: yellow;
 }
 
-h3 {
+h2, h3 {
     text-align: center;
 }
 
@@ -271,7 +270,7 @@ span {
     display: none;
 }
 
-.btn-connect {
+.btn-connect, .btn-account-update {
     width: fit-content;
 }
 
@@ -382,6 +381,10 @@ span {
 .btn-delete {
     margin-bottom: 2px;
 }
+
+.container-my-datas {
+    margin-bottom: 20px;
+}
 /*endprofil*/
 
 @media screen and (min-width: 992px) {
@@ -399,7 +402,7 @@ span {
         width: 50%;
     }
 
-    .looking_for_block, .container-custom, .sign_up_block, .card-custom, .container-profil-offer {
+    .looking_for_block, .container-custom, .sign_up_block, .container-profil-offer {
         width: 50%;
     }
 
