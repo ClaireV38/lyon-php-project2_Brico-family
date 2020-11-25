@@ -8,8 +8,7 @@ use App\Model\UserManager;
 
 class UserController extends AbstractController
 {
-
-  public function signIn()
+    public function signIn()
     {
         $errors = [];
         $email = $password = "";
@@ -34,8 +33,8 @@ class UserController extends AbstractController
                     $_SESSION['user'] = [
                         'email' => $user['email'],
                     ];
+                    header("Location: /");
                 }
-                    header('Location:/home/index/');
             }
         }
         $signInInfos = [
@@ -70,7 +69,7 @@ class UserController extends AbstractController
             $password2 = trim($_POST['password2']);
             $lastname = strtoupper(trim($_POST['lastname']));
             $firstname = ucfirst(strtolower(trim($_POST['firstname'])));
-            $phoneNumber = trim($_POST['phone_number']);
+            $phoneNumber = str_replace(' ', '', trim($_POST['phone_number']));
 
             if (!isset($_POST['city'])) {
                 $errors['city'] = "vous devez rentrer la ville la plus proche de chez vous";
@@ -129,7 +128,6 @@ class UserController extends AbstractController
                 }
             }
         }
-
         return $this->twig->render("User/signUp.html.twig", [
             'errors' => $errors,
             'departments' => $departments,

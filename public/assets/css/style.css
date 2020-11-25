@@ -260,13 +260,16 @@ span {
     max-width: 600px;
 }
 
+.btn-connect {
+    width: fit-content;
+}
+
 /*end offer details*/
 /* start sign-up */
 
 .phone-group {
     padding: 0;
 }
-
 /*end sign-up*/
 /* start sign-up */
 
