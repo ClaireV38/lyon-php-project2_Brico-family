@@ -56,7 +56,7 @@ class OfferManager extends AbstractManager
         FROM " . self::TABLE .
         " INNER JOIN product ON " . self::TABLE . ".product_id = product.id
         INNER JOIN transaction ON " . self::TABLE .".transaction_id = transaction.id
-        INNER JOIN user ON " . self::TABLE . ".user_id = user_id
+        INNER JOIN user ON " . self::TABLE . ".user_id = user.id
         INNER JOIN city ON user.city_id = city.id
         WHERE product.name = :product
         AND transaction.name = :transaction
@@ -83,5 +83,31 @@ class OfferManager extends AbstractManager
 
         $resultOffer = $statement->fetch();
         return $resultOffer;
+    }
+
+    /**
+     * get all offers from a user
+     * @param int $userId
+     * @return array
+     */
+    public function selectAllByUserId(int $userId): array
+    {
+        $statement = $this->pdo->prepare("SELECT " . self::TABLE . ".id AS offer_id, title, description,
+        price, created_at, product.name as product_name, transaction.name as transaction_name FROM " . self::TABLE .
+        " INNER JOIN product ON " . self::TABLE . ".product_id = product.id
+        INNER JOIN transaction ON " . self::TABLE . ".transaction_id = transaction.id
+        WHERE " . self::TABLE . ".user_id = :userId
+        ORDER BY created_at DESC");
+        $statement->bindValue('userId', $userId, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    public function delete(int $id): void
+    {
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
     }
 }
