@@ -23,6 +23,9 @@ class OfferController extends AbstractController
 
     public function add()
     {
+        if (!isset($_SESSION['user'])) {
+            header("Location: /");
+        }
         $productManager = new ProductManager();
         $toolproducts = $productManager->selectByProductType('Tool');
         $materialproducts = $productManager->selectByProductType('Material');
@@ -117,6 +120,7 @@ class OfferController extends AbstractController
                 }
             }
             if (empty($errors) && empty($imageErrors)) {
+                $user = $this->getUser();
                 $offerInfos = [
                     'product' => $product,
                     'productType' => $productType,
@@ -124,7 +128,7 @@ class OfferController extends AbstractController
                     'offerTitle' => $offerTitle,
                     'description' => $description,
                     'price' => $price,
-                    'userId' => 1,
+                    'userId' => $user['id'],
                 ];
                 $offerManager = new OfferManager();
                 $imageManager = new ImageManager();
@@ -308,5 +312,23 @@ class OfferController extends AbstractController
             'sellerShow' => $sellerShow,
             'sellerDetails' => $sellerDetails,
             'images' => $offerImages]);
+    }
+
+    /**
+     * delete offer selected by user
+     */
+    public function delete()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            header("HTTP/1.0 405 Method Not Allowed");
+            exit();
+        }
+
+        if (!empty($_POST)) {
+            $id = intval($_POST['id']);
+            $offerManager = new OfferManager();
+            $offerManager->delete($id);
+        }
+        header("Location:/account/profil");
     }
 }
