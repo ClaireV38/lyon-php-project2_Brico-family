@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b02278ec6fa07a9a23d2b9d262d494ec",
+    "content-hash": "92deccaababec509a622646c1844b923",
     "packages": [
         {
             "name": "snapappointments/bootstrap-select",
@@ -3280,8 +3280,7 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.2",
-        "ext-pdo": "*",
-        "ext-gd": "*"
+        "ext-pdo": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

@@ -8,6 +8,44 @@ use App\Model\UserManager;
 
 class UserController extends AbstractController
 {
+    public function signIn()
+    {
+        $errors = [];
+        $email = $password = "";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-signIn']) && !empty($_POST)) {
+            $email = trim($_POST['email']);
+            $password = trim($_POST['password']);
+
+            if (empty($email)) {
+                $errors['email'] = "Veuillez renseigner votre email";
+            }
+            if (empty($password)) {
+                $errors['password'] = "Veuillez renseigner votre mot de passe";
+            }
+            if (empty($errors)) {
+                $userManager = new UserManager();
+                $user = $userManager->selectUserByEmail($email);
+                if (!$user) {
+                    $errors['email'] = "Nous ne vous avons pas trouvé ... Créer votre compte dès maintenant !";
+                } elseif (!password_verify($password, $user['password'])) {
+                    $errors['password'] = "Mauvais mot de passe";
+                } else {
+                    $_SESSION['user'] = [
+                        'email' => $user['email'],
+                    ];
+                    header("Location: /");
+                }
+            }
+        }
+        $signInInfos = [
+            'email' => $email,
+        ];
+        return $this->twig->render('User/signIn.html.twig', [
+            'signInInfos' => $signInInfos,
+            'errors' => $errors,
+        ]);
+    }
+
     public function signUp()
     {
         if (isset($_SESSION['user'])) {
@@ -31,7 +69,7 @@ class UserController extends AbstractController
             $password2 = trim($_POST['password2']);
             $lastname = strtoupper(trim($_POST['lastname']));
             $firstname = ucfirst(strtolower(trim($_POST['firstname'])));
-            $phoneNumber = trim($_POST['phone_number']);
+            $phoneNumber = str_replace(' ', '', trim($_POST['phone_number']));
 
             if (!isset($_POST['city'])) {
                 $errors['city'] = "vous devez rentrer la ville la plus proche de chez vous";
@@ -41,7 +79,7 @@ class UserController extends AbstractController
             if (empty($email)) {
                 $errors['email'] = "vous devez rentrer un email";
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = "votre format de mot de passe est invalide";
+                $errors['email'] = "le format de votre email est invalide";
             }
             if (empty($password)) {
                 $errors['password'] = "vous devez saisir un mot de passe";
@@ -90,7 +128,6 @@ class UserController extends AbstractController
                 }
             }
         }
-
         return $this->twig->render("User/signUp.html.twig", [
             'errors' => $errors,
             'departments' => $departments,

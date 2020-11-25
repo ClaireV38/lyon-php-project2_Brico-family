@@ -51,7 +51,7 @@
                 </div>
                 <h4>Description :</h4>
                 <p class="card-text">{{ detailsOffer.description }}</p>
-                {% if sellerShow == 'show' %}
+                {% if sellerShow == 'show' and app.user %}
                     <form method="post" action="/offer/details/{{ detailsOffer.id }}">
                         <input type="hidden" name="seller_hide" value="hide"/>
                         <button type="submit" name="btn_seller_hide" class="btn btn-custom btn-light">Cacher les coordonées du
@@ -59,7 +59,7 @@
                         </button>
                     </form>
                     <div class="seller_details">
-                        <h4>coordonnées du vendeur :</h4>
+                        <h4>Coordonnées du vendeur :</h4>
                         <p>
                             {{ sellerDetails.firstname }} {{ sellerDetails.lastname }}
                         </p>
@@ -79,11 +79,14 @@
                                 {{ sellerDetails.user_city }} ({{ sellerDetails.user_department }}) </span>
                         </p>
                     </div>
+                {% elseif sellerShow == 'show' and not app.user %}
+                    <p class="errors"> Vous devez être connecté pour voir les coordonnées du vendeur</p>
+                    <a class="btn-connect btn-custom btn btn-light" href="/User/signIn">Se connecter</a>
                 {% else %}
                     <form method="post" action="/offer/details/{{ detailsOffer.id }}">
                         <input type="hidden" name="seller_show" value="show"/>
                         <button type="submit" name="btn_seller_show" class="btn btn-custom btn-light">Voir les
-                            coordonées du vendeur
+                            coordonnées du vendeur
                         </button>
                     </form>
                 {% endif %}

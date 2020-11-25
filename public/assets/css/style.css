@@ -68,7 +68,6 @@ input[type='radio']:checked:before {
     background: var(--radio-button-color);
 }
 
-
 .btn-custom {
     display: block;
     margin: auto;
@@ -114,11 +113,27 @@ input[type='radio']:checked:before {
     width: 90%;
     font-family: var(--text-font-family);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 0;
 }
 
 .card-custom:hover {
     transition-duration: 1s;
     background-color: var(--on-hover-button);
+}
+
+.results {
+    height: 130px;
+}
+
+.image-offer {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+}
+
+.image-offer img {
+    display: none;
 }
 
 .errors_center {
@@ -171,7 +186,7 @@ input[type='radio']:checked:before {
     background-color: yellow;
 }
 
-h3 {
+h2, h3 {
     text-align: center;
 }
 
@@ -244,13 +259,27 @@ span {
     max-width: 600px;
 }
 
+.image-offer {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+}
+
+.image-offer img {
+    display: none;
+}
+
+.btn-connect, .btn-account-update {
+    width: fit-content;
+}
+
 /*end offer details*/
 /* start sign-up */
 
 .phone-group {
     padding: 0;
 }
-
 /*end sign-up*/
 /* start sign-up */
 
@@ -314,11 +343,12 @@ span {
     display: flex;
     align-items: center;
     background-color: var(--primary-color);
-    width: 50%;
     height: 20rem;
     margin: auto;
     text-align: center;
     border-radius: 10px;
+    overflow:hidden;
+    max-width: 80%;
 }
 .addSuccess_card h1{
     font-size: 30px;
@@ -329,7 +359,35 @@ span {
     margin-bottom: 10px;
 }
 /*endaddSuccess*/
-@media screen and (min-width: 1000px) {
+/*profil*/
+.container-profil-offer{
+    padding-bottom: 10px;
+}
+.row1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.row1 h5 {
+    font-size: 17px;
+}
+.profil-results {
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn-delete {
+    margin-bottom: 2px;
+}
+
+.container-my-datas {
+    margin-bottom: 20px;
+}
+/*endprofil*/
+
+@media screen and (min-width: 992px) {
 
     .home_page_content {
         flex-direction: row;
@@ -344,7 +402,7 @@ span {
         width: 50%;
     }
 
-    .looking_for_block, .container-custom, .sign_up_block {
+    .looking_for_block, .container-custom, .sign_up_block, .container-profil-offer {
         width: 50%;
     }
 
@@ -363,7 +421,7 @@ span {
         max-width: 50%;
     }
 
-    .carousel-inner {
+    .carousel_inner_custom {
         max-width: 50%;
         height: 300px;
     }
@@ -391,11 +449,24 @@ span {
         height: 65px;
     }
     /*endnavbar*/
+
     /*addSuccess*/
+
     .success_image {
         width: 150px;
         height: 150px;
     }
+  
+    .addSuccess_card{
+        max-width: 50%;
+    }
+
+    /*endaddsucces*/
+    /*profil*/
+    .row1 h5 {
+        font-size: 20px;
+    }
+    /*endprofil*/
 
 }
 

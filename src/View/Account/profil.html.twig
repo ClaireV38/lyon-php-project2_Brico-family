@@ -1,5 +1,72 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Hello world</h1>
+    <h2>Mes informations</h2>
+    <div class="container container-custom container-my-datas">
+        <p>
+            {{ user.firstname }} {{ user.lastname }}
+        </p>
+        <p><img
+                    src="/assets/images/icon_email.png"
+                    alt="icon email" height="20px"/>
+            <span> {{ user.email }} </span></p>
+        <p><img
+                    src="/assets/images/icon_phone.png"
+                    alt="icon phone" height="20px"/>
+            <span> {{ user.phone_number }} </span>
+        </p>
+        <p><img
+                    src="/assets/images/icon_city.png"
+                    alt="icon city" height="20px"/>
+            <span> {{ user.user_city }} ({{ user.user_department }}) </span>
+        </p>
+        <a href="/Account/update" class="btn-account-update btn-custom btn btn-light">Modifier mes informations</a>
+    </div>
+    <h2>Mes annonces</h2>
+    <div class="errors errors_center">
+        {% if errors.noResult is defined %}
+            {{ errors.noResult }}
+        {% endif %}
+    </div>
+    {% if not userOffers %}
+    <div class="errors errors_center">
+        Vous n'avez aucune annonce en ligne. Pour déposer une annonce cliquez sur "déposer une annonce".
+    </div>
+    {% endif %}
+    {% for userOffer in userOffers %}
+        <a href="/offer/details/{{ userOffer.offer_id }}">
+            <div class="container card-custom container-profil-offer container-custom">
+                <div class="row no-gutters mt-3 align-items-center profil-results">
+                    <div class="col-4 col-md-3 col-lg-2 d-flex justify-content-center">
+                        {% if userOffer.images[0].name %}
+                            <div class="image-offer"
+                                 style="background-image:url(/uploads/{{ userOffer.images[0].name }})">
+                                <img src="/uploads/{{ userOffer.images[0].name }}" alt=""/>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        <div class="row1">
+                            <h5 class="card-title">{{ userOffer.title }}</h5>
+                            <div class="top_right">
+                                <div class="transaction_logo
+                            {% if userOffer.transaction_name == 'Location' %}
+                            yellow
+                            {% endif %}
+                            ">
+                                    {{ userOffer.transaction_name }}
+                                </div>
+                            </div>
+                        </div>
+                        <p>Prix: {{ userOffer.price }} €</p>
+                        <p>Mise en ligne le : {{ userOffer.created_at }}</p>
+                    </div>
+                </div>
+                <form method="post" action="/offer/delete">
+                    <input type="hidden" name="id" value="{{ userOffer.offer_id  }}" />
+                    <button type="submit" class="btn-delete btn-custom btn btn-light">Supprimer</button>
+                </form>
+            </div>
+        </a>
+    {% endfor %}
 {% endblock %}

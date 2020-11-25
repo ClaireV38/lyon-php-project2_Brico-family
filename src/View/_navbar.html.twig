@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand mx-auto" href="/"><img src="/assets/images/logo_rond.png" class="nav_logo"><B>BRICO</B>
+    <a class="navbar-brand mx-auto" href="/"><img src="/assets/images/logo_rond.png" class="nav_logo" alt="image-logo"><B>BRICO</B>
         FAMILY</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,11 +7,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Faire une recherche <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+                <a class="nav-link" href="/Offer/results">Faire une recherche</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/Offer/add">Déposer une annonce</a>
+                {% if not app.user %}
+                    <a class="nav-link" href="/User/signIn">Déposer une annonce</a>
+                {% else %}
+                    <a class="nav-link" href="/Offer/add">Déposer une annonce</a>
+                {% endif %}
             </li>
             <li class="nav-item">
                 {% if not app.user %}
@@ -20,6 +24,11 @@
                 <a class="nav-link" href="/user/logout">Se deconnecter</a>
                 {% endif %}
             </li>
+            {% if app.user %}
+            <li class="nav-item">
+                    <a class="nav-link" href="/Account/profil">Mon profil</a>
+            </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

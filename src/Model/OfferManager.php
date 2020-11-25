@@ -39,7 +39,7 @@ class OfferManager extends AbstractManager
         product_id, transaction_id) VALUES (:title, :description, :price, :userId, :productId, :transactionId)");
         $statement->bindValue('title', $offerInfos['offerTitle'], \PDO::PARAM_STR);
         $statement->bindValue('description', $offerInfos['description'], \PDO::PARAM_STR);
-        $statement->bindValue('price', $offerInfos['price'], \PDO::PARAM_INT);
+        $statement->bindValue('price', $offerInfos['price'], \PDO::PARAM_STR);
         $statement->bindValue('userId', $offerInfos['userId'], \PDO::PARAM_INT);
         $statement->bindValue('productId', $productName['id'], \PDO::PARAM_INT);
         $statement->bindValue('transactionId', $transactionName['id'], \PDO::PARAM_INT);
@@ -51,10 +51,12 @@ class OfferManager extends AbstractManager
     public function selectOfferByResearchForm($offerInfos)
     {
         $statement = $this->pdo->prepare("SELECT " . self::TABLE . ".id AS offer_id, title, description,
-        price, created_at, city.name AS city_name, firstname, lastname, email, phone_number FROM " . self::TABLE .
+        price, created_at, city.name AS city_name, firstname, lastname, email, phone_number,
+        (SELECT name FROM image WHERE offer_id = " . self::TABLE . ".id LIMIT 1) AS image_name
+        FROM " . self::TABLE .
         " INNER JOIN product ON " . self::TABLE . ".product_id = product.id
         INNER JOIN transaction ON " . self::TABLE .".transaction_id = transaction.id
-        INNER JOIN user ON " . self::TABLE . ".user_id = user_id
+        INNER JOIN user ON " . self::TABLE . ".user_id = user.id
         INNER JOIN city ON user.city_id = city.id
         WHERE product.name = :product
         AND transaction.name = :transaction
@@ -81,5 +83,31 @@ class OfferManager extends AbstractManager
 
         $resultOffer = $statement->fetch();
         return $resultOffer;
+    }
+
+    /**
+     * get all offers from a user
+     * @param int $userId
+     * @return array
+     */
+    public function selectAllByUserId(int $userId): array
+    {
+        $statement = $this->pdo->prepare("SELECT " . self::TABLE . ".id AS offer_id, title, description,
+        price, created_at, product.name as product_name, transaction.name as transaction_name FROM " . self::TABLE .
+        " INNER JOIN product ON " . self::TABLE . ".product_id = product.id
+        INNER JOIN transaction ON " . self::TABLE . ".transaction_id = transaction.id
+        WHERE " . self::TABLE . ".user_id = :userId
+        ORDER BY created_at DESC");
+        $statement->bindValue('userId', $userId, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    public function delete(int $id): void
+    {
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
     }
 }
