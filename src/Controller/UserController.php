@@ -8,6 +8,44 @@ use App\Model\UserManager;
 
 class UserController extends AbstractController
 {
+    public function signIn()
+    {
+        $errors = [];
+        $email = $password = "";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-signIn']) && !empty($_POST)) {
+            $email = trim($_POST['email']);
+            $password = trim($_POST['password']);
+
+            if (empty($email)) {
+                $errors['email'] = "Veuillez renseigner votre email";
+            }
+            if (empty($password)) {
+                $errors['password'] = "Veuillez renseigner votre mot de passe";
+            }
+            if (empty($errors)) {
+                $userManager = new UserManager();
+                $user = $userManager->selectUserByEmail($email);
+                if (!$user) {
+                    $errors['email'] = "Nous ne vous avons pas trouvé ... Créer votre compte dès maintenant !";
+                } elseif (!password_verify($password, $user['password'])) {
+                    $errors['password'] = "Mauvais mot de passe";
+                } else {
+                    $_SESSION['user'] = [
+                        'email' => $user['email'],
+                    ];
+                    header("Location: /");
+                }
+            }
+        }
+        $signInInfos = [
+            'email' => $email,
+        ];
+        return $this->twig->render('User/signIn.html.twig', [
+            'signInInfos' => $signInInfos,
+            'errors' => $errors,
+        ]);
+    }
+
     public function signUp()
     {
         if (isset($_SESSION['user'])) {
@@ -31,24 +69,23 @@ class UserController extends AbstractController
             $password2 = trim($_POST['password2']);
             $lastname = strtoupper(trim($_POST['lastname']));
             $firstname = ucfirst(strtolower(trim($_POST['firstname'])));
-            $phoneNumber = trim($_POST['phone_number']);
+            $phoneNumber = str_replace(' ', '', trim($_POST['phone_number']));
 
             if (!isset($_POST['city'])) {
-                $errors['city'] = "Vous devez rentrer la ville la plus proche de chez vous";
+                $errors['city'] = "vous devez rentrer la ville la plus proche de chez vous";
             } else {
                 $city = trim($_POST['city']);
             }
-
             if (empty($email)) {
-                $errors['email'] = "Vous devez rentrer un email";
+                $errors['email'] = "vous devez rentrer un email";
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = "Le format de votre email est invalide";
+                $errors['email'] = "votre format de mot de passe est invalide";
             }
             if (empty($password)) {
-                $errors['password'] = "Vous devez saisir un mot de passe";
+                $errors['password'] = "vous devez saisir un mot de passe";
             } elseif (!preg_match("/^(?=.*[0-9])(?=.*[A-Z]).{8,20}$/i", $password)) {
                 $errors['password'] = "Votre mot de passe doit être entre 8 et 20 caractères et doit contenir 
-                au un chiffre";
+                au moins un chiffre";
             } else {
                 if (empty($password2)) {
                     $errors['password2'] = "Vous devez confirmer votre mot de passe";
@@ -72,10 +109,25 @@ class UserController extends AbstractController
                 $errors['phoneNumber'] = "Votre numéro de téléphone n'est pas valide";
             }
             if (empty($errors)) {
+                $userManager = new UserManager();
+                try {
+                    $userManager->insertUser([
+                        'email' => $email,
+                        'password' => $password,
+                        'firstname' => $firstname,
+                        'lastname' => $lastname,
+                        'city' => $city,
+                        "phoneNumber" => $phoneNumber
+                    ]);
+                    $_SESSION['user'] = [
+                        'email' => $email,
+                    ];
                     header("Location: /");
+                } catch (\PDOException $e) {
+                    $errors['form'] = $e->getMessage();
+                }
             }
         }
-
         return $this->twig->render("User/signUp.html.twig", [
             'errors' => $errors,
             'departments' => $departments,
@@ -90,5 +142,11 @@ class UserController extends AbstractController
                 "phoneNumber" => $phoneNumber
             ]
         ]);
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        header("Location: /");
     }
 }

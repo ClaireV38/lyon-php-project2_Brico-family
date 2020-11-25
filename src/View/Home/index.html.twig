@@ -133,7 +133,11 @@
             </form>
         </div>
         <div class="box_button_add">
+            {% if app.user %}
             <a class="container-custom container-md button_add" href="/offer/add">Je dépose une annonce</a>
+            {% else %}
+            <a class="container-custom container-md button_add" href="/user/signIn">Je dépose une annonce</a>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
