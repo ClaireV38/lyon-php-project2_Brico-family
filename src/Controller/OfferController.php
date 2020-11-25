@@ -66,7 +66,8 @@ class OfferController extends AbstractController
             }
             $offerTitle = trim($_POST['offerTitle']);
             $description = trim($_POST['description']);
-            $price = trim($_POST['price']);
+            $price = str_replace(',', '.', trim($_POST['price']));
+
             if (empty($offerTitle)) {
                 $errors['offerTitle'] = "Veuillez renseigner le titre de votre annonce";
             } elseif (mb_strlen($offerTitle) > 50) {

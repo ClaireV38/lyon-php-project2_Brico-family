@@ -61,7 +61,7 @@
                         {% if offerInfos.product is not same as ('') %}
                             <option value="{{ offerInfos.product }}">{{ offerInfos.product }}</option>
                         {% else %}
-                            <option value="" disabled selected>Selectionnez une catégorie</option>
+                            <option value="" disabled selected>Sélectionnez une catégorie</option>
                         {% endif %}
                         {% for product in products.tools if product.name is not same as (offerInfos.product) %}
                             <option value="{{ product.name }}">{{ product.name }}</option>
@@ -93,7 +93,7 @@
                         {% if offerInfos.transaction is not same as ('') %}
                             <option value="{{ offerInfos.transaction }}">{{ offerInfos.transaction }}</option>
                         {% else %}
-                            <option value="" disabled selected>Selectionnez</option>
+                            <option value="" disabled selected>Sélectionnez</option>
                         {% endif %}
                         {% for transaction in transactions if transaction.name is not same as (offerInfos.transaction) %}
                             <option value="{{ transaction.name }}">{{ transaction.name }}</option>
@@ -106,12 +106,12 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="city">ville :</label>
+                    <label for="city">Ville :</label>
                     <select name="city" id="city" class="form-control">
                         {% if offerInfos.city is defined and  offerInfos.city is not same as ('') %}
                             <option value="{{ offerInfos.city }}">{{ offerInfos.city }}</option>
                         {% else %}
-                            <option value="" disabled selected>Selectionnez</option>
+                            <option value="" disabled selected>Sélectionnez</option>
                         {% endif %}
                         {% for department in departments %}
                             <optgroup label="{{ department.name }}">
