@@ -33,3 +33,10 @@
         </div>
     </div>
 {% endblock %}
+{% block javascript %}
+<script>
+    $(function () {
+    $('#city').selectpicker({liveSearch: true});
+});
+</script>
+{% endblock %}
