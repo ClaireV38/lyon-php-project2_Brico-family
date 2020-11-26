@@ -52,10 +52,7 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    <select data-live-search="true" name="tools_products" id="tools_products" class=" form-control
-                {% if offerInfos.productType is not same as ('tool') %}
-                {% endif %}
-                " >
+                    <select data-live-search="true" name="tools_products" id="tools_products" class=" form-control" >
                         {% if offerInfos.product is not same as ('') %}
                             <option value="{{ offerInfos.product }}">{{ offerInfos.product }}</option>
                         {% else %}

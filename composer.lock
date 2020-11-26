@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "b02278ec6fa07a9a23d2b9d262d494ec",
+=======
+    "content-hash": "92deccaababec509a622646c1844b923",
+>>>>>>> 77ecb15d147e4f14bb97e3499fa4a0b5b7ca3550
     "packages": [
         {
             "name": "snapappointments/bootstrap-select",
