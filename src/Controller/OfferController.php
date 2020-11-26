@@ -331,22 +331,4 @@ class OfferController extends AbstractController
         }
         header("Location:/account/profil");
     }
-
-    /**
-     * delete offer selected by user
-     */
-    public function delete()
-    {
-        if ($_SERVER["REQUEST_METHOD"] == "GET") {
-            header("HTTP/1.0 405 Method Not Allowed");
-            exit();
-        }
-
-        if (!empty($_POST)) {
-            $id = intval($_POST['id']);
-            $offerManager = new OfferManager();
-            $offerManager->delete($id);
-        }
-        header("Location:/account/profil");
-    }
 }

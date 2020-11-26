@@ -3,7 +3,7 @@
 {% block content %}
     <div id="details_content">
         {% if images is not empty %}
-        <div id="carouselExampleIndicators" class="carousel slide carousel_custom" data-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide carousel_custom carousel-details" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 {% for key,image in images if key > 0 %}
