@@ -77,4 +77,29 @@ class UserManager extends AbstractManager
 
         return $statement->fetch();
     }
+
+    /**
+     * update user datas
+     * @param array $user
+     * @return bool
+     */
+    public function updateUser(array $user)
+    {
+        $statement = $this->pdo->prepare("SELECT id FROM city WHERE name = :cityName");
+        $statement->bindValue('cityName', $user['user_city'], \PDO::PARAM_STR);
+        $statement->execute();
+        $cityId = $statement->fetch();
+
+        $query = "UPDATE " . self::TABLE . " SET firstname = :firstname, lastname =  :lastname,
+         email = :email, phone_number =  :phone_number, city_id = :city_id
+         WHERE id=:id";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue('id', $user['id'], \PDO::PARAM_INT);
+        $statement->bindValue('firstname', $user['firstname'], \PDO::PARAM_STR);
+        $statement->bindValue('lastname', $user['lastname'], \PDO::PARAM_STR);
+        $statement->bindValue('email', $user['email'], \PDO::PARAM_STR);
+        $statement->bindValue('phone_number', $user['phone_number'], \PDO::PARAM_STR);
+        $statement->bindValue('city_id', $cityId['id'], \PDO::PARAM_STR);
+        return $statement->execute();
+    }
 }

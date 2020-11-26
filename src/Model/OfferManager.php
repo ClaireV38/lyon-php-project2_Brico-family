@@ -39,7 +39,7 @@ class OfferManager extends AbstractManager
         product_id, transaction_id) VALUES (:title, :description, :price, :userId, :productId, :transactionId)");
         $statement->bindValue('title', $offerInfos['offerTitle'], \PDO::PARAM_STR);
         $statement->bindValue('description', $offerInfos['description'], \PDO::PARAM_STR);
-        $statement->bindValue('price', $offerInfos['price'], \PDO::PARAM_INT);
+        $statement->bindValue('price', $offerInfos['price'], \PDO::PARAM_STR);
         $statement->bindValue('userId', $offerInfos['userId'], \PDO::PARAM_INT);
         $statement->bindValue('productId', $productName['id'], \PDO::PARAM_INT);
         $statement->bindValue('transactionId', $transactionName['id'], \PDO::PARAM_INT);

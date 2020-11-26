@@ -52,29 +52,20 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    <select name="tools_products" id="tools_products" class=" form-control
+                    <select data-live-search="true" name="tools_products" id="tools_products" class=" form-control
                 {% if offerInfos.productType is not same as ('tool') %}
-                    invisible
-                {% else %}
-                    selectpicker
                 {% endif %}
                 " >
                         {% if offerInfos.product is not same as ('') %}
                             <option value="{{ offerInfos.product }}">{{ offerInfos.product }}</option>
                         {% else %}
-                            <option value="" disabled selected>Selectionnez une catégorie</option>
+                            <option value="" disabled selected>Sélectionnez une catégorie</option>
                         {% endif %}
                         {% for product in products.tools if product.name is not same as (offerInfos.product) %}
                             <option value="{{ product.name }}">{{ product.name }}</option>
                         {% endfor %}
                     </select>
-                    <select name="materials_products" id="materials_products" class=" form-control
-                {% if offerInfos.productType is not same as ('material') %}
-                    invisible
-                {% else %}
-                    selectpicker
-                {% endif %}
-                " >
+                    <select data-live-search="true" name="materials_products" id="materials_products" class=" form-control" >
                         {% if offerInfos.product is not same as ('') %}
                             <option value="{{ offerInfos.product }}">{{ offerInfos.product }}</option>
                         {% else %}
@@ -96,7 +87,7 @@
                         {% if offerInfos.transaction is not same as ('') %}
                             <option value="{{ offerInfos.transaction }}">{{ offerInfos.transaction }}</option>
                         {% else %}
-                            <option value="" disabled selected>Selectionnez</option>
+                            <option value="" disabled selected>Sélectionnez</option>
                         {% endif %}
                         {% for transaction in transactions if transaction.name is not same as (offerInfos.transaction) %}
                             <option value="{{ transaction.name }}">{{ transaction.name }}</option>
@@ -109,12 +100,12 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="city">ville :</label>
-                    <select name="city" id="city" class="form-control"  >
+                    <label for="city">Ville :</label>
+                    <select name="city" id="city" class="form-control">
                         {% if offerInfos.city is defined and  offerInfos.city is not same as ('') %}
                             <option value="{{ offerInfos.city }}">{{ offerInfos.city }}</option>
                         {% else %}
-                            <option value="" disabled selected>Selectionnez</option>
+                            <option value="" disabled selected>Sélectionnez</option>
                         {% endif %}
                         {% for department in departments %}
                             <optgroup label="{{ department.name }}">
@@ -146,29 +137,30 @@
 {% endblock %}
 {% block javascript %}
 <script>
-    const selectToolsproducts = document.querySelector("#tools_products");
-    const btnCheckTool = document.querySelector('#tool');
-    const selectMaterialsproducts = document.querySelector("#materials_products");
-    const btnCheckMaterial = document.querySelector("#material");
-    btnCheckTool.addEventListener('change', function() {
-        selectToolsproducts.classList.remove("invisible");
-        selectMaterialsproducts.classList.add("invisible");
-        $('#tools_products').selectpicker({liveSearch: true});
-        $('#materials_products').selectpicker('hide');
+        const btnCheckTool = document.querySelector('#tool');
+        const btnCheckMaterial = document.querySelector("#material");
+        window.onload = function ()
+        {
+            $('#materials_products').selectpicker('hide');
+            $('#tools_products').selectpicker('hide');
+            if (btnCheckTool.checked == true) {
+            $('#tools_products').selectpicker('show');
+            }
+            if (btnCheckMaterial.checked == true) {
+            $('#tools_products').selectpicker('show');
+             }
+        };
+        btnCheckTool.addEventListener('change', function() {
         $('#tools_products').selectpicker('show');
-        $('#tools_products').selectpicker('refresh');
+        $('#materials_products').selectpicker('hide');
     });
-    btnCheckMaterial.addEventListener('change', function() {
-        selectMaterialsproducts.classList.remove("invisible");
-        selectToolsproducts.classList.add("invisible");
-        $('#materials_products').selectpicker({liveSearch: true});
-        $('#tools_products').selectpicker('hide');
+        btnCheckMaterial.addEventListener('change', function() {
         $('#materials_products').selectpicker('show');
-        $('#materials_products').selectpicker('refresh');
-});
+        $('#tools_products').selectpicker('hide');
+    });
     $(function () {
     $('#city').selectpicker({liveSearch: true});
-    $('#transaction').selectpicker()
+    $('#transaction').selectpicker({liveSearch: true})
 });
 </script>
 {% endblock %}
