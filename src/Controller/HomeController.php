@@ -51,6 +51,7 @@ class HomeController extends AbstractController
 
         $errors = [];
         $productType = $product = $transaction = $department = $city = "";
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn-index-search']) && !empty($_POST)) {
             if (!isset($_POST['tools_products']) && !isset($_POST['materials_products'])) {
                 $errors['product'] = 'Veuillez choisir une catégorie de produit';
@@ -101,14 +102,13 @@ class HomeController extends AbstractController
             'department' => $department,
             'city' => $city
         ];
-
         return $this->twig->render('Home/index.html.twig', [
             'departments' => $departments,
             'citiesByDepartment' => $citiesByDepartment,
             'transactions' => $transactions,
             'products' => $products,
             'errors' => $errors,
-            'offerInfos' => $offerInfos
+            'offerInfos' => $offerInfos,
         ]);
     }
 }

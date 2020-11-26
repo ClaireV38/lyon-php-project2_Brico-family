@@ -62,7 +62,7 @@
                 {% endif %}
             </div>
             <div class="form-group">
-                <label for="city">ville :</label>
+                <label for="city">Ville :</label>
                 <select name="city" id="city" class="form-control">
                     {% if data.city is defined and  data.city is not same as ('') %}
                         <option value="{{ data.city }}">{{ data.city }}</option>
@@ -88,4 +88,12 @@
             <button type="submit" name="btn-register" class="btn-go btn-custom btn btn-light">Go !</button>
         </form>
     </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(function () {
+    $('#city').selectpicker({liveSearch: true});
+});
+</script>
 {% endblock %}

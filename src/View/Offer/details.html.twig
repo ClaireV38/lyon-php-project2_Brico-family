@@ -37,7 +37,7 @@
         <div class="container-md card card-detail container-custom">
             <div class="card-body">
                 <div class="first_row">
-                    <h3 class="card-title"> {{ detailsOffer.title }}</h3>
+                    <h3 class="card-title"> {{ detailsOffer.title|capitalize }}</h3>
                     <div class="top_right">
                         <div class="transaction_logo
                     {% if detailsOffer.transaction_name == 'Location' %}
